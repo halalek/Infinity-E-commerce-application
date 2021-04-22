@@ -8,7 +8,7 @@ class BlockButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Container(
       decoration: BoxDecoration(
         boxShadow: [

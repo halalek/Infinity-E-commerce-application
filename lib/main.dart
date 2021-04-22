@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:structurepublic/src/pages/login.dart';
+import 'package:structurepublic/src/pages/loginView.dart';
 
 import 'generated/l10n.dart';
 import 'route_generator.dart';
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           return  MaterialApp(
               navigatorKey: settingRepo.navigatorKey,
               title: "",
-              home:Loginmain(),
+              home:LoginMain(),
               //MainStateWidget(),
               // initialRoute: '/MainStateWidget',
               onGenerateRoute: RouteGenerator.generateRoute,
