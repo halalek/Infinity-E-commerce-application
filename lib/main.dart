@@ -9,6 +9,7 @@ import 'route_generator.dart';
 import 'src/helpers/custom_trace.dart';
 import 'src/models/setting.dart';
 import 'src/pages/mainView.dart';
+import 'src/pages/page_Main_View.dart';
 import 'src/repository/settings_repository.dart' as settingRepo;
 import 'src/repository/user_repository.dart' as userRepo;
 import 'src/helpers/app_config.dart' as config;
@@ -43,7 +44,9 @@ class _MyAppState extends State<MyApp> {
           return  MaterialApp(
               navigatorKey: settingRepo.navigatorKey,
               title: "",
-              home:LoginMain(),
+              home:
+              PageMain(),
+              //LoginMain(),
               //MainStateWidget(),
               // initialRoute: '/MainStateWidget',
               onGenerateRoute: RouteGenerator.generateRoute,
