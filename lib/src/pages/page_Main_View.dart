@@ -50,24 +50,6 @@ class  _PageMain extends StateMVC<PageMain>
                 ),
 
               ),
-              ListTile(
-                title: Text(' Sign up ',textDirection: TextDirection.rtl,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
-              ),
-
-              ListTile(
-                title: Text('لا تشرب أقل من 6 أكواب من الماء ',textDirection: TextDirection.rtl,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
-              ),
-
-              ListTile(
-                title: Text('ولا تنسى أن العقل السليم في الجسم السليم',textDirection: TextDirection.rtl,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,)),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                //  title: Image.asset("Images/8.png"),
-              ),
             ],
           ),
         ),
