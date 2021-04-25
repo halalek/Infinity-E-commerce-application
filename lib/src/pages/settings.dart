@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
 import '../../main.dart';
@@ -11,11 +12,14 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+
   @override
   Widget build( context) {
 
     return Container(
-     //color:dark,
+
+     color:dark,
       padding: EdgeInsets.only(left: 16, top: 25, right: 16),
       child: ListView(
         children: [
@@ -303,6 +307,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                               Navigator.of(context).pop();
                               Navigator.of(context).popAndPushNamed('/a');
+                             // Navigator.popAndPushNamed(context, MaterialPageRoute(builder: (context) => StartMain() ) );
                             });
 
                           },

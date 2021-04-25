@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/start_controller.dart';
+import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/privacy_policy.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/settings.dart';
@@ -107,15 +108,15 @@ class _StartMain extends StateMVC<StartMain> {
         });
   }
 
-  var currentPage = DrawerSections.dashboard;
+  var currentPage = DrawerSections.page_Main_View;
   var container ;
   bool set =false;
-
+  int point=1;
 
   @override
   Widget build(BuildContext context) {
-    if (currentPage == DrawerSections.dashboard) {
-      container = DashboardPage();
+    if (currentPage == DrawerSections.page_Main_View) {
+      container = PageMain();
     } else if (currentPage == DrawerSections.contact_support) {
       container = Common_questionsPage();
     } else if (currentPage == DrawerSections.events) {
@@ -169,6 +170,71 @@ class _StartMain extends StateMVC<StartMain> {
           ),  ),
 
       ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex:  point,
+          selectedFontSize: 13,
+          selectedItemColor: Theme.of(context).primaryColorLight,
+          unselectedItemColor: Colors.black45,
+          unselectedFontSize: 5,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                //  color: Colors.black45,
+              ),
+              title: Text(
+                "الرئيسية",
+                // style: TextStyle(color: Colors.black45),
+              ),
+              backgroundColor: Colors.white38,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.local_grocery_store,
+                //  color: Theme.of(context).primaryColorLight,
+              ),
+              title: Text(
+                "التسوق",
+                //  style: TextStyle(color: Theme.of(context).primaryColorLight),
+              ),
+              // backgroundColor:Colors.white38,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.show_chart,
+                // color: Colors.black45,
+              ),
+              title: Text(
+                "العروض",
+                //  style: TextStyle(color: Colors.black45),
+              ),
+              //  backgroundColor:Colors.white38,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                // color: Colors.black45,
+              ),
+              title: Text(
+                "حسابك",
+                //   style: TextStyle(color: Colors.black45),
+              ),
+              // backgroundColor:Colors.white38,
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              point=index;
+              if(point==0)
+              {
+                navigetor1("app");
+                //  Navigator.pop(context);
+              }
+
+              //   Navigator.pop(context);
+            });
+          },
+        )
     );
   }
 
@@ -183,7 +249,7 @@ class _StartMain extends StateMVC<StartMain> {
         // shows the list of menu drawer
         children: [
           menuItem(1,"Dashboard" , Icons.dashboard_outlined,
-              currentPage == DrawerSections.dashboard ? true : false),
+              currentPage == DrawerSections.page_Main_View ? true : false),
           menuItem(2, "Common questions", Icons.contact_support_outlined,
               currentPage == DrawerSections.contact_support ? true : false),
           menuItem(3,"Events" , Icons.event,
@@ -214,7 +280,7 @@ class _StartMain extends StateMVC<StartMain> {
           Navigator.pop(context);
           setState(() {
             if (id == 1) {
-              currentPage = DrawerSections.dashboard;
+              currentPage = DrawerSections.page_Main_View;
             } else if (id == 2) {
               currentPage = DrawerSections.contact_support;
             } else if (id == 3) {
@@ -262,11 +328,27 @@ class _StartMain extends StateMVC<StartMain> {
     );
 
   }
+  void navigetor(String app) async
+  {
+    bool result= await Navigator.push(context, MaterialPageRoute(builder :(context)
+    {
+      //  return Pagelist();
+    }));
+  }
+
+
+  void navigetor1(String app) async
+  {
+    bool result= await Navigator.push(context, MaterialPageRoute(builder :(context)
+    {
+      // return Page1();
+    }));
+  }
 
 }
 
 enum DrawerSections {
-  dashboard,
+  page_Main_View,
   contact_support,
   events,
   Profile,

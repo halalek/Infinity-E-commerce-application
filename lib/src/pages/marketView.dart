@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
+import 'package:structurepublic/src/controler/page_market_controller.dart';
 import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 
 class PageMarket extends StatefulWidget
 {
-  @override
+
+
 
 
   @override
@@ -18,21 +21,31 @@ class PageMarket extends StatefulWidget
   }
 }
 
-class _PageMarket extends State<PageMarket>
+class  _PageMarket extends StateMVC<PageMarket>
 {
+  PageMarketController _con2;
+
+  _PageMarket() : super( PageMarketController()) {
+    // _con = controller;
+    _con2 = controller;
+  }
 
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("المطاعم"),
         backgroundColor: Theme.of(context).primaryColor,
+
       ),
        body: ListView.builder(
-     //    itemCount: _con.listSection.length,
+
+         itemCount: _con2.listMarket.length,
          itemBuilder: (context, i) {
-           return CardMarketWidget();
+              return CardMarketWidget(marketData: _con2.listMarket[i],);
+
          },
        ),
     //ListView(

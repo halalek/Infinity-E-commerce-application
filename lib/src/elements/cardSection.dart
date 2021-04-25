@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/pages/marketView.dart';
+
+import 'cardmarketWidget.dart';
 
 class CardWidget extends StatelessWidget {
   const CardWidget({Key key,this.sectionData}) : super(key: key);
 
   final SectionData sectionData;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,13 @@ class CardWidget extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child:  GestureDetector(child: Container(
           child:
-          Center(child: RaisedButton(
+          Center(
+            child: RaisedButton(
             onPressed: () {
-              //  navigetor("");
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket()) );
+
+
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(80.0),),
@@ -65,7 +73,7 @@ class CardWidget extends StatelessWidget {
           ),
         ),
           onTap: () {
-            // navigetor("");
+           // Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket() ) );
           },
         ),
         shape: RoundedRectangleBorder(

@@ -6,7 +6,7 @@ class MarketData {
     this.descriptionEn,
     this.descriptionAr,
     this.idSection,
-  this.let,
+    this.let,
     this.long,
     this.nameAr,
     this.id,
@@ -31,19 +31,34 @@ class MarketData {
 
   factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
     image: json["image"] == null ? null : json["image"],
+    imageIcon: json["image_icon"] == null ? null : json["image_icon"],
     hide: json["hide"] == null ? null : json["hide"],
+    descriptionEn: json["description_en"] == null ? null : json["description_en"],
+    descriptionAr: json["description_er"] == null ? null : json["description_er"],
+    idSection: json["id_section"] == null ? null : json["id_section"],
+    let: json["lat"] == null ? null : json["lat"],
+    long: json["long"] == null ? null : json["long"],
     nameAr: json["name_ar"] == null ? null : json["name_ar"],
     id: json["id"] == null ? null : json["id"],
-  //  timesTamp: json["timesTamp"] == null ? null : json["timesTamp"],
+    timesTampClose: json["timesTampClose"] == null ? null : json["timesTampClose"],
+    timesTampOpen: json["timesTampOpen"] == null ? null : json["timesTampOpen"],
     nameEn: json["name_en"] == null ? null : json["name_en"],
+
   );
 
   Map<String, dynamic> toJson() => {
-    "image": image == null ? null : image,
-    "hide": hide == null ? null : hide,
-    "name_ar": nameAr == null ? null : nameAr,
-    "id": id == null ? null : id,
-   // "timesTamp": timesTamp == null ? null : timesTamp,
-    "name_en": nameEn == null ? null : nameEn,
+     "image": image == null ? null : image,
+     "image_icon":imageIcon == null ? null : imageIcon,
+     "hide": hide == null ? null : hide,
+     "description_en":descriptionEn == null ? null : descriptionEn,
+     "description_er":descriptionAr == null ? null : descriptionAr,
+     "id_section":idSection == null ? null : idSection,
+     "lat":let == null ? null : let,
+     "long":long == null ? null : long,
+     "name_ar": nameAr == null ? null : nameAr,
+     "id": id == null ? null : id,
+     "timesTampClose":timesTampClose == null ? null : timesTampClose,
+     "timesTampOpen":timesTampOpen == null ? null : timesTampOpen,
+     "name_en": nameEn == null ? null : nameEn,
   };
 }
