@@ -11,5 +11,5 @@ import '../helpers/helper.dart';
 import '../models/user.dart';
 import '../repository/user_repository.dart' as userRepo;
 
-ValueNotifier<Users> currentUser = new ValueNotifier(Users());
+//ValueNotifier<Users> currentUser = new ValueNotifier(Users());
 

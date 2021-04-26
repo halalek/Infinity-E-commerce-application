@@ -4,7 +4,9 @@ import 'package:splashscreen/splashscreen.dart';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
+import 'package:structurepublic/src/controler/logout_controller.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
+import 'package:structurepublic/src/controler/shared.dart';
 import 'package:structurepublic/src/elements/cardSection.dart';
 
 
@@ -119,9 +121,10 @@ class  _PageMain extends StateMVC<PageMain>
           onTap: (index) {
             setState(() {
               point=index;
-              if(point==0)
+              if(point==3)
               {
-                navigetor1("app");
+               // navigetor1("app");
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogoutController(),),);
                 //  Navigator.pop(context);
               }
 
