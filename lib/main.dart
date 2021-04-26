@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:structurepublic/src/models/user.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
+import 'package:structurepublic/src/pages/startView.dart';
 
 import 'generated/l10n.dart';
 import 'route_generator.dart';
@@ -55,14 +56,16 @@ class _MyAppState extends State<MyApp> {
         valueListenable: settingRepo.setting,
         builder: (context, Setting _setting, _) {
           return  MaterialApp(
+              routes: <String,WidgetBuilder>{
+                '/a':(BuildContext context) =>StartMain(),
+              },
               navigatorKey: settingRepo.navigatorKey,
               title: "",
               home:
             //  PageMarket(),
-            // PageMain(),
-             // LoginMain(),
-            //  PageVerfiy(),
-              PageMain()  ,
+             //PageMain(),
+              StartMain(),
+              //LoginMain(),
               //MainStateWidget(),
               // initialRoute: '/MainStateWidget',
               onGenerateRoute: RouteGenerator.generateRoute,

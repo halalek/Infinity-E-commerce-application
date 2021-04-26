@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:structurepublic/src/models/SectionData.dart';
-import 'package:structurepublic/src/repository/page_market_repository.dart';
-import 'package:structurepublic/src/repository/pagemain_repository.dart' as repo;
+import 'package:structurepublic/src/models/MarketData.dart';
+import 'package:structurepublic/src/repository/page_market_repository.dart' as repo;
+
 
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
@@ -20,9 +20,9 @@ class PageMarketController extends ControllerMVC {
   OverlayEntry loader;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  List<SectionData> listSection = [];
+  List<MarketData> listMarket = [];
 
-  PageMainController() {
+  PageMarketController() {
     loader = Helper.overlayLoader(context);
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
@@ -31,18 +31,22 @@ class PageMarketController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
-    getMarket();
+    getMarkets();
   }
 
-  // getMarketControoler() async {
-  //   setState((){
-  //     listSection.clear();
-  //   });
-  //   await repo.getSections().then((value) {
-  //     setState((){
-  //       listSection.addAll(value);
-  //     });
-  //   });
-  // }
+getMarkets() async {
+    setState((){
+      listMarket.clear();
+    });
+    await repo.getMarket().then((value) {
+      setState((){
+        listMarket.addAll(value);
 
+      });
+      print("=====================================================================");
+      print( listMarket);
+      print("=====================================================================");
+
+    });
+  }
 }

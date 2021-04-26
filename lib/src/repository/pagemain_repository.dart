@@ -30,9 +30,11 @@ Future<List<SectionData>> getSections() async {
     print("value.docs[i].data()");
 
     for(int i=0;i<value.docs.length;i++){
+
           list.add(SectionData.fromJson(value.docs[i].data()));
         }
   })
       .catchError((e) {});
+
   return list;
 }

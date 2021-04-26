@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
+import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 
 class CardMarketWidget extends StatelessWidget {
- //const CardMarketWidget({Key key,this.sectionData}) : super(key: key);
+ const CardMarketWidget({Key key,this.marketData}) : super(key: key);
 
- // final SectionData sectionData;
-  PageMarketController ggg=new  PageMarketController();
+ final MarketData marketData;
+
+ // PageMarketController ggg=new  PageMarketController();
 
   @override
   Widget build(BuildContext context) {
+
     return  Container(
       //      padding: EdgeInsets.fromLTRB(10,10,10,0),
       height: 300,
@@ -26,13 +29,19 @@ class CardMarketWidget extends StatelessWidget {
             new SizedBox(
               height: 200,
               width: MediaQuery.of(context).size.width,
-              child: Image.network('https://www.awanmasr.com/wp-content/uploads/2021/01/%D8%A3%D8%B6%D8%B1%D8%A7%D8%B1-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7.png',fit: BoxFit.cover,),
+              child:Container(
+               decoration: BoxDecoration(
+              image: DecorationImage(
+              image: new NetworkImage(marketData.image),
 
-            ),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter,
+              ),
+           ),)),
 
 
 
-            //     Container(
+          /*  //     Container(
             //     decoration: BoxDecoration(
             //         image: DecorationImage(
             //         image: new ExactAssetImage("image/3.jpg"),
@@ -40,13 +49,13 @@ class CardMarketWidget extends StatelessWidget {
             //     alignment: Alignment.topCenter,
             //   ),
             // ),
-            //     ),
+            //     ),*/
             Expanded(child: ListTile(
               leading:
-              CircleAvatar(backgroundColor: Colors.black12,backgroundImage:NetworkImage('https://lh3.googleusercontent.com/p/AF1QipOgVQvmgYeEy0sz3x5BoUG4C_qbP99frKKgwB1W=s1600-w400',),),
+              CircleAvatar(backgroundColor: Colors.black12,backgroundImage: new NetworkImage(marketData.imageIcon),),
 
-              title: Text("الزين",style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-              subtitle: Text(  " شاورما - مشاوي - وجبات سريعة"),
+              title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
+              subtitle: Text( marketData.descriptionAr),
 
               trailing:
               GestureDetector(

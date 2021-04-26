@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
+import 'package:structurepublic/src/pages/startView.dart';
 
 import '../../generated/l10n.dart';
 import '../controler/user_controller.dart';
@@ -135,6 +136,7 @@ class _LoginMain extends StateMVC<LoginMain> {
 
                       _loginrController.loginfirebase();
                     }
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => StartMain() ) );
                   },
                 ),
 
