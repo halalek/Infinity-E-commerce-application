@@ -22,11 +22,10 @@ class PageMain extends StatefulWidget
 }
 
 
-class  _PageMain extends StateMVC<PageMain>
-{
+class  _PageMain extends StateMVC<PageMain> {
   PageMainController _con;
 
-  _PageMain() : super( PageMainController()) {
+  _PageMain() : super(PageMainController()) {
     // _con = controller;
     _con = controller;
   }
@@ -35,79 +34,19 @@ class  _PageMain extends StateMVC<PageMain>
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return  Container(
-      color:dark,
+    return Container(
+      color: dark,
       child: ListView.builder(
-          itemCount: _con.listSection.length,
-          itemBuilder: (context, i) {
+        itemCount: _con.listSection.length,
+        itemBuilder: (context, i) {
+          return CardWidget(sectionData: _con.listSection[i],);
+        },
+      ),
 
-            return CardWidget(sectionData: _con.listSection[i],);
-          },
-        ),);}}
-      //  ),
+    );
+  }
+}
 
-  //       bottomNavigationBar: BottomNavigationBar(
-  //         currentIndex:  point,
-  //         selectedFontSize: 13,
-  //         selectedItemColor: Theme.of(context).primaryColorLight,
-  //         unselectedItemColor: Colors.black45,
-  //         unselectedFontSize: 5,
-  //         items: [
-  //           BottomNavigationBarItem(
-  //             icon: Icon(
-  //               Icons.home,
-  //               //  color: Colors.black45,
-  //             ),
-  //             title: Text(
-  //               "الرئيسية",
-  //               // style: TextStyle(color: Colors.black45),
-  //             ),
-  //             backgroundColor: Colors.white38,
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: Icon(
-  //               Icons.local_grocery_store,
-  //               //  color: Theme.of(context).primaryColorLight,
-  //             ),
-  //             title: Text(
-  //               "التسوق",
-  //               //  style: TextStyle(color: Theme.of(context).primaryColorLight),
-  //             ),
-  //             // backgroundColor:Colors.white38,
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: Icon(
-  //               Icons.show_chart,
-  //               // color: Colors.black45,
-  //             ),
-  //             title: Text(
-  //               "العروض",
-  //               //  style: TextStyle(color: Colors.black45),
-  //             ),
-  //             //  backgroundColor:Colors.white38,
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: Icon(
-  //               Icons.person,
-  //               // color: Colors.black45,
-  //             ),
-  //             title: Text(
-  //               "حسابك",
-  //               //   style: TextStyle(color: Colors.black45),
-  //             ),
-  //             // backgroundColor:Colors.white38,
-  //           ),
-  //         ],
-  //         onTap: (index) {
-  //           setState(() {
-  //             point=index;
-  //             if(point==3)
-  //             {
-  //              // navigetor1("app");
-  //               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogoutController(),),);
-  //               //  Navigator.pop(context);
-  //             }
-  //
 
 
 

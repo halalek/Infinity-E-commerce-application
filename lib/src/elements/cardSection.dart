@@ -26,7 +26,7 @@ class CardWidget extends StatelessWidget {
             child: RaisedButton(
             onPressed: () {
 
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket()) );
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket(sectionData)) );
 
 
             },
@@ -73,6 +73,7 @@ class CardWidget extends StatelessWidget {
           ),
         ),
           onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket(sectionData)) );
            // Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket() ) );
           },
         ),

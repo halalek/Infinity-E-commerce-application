@@ -9,6 +9,7 @@ class CardMarketWidget extends StatelessWidget {
 
  final MarketData marketData;
 
+
  // PageMarketController ggg=new  PageMarketController();
 
   @override

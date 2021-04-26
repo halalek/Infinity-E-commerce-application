@@ -27,7 +27,6 @@ Future<List<SectionData>> getSections() async {
       .collection("section")
       .get()
       .then((value) {
-    print("value.docs[i].data()");
 
     for(int i=0;i<value.docs.length;i++){
 
