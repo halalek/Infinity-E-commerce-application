@@ -24,13 +24,6 @@ final Userss userss=new Userss();
 Future<Userss> loginSettings(String email, String password,String name,String phone) async {
   var result = await FirebaseAuth.instance
       .signInWithEmailAndPassword(email: email, password: password);
-  // userss.Usersslogin(result.user.uid, name, email,int.parse(phone));
-  //userss.phone= int.parse(phone);
-
-   //userss.email= email;
-   //userss.name=name;
-   //userss.id=result.user.uid;
-  //  return result;
   if (result != null) {
     userss.Usersslogin(result.user.uid, name, email,int.parse(phone));
     // getUser
@@ -76,6 +69,7 @@ Future<void> updateUser() async {
     return value;
   })
       .catchError((e) {});
+  return  await getUser();
 
 }
 
@@ -88,6 +82,7 @@ Future<Userss> addUser() async {
         "id":userss.id,
         "token":userss.token,
         "role":userss.role,
+
       }
   )
       .then((value) {
