@@ -1,28 +1,28 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
 import 'package:structurepublic/src/pages/startView.dart';
-
 import 'generated/l10n.dart';
 import 'route_generator.dart';
-import 'src/helpers/custom_trace.dart';
 import 'src/models/setting.dart';
-import 'src/pages/mainView.dart';
-import 'src/pages/marketView.dart';
-import 'src/pages/page_Main_View.dart';
 import 'src/repository/settings_repository.dart' as settingRepo;
-import 'src/repository/user_repository.dart' as userRepo;
 import 'src/helpers/app_config.dart' as config;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await GlobalConfiguration().loadFromAsset("configurations");
-  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
- await Firebase.initializeApp();
+//  await GlobalConfiguration().loadFromAsset("configurations");
+//  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
 
-  runApp(MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var user = preferences.getString('user');
+  await Firebase.initializeApp();
+  runApp(MaterialApp(home: user == null ? LoginMain() :  MyApp(),));
+
+
 }
 
 class MyApp extends StatefulWidget {

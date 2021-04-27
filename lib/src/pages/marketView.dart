@@ -7,25 +7,27 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
 import 'package:structurepublic/src/elements/cardmarketWidget.dart';
+import 'package:structurepublic/src/models/SectionData.dart';
 
 class PageMarket extends StatefulWidget
 {
-
-
+  final SectionData sectionData;
+  PageMarket(this.sectionData);
 
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _PageMarket();
+    return _PageMarket(this.sectionData);
   }
 }
 
 class  _PageMarket extends StateMVC<PageMarket>
 {
+  final SectionData sectionData;
   PageMarketController _con2;
 
-  _PageMarket() : super( PageMarketController()) {
+  _PageMarket(this.sectionData) : super( PageMarketController(sectionData)) {
     // _con = controller;
     _con2 = controller;
   }
@@ -36,7 +38,7 @@ class  _PageMarket extends StateMVC<PageMarket>
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("المطاعم"),
+        title: Text(sectionData.nameAr),
         backgroundColor: Theme.of(context).primaryColor,
 
       ),

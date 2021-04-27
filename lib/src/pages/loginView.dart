@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 
@@ -13,6 +14,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'page_Main_View.dart';
 
 class LoginMain extends StatefulWidget {
   @override
@@ -37,6 +40,8 @@ class _LoginMain extends StateMVC<LoginMain> {
     Firebase.initializeApp();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +54,45 @@ class _LoginMain extends StateMVC<LoginMain> {
             key: _formkey,
             child: Column(
               children: <Widget>[
+
+
+                TextFormField(
+                  controller: _loginrController.nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Name',
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Fill Name Input';
+                    }
+
+                    return null;
+                  },
+                ),
+
+                SizedBox(
+                  height: 25,
+                ),
+
+
+                TextFormField(
+                  controller: _loginrController.phoneController,
+                  decoration: InputDecoration(
+                    hintText: 'Phone',
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Fill Phone Input';
+                    }
+
+                    return null;
+                  },
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
                 TextFormField(
                   controller: _loginrController.emailController,
                   //_emailcontroller,
@@ -62,9 +106,11 @@ class _LoginMain extends StateMVC<LoginMain> {
                     return null;
                   },
                 ),
+
                 SizedBox(
-                  height: 20,
+                  height: 25,
                 ),
+
                 TextFormField(
                   controller: _loginrController.passwordController,
                   decoration: InputDecoration(
@@ -77,9 +123,6 @@ class _LoginMain extends StateMVC<LoginMain> {
 
                     return null;
                   },
-                ),
-                SizedBox(
-                  height: 25,
                 ),
 
                 RaisedButton(
@@ -107,6 +150,7 @@ class _LoginMain extends StateMVC<LoginMain> {
                     if (_formkey.currentState.validate()) {
 
                       _loginrController.signupfirebase();
+
                     }
                   },
                 ),

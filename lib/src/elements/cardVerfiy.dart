@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
-import 'package:structurepublic/src/pages/marketView.dart';
+import 'package:structurepublic/src/models/user.dart';
 
-import 'cardmarketWidget.dart';
+class CardVerfiy extends StatelessWidget {
 
-class CardWidget extends StatelessWidget {
-  const CardWidget({Key key,this.sectionData}) : super(key: key);
+  const CardVerfiy({Key key,this.userss}) : super(key: key);
 
-  final SectionData sectionData;
-
+  final Userss userss;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +20,9 @@ class CardWidget extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child:  GestureDetector(child: Container(
           child:
-          Center(
-            child: RaisedButton(
+          Center(child: RaisedButton(
             onPressed: () {
-
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket(sectionData)) );
-
-
+              //  navigetor("");
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(80.0),),
@@ -49,7 +43,7 @@ class CardWidget extends StatelessWidget {
                 BoxConstraints(maxWidth: 100.0, minHeight: 40.0,maxHeight: 50),
                 alignment: Alignment.center,
                 child: Text(
-                  sectionData.nameAr,
+                  userss.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -64,17 +58,16 @@ class CardWidget extends StatelessWidget {
 
 
 
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: new NetworkImage(sectionData.image),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //    // image: new NetworkImage(sectionData.image),
+          //     fit: BoxFit.fitWidth,
+          //     alignment: Alignment.topCenter,
+          //   ),
+          // ),
         ),
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket(sectionData)) );
-           // Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket() ) );
+            // navigetor("");
           },
         ),
         shape: RoundedRectangleBorder(

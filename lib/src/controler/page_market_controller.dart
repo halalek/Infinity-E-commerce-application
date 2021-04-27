@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
+import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/repository/page_market_repository.dart' as repo;
 
 
@@ -21,8 +22,8 @@ class PageMarketController extends ControllerMVC {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   List<MarketData> listMarket = [];
-
-  PageMarketController() {
+  final SectionData sectionData;
+  PageMarketController(this.sectionData) {
     loader = Helper.overlayLoader(context);
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
@@ -38,15 +39,23 @@ getMarkets() async {
     setState((){
       listMarket.clear();
     });
-    await repo.getMarket().then((value) {
+    await repo.getMarket(this.sectionData).then((value) {
       setState((){
+print("kkkkkkkkkkkkkkkkkkkk"   + value.length.toString());
         listMarket.addAll(value);
 
-      });
-      print("=====================================================================");
-      print( listMarket);
-      print("=====================================================================");
+        // for(int i=0;i<listMarket.length;i++)
+        // {if(listMarket[i].idSection!=sectionData.id)
+        // {listMarket.removeAt(i);}
+        // }
+      }
 
+      );
+
+      print(listMarket.length.toString() + "444444444444444444444444444444444444444444444");
     });
+
+
+
   }
 }

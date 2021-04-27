@@ -94,19 +94,19 @@ class _SettingsPageState extends State<SettingsPage> {
             height: 40,
           ),
           Row(
-            children: [
-              Icon(
-                Icons.volume_up_outlined,
-                color: changecolor,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                   "Notifications",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,fontFamily: font,color: darkfont),
-              ),
-            ],
+            // children: [
+            //   Icon(
+            //     Icons.volume_up_outlined,
+            //     color: changecolor,
+            //   ),
+            //   SizedBox(
+            //     width: 8,
+            //   ),
+            //   Text(
+            //        "Notifications",
+            //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,fontFamily: font,color: darkfont),
+            //   ),
+            // ],
           ),
           Divider(
             height: 15,
@@ -625,25 +625,25 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.font_download_outlined,
-                color: darkfont,
-              ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: darkfont,
-                  fontFamily: font,
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color:darkfont,
-              ),
-            ],
+            // children: [
+            //   Icon(
+            //     Icons.font_download_outlined,
+            //     color: darkfont,
+            //   ),
+            //   Text(
+            //     title,
+            //     style: TextStyle(
+            //       fontSize: 18,
+            //       fontWeight: FontWeight.w500,
+            //       color: darkfont,
+            //       fontFamily: font,
+            //     ),
+            //   ),
+            //   Icon(
+            //     Icons.arrow_forward_ios,
+            //     color:darkfont,
+            //   ),
+            // ],
           ),
         )); }
   Container buildAccountOptionRow5(BuildContext context, String title) {
@@ -756,7 +756,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            isSwitched1? IconButton(icon: Icon(Icons.wb_sunny,color: darkfont,), ):IconButton(icon: Icon(Icons.bedtime,color: darkfont,),),
+           // isSwitched1? IconButton(icon: Icon(Icons.wb_sunny,color: darkfont,), ):IconButton(icon: Icon(Icons.bedtime,color: darkfont,),),
             Text(
               title,
               style: TextStyle(

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structurepublic/src/controler/varify_controller.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/models/user.dart';
 
 import '../helpers/custom_trace.dart';
 import '../models/setting.dart';
@@ -21,19 +21,18 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 //LocationData locationData;
 
-Future<List<SectionData>> getSections() async {
-  List<SectionData> list = [];
+Future<List<Userss>> getUserFirebase() async {
+  List<Userss> list = [];
   await FirebaseFirestore.instance
-      .collection("section")
+      .collection("users")
       .get()
       .then((value) {
+    //print("value.docs[i].data()");
 
     for(int i=0;i<value.docs.length;i++){
-
-          list.add(SectionData.fromJson(value.docs[i].data()));
-        }
+      list.add(Userss.fromJson(value.docs[i].data()));
+    }
   })
       .catchError((e) {});
-
   return list;
 }

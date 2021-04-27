@@ -8,7 +8,7 @@ import '../models/user.dart';
 import '../repository/user_repository.dart' as repository;
 
 class UserController extends ControllerMVC {
-  Users user = new Users();
+  Userss user = new Userss();
   bool loading = false;
   GlobalKey<ScaffoldState> scaffoldKey;
    OverlayEntry loader;
@@ -18,6 +18,5 @@ class UserController extends ControllerMVC {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
 
   }
-
 
 }
