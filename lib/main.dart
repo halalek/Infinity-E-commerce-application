@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:structurepublic/src/models/user.dart';
+import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
+import 'package:structurepublic/src/pages/profil.dart';
+import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'generated/l10n.dart';
 import 'route_generator.dart';
@@ -15,10 +19,9 @@ Future<void> main() async {
 //  await GlobalConfiguration().loadFromAsset("configurations");
 //  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
 
-
+  SharedPref sharedPref=SharedPref();
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  var user = preferences.getString('user');
+  Userss user =Userss.fromJson(await sharedPref.read('user')) ;
   await Firebase.initializeApp();
   runApp(MaterialApp(home: user == null ? LoginMain() :  MyApp(),));
 
@@ -46,6 +49,7 @@ class _MyAppState extends State<MyApp> {
           return  MaterialApp(
               routes: <String,WidgetBuilder>{
                 '/a':(BuildContext context) =>StartMain(),
+                '/b':(BuildContext context) => editProfilePage(),
               },
               navigatorKey: settingRepo.navigatorKey,
               title: "",

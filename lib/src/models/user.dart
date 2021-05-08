@@ -6,6 +6,7 @@ class Userss {
   String email;
  // int password;
   String token;
+  String image;
   //String deviceToken;
   double lat;
   double long;
@@ -26,6 +27,7 @@ class Userss {
     this.long,
     this.role,
     this.phone,
+    this.image,
    // this.password,
     this.email,
     this.id,
@@ -51,6 +53,7 @@ class Userss {
      phone: json["phone"] == null ? null : json["phone"],
      email: json["email"] == null ? null : json["email"],
      timesTamp: json["timesTamp"] == null ? null : json["timesTamp"],
+    image: json["image"] == null ? null : json["image"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -63,6 +66,7 @@ class Userss {
     "id": id == null ? null : id,
     "timesTamp": timesTamp == null ? null : timesTamp,
     "name": name == null ? null : name,
+    "image": image == null ? null : image,
   };
 
 

@@ -29,14 +29,17 @@ import 'notifications.dart';
 class StartMain extends StatefulWidget {
   @override
   _StartMain createState() => _StartMain();
+
 }
 
 class _StartMain extends StateMVC<StartMain> {
-  StartController _StartrController;
+  UserController _con;
 
-  _StartMain() : super(StartController()) {
+  _StartMain() : super(UserController()) {
     // _con = controller;
-    _StartrController = controller;
+    _con = controller;
+    _con.getUsers();
+
   }
 
   @override
@@ -248,26 +251,26 @@ class _StartMain extends StateMVC<StartMain> {
       ),
 
       child: Column(
-        // shows the list of menu drawer
-        // children: [
-        //   menuItem(1, "Dashboard", Icons.dashboard_outlined,
-        //       currentPage == DrawerSections.page_Main_View ? true : false),
-        //   menuItem(2, "Common questions", Icons.contact_support_outlined,
-        //       currentPage == DrawerSections.contact_support ? true : false),
-        //   menuItem(3, "Events", Icons.event,
-        //       currentPage == DrawerSections.events ? true : false),
-        //   menuItem(4, "Profile", Icons.account_circle,
-        //       currentPage == DrawerSections.Profile ? true : false),
-        //   Divider(),
-        //   menuItem(5, "Settings", Icons.settings_outlined,
-        //       currentPage == DrawerSections.settings ? true : false),
-        //   menuItem(6, "Notifications", Icons.notifications_outlined,
-        //       currentPage == DrawerSections.notifications ? true : false),
-        //   Divider(),
-        //   menuItem(7, "Privacy policy", Icons.privacy_tip_outlined,
-        //       currentPage == DrawerSections.privacy_policy ? true : false),
-        //   menuItem(8, "Exit", Icons.logout, set),
-        // ],
+
+        children: [
+          menuItem(1, "Dashboard", Icons.dashboard_outlined,
+              currentPage == DrawerSections.page_Main_View ? true : false),
+          menuItem(2, "Common questions", Icons.contact_support_outlined,
+              currentPage == DrawerSections.contact_support ? true : false),
+          menuItem(3, "Events", Icons.event,
+              currentPage == DrawerSections.events ? true : false),
+          menuItem(4, "Profile", Icons.account_circle,
+              currentPage == DrawerSections.Profile ? true : false),
+          Divider(),
+          menuItem(5, "Settings", Icons.settings_outlined,
+              currentPage == DrawerSections.settings ? true : false),
+          menuItem(6, "Notifications", Icons.notifications_outlined,
+              currentPage == DrawerSections.notifications ? true : false),
+          Divider(),
+          menuItem(7, "Privacy policy", Icons.privacy_tip_outlined,
+              currentPage == DrawerSections.privacy_policy ? true : false),
+          menuItem(8, "Exit", Icons.logout, set),
+        ],
       ),
     );
   }

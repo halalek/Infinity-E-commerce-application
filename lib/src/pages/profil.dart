@@ -1,19 +1,227 @@
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structurepublic/src/controler/login_controller.dart';
+import 'package:structurepublic/src/controler/user_controller.dart';
+import 'package:structurepublic/src/elements/cardFavorite.dart';
+import 'package:structurepublic/src/models/user.dart';
+import 'package:structurepublic/src/pages/editProfil.dart';
+import 'package:structurepublic/src/pages/realLocation.dart';
+import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
-class ProfilePage extends StatefulWidget {
+import 'package:structurepublic/src/repository/login_repository.dart'as repo;
+import 'package:location/location.dart';
+import 'dart:io';
+
+import 'package:structurepublic/src/repository/login_repository.dart';
+class ProfilePage extends StatefulWidget
+{
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _ProfilePage();
+  }
+
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+
+class  _ProfilePage extends StateMVC<ProfilePage> {
+
+  void updataName(String name){
+    setState(() =>_name = name);
+  }
+  void moveToSecondPage() async {
+    final information = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+          fullscreenDialog: true, builder: (context) => editProfilePage()),
+    );
+    updataName(information);
+  }
+  String _name;
+  UserController _con;
+  SharedPref sharedPref=SharedPref();
+  _ProfilePage() : super(UserController()) {
+    // _con = controller;
+    _con = controller;
+
+  }
 
 
-bool showPassword=false;
+
+
+
+  String getcon(){
+    _name=_con.user.name;
+    return _name;
+  }
+void location() async{
+  Location location = new Location();
+
+
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
+
+  _serviceEnabled = await location.serviceEnabled();
+  if (!_serviceEnabled) {
+    _serviceEnabled = await location.requestService();
+    if (!_serviceEnabled) {
+      return;
+    }
+  }
+
+  _permissionGranted = await location.hasPermission();
+  if (_permissionGranted == PermissionStatus.denied) {
+    _permissionGranted = await location.requestPermission();
+    if (_permissionGranted != PermissionStatus.granted) {
+      return;
+    }
+  }
+
+  location.onLocationChanged.listen((LocationData currentLocation) {
+    // Use current location
+
+
+    _con.user.long=currentLocation.longitude;
+    _con.user.lat=currentLocation.latitude;
+    sharedPref.save('user', _con.user);
+    // print(repo.updateUser(lat1));
+
+    repo.updateUser(_con.user);
+
+
+
+  });
+
+}
+  bool showPassword=false;
+  void displayBottomSheet(BuildContext context)  { showModalBottomSheet( context: context, builder: (ctx) {
+    return Container( height: MediaQuery.of(context).size.height * 0.4,
+        child: Column(   children: [Row(
+            children: [
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/c.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://www.pngkey.com/png/full/284-2844044_fashion-toys-electrical-items-and-more-girl-with.png";});
+                  _con.user.image=image;
+                  sharedPref.save('user', _con.user);
+
+                  repo.updateUser(_con.user);
+
+                },
+              ),
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/rose_PNG66944.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://www.joigifts.com/pub/media/catalog/product/cache/afad95d7734d2fa6d0a8ba78597182b7/0/0/0005752_50-red-roses-bouquet.jpeg";});
+                  _con.user.image=image;
+                  sharedPref.save('user', _con.user);
+
+                  repo.updateUser(_con.user);
+
+                },
+              ),
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/ic.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://igav3-metcdn-com.global.ssl.fastly.net/content/uploads/sites/2/2018/10/16091327/49_Hero.png";});
+
+                  _con.user.image=image;
+                  sharedPref.save('user', _con.user);
+
+                  repo.updateUser(_con.user);
+
+                },
+              ),
+            ]
+        ),Row(
+            children: [
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/c2.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://www.seekpng.com/png/full/21-212923_mens-jens-fashion-png.png";});
+                  _con.user.image=image;
+                  sharedPref.save('user', _con.user);
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                  repo.updateUser(_con.user);
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                },
+              ),
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/f2.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://rjeem.com/wp-content/uploads/2019/12/%D8%A8%D9%88%D9%83%D9%8A%D9%87-%D9%88%D8%B1%D8%AF-%D8%A7%D8%A8%D9%8A%D8%B6.png";});
+
+                  _con.user.image=image;
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                  sharedPref.save('user', _con.user);
+                  repo.updateUser(_con.user);
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                },
+              ),
+              IconButton(
+                iconSize: 120,
+                icon: Image.asset( "assets/img/p.png",
+
+                ),
+                onPressed: (){
+                  setState(() {
+
+                    image="https://www.seekpng.com/png/full/89-891255_fast-food-png-food.png";});
+                  if(image!="https://cdn.dribbble.com/users/25514/screenshots/1614757/logo-design-golden-ratio-infinity.gif")
+                  _con.user.image=image;
+                  sharedPref.save('user', _con.user);
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                  repo.updateUser(_con.user);
+                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
+                },
+              ),
+            ]
+        ),],
+        )); }); }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+
+
     return Container(
       color: darkAlert,
-     child: ListView(
+
+      child: ListView(
+
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -30,35 +238,170 @@ bool showPassword=false;
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 90.0,
-                    width: 90.0,
-                    decoration: BoxDecoration(
-                      image: new DecorationImage(
-                        image: new AssetImage("assets/img/logo.png"),
-                      ) ,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 5.0,
+                  child:Stack(
+                    children: [
+                      Container(
+
+                        width: 120,
+                        height: 120,
+
+                        decoration: BoxDecoration(
+
+                            border: Border.all(
+                                width: 4,
+                                color: changecolor),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  color: Colors.black.withOpacity(0.1),
+                                  offset: Offset(0, 10))
+                            ],
+                            shape: BoxShape.circle,
+
+                            image: DecorationImage(
+
+                              fit: BoxFit.fill,
+
+                              image: CachedNetworkImageProvider( "${_con.user.image}"),)),
+
                       ),
-                    ),
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 2,
+                                color: changecolor,
+                              ),
+                              color:changecolor,
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.edit,color: darkfont,),
+                              onPressed: (){
+                                displayBottomSheet(context);
+                              },
+                            ),
+                          )),
+                    ],
                   ),
                 ),
+
               )
             ],
+          ),
+          Container(
+
+            padding: const EdgeInsets.only(left: 180),
+            child :Text(_name==null?"${getcon()}":"${_name}"),
           ),
           Container(
             padding: const EdgeInsets.only(top: 32.0),
             child: Column(
               children: <Widget>[
-                Text('Hello Bhupesh!!!'),
+                IntrinsicHeight
+                  (
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                            children: [IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: (){
+
+                                moveToSecondPage();   },
+                            ),
+
+
+                              FlatButton(
+                                child:      Text("edit profil",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color:darkfont,
+
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: font,
+                                  ),),
+                                onPressed: (){
+                                  moveToSecondPage();
+                                },)
+                            ]),
+
+
+                        VerticalDivider(color: darkfont,width: 20,),
+                        Column(
+                            children: [ IconButton(
+                              icon: Icon(Icons.add_location_alt_outlined),
+                              onPressed:()async{
+                                location();
+                              },
+                            ),
+                              FlatButton(
+                                child:Text("location",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color:darkfont,
+
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: font,
+                                  ),),
+                                onPressed: (){
+                                  location();
+                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => RealtimeMapScrren()));
+                                },)
+                            ]),
+
+
+                        VerticalDivider(color: darkfont,width: 20,),
+                        Column(
+                            children: [IconButton(
+                              icon: Icon(Icons.shopping_cart_outlined),
+                              onPressed: (){
+
+                              },
+                            ),   FlatButton(
+                              child:Text("my requests",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color:darkfont,
+
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: font,
+                                ),),
+                              onPressed: (){
+
+                              },)
+
+
+
+                            ]),
+
+                      ], )),
                 Padding(
-                  padding:
-                  const EdgeInsets.only(top: 22.0, left: 42.0, right: 42.0),
-                  child: Center(child: Text('Welcome to your Profile, Although, you do not have much to say in your profile apart from your cool image!!!')),
-                )
-              ],
+                    padding:
+                    const EdgeInsets.only(top: 22.0, left: 42.0, right: 42.0),
+                    child: Center(
+                      child:Column(
+                          children: [
+                            Row(  children: [
+                              Text("Favorite"),
+                              IconButton(
+                                  icon: Icon(Icons.favorite,color:changecolor,),
+
+                                  onPressed: (){}
+
+
+                              ),
+
+
+
+                            ])
+                          ]),)
+                ), ],
             ),
           ),
         ],
@@ -90,155 +433,5 @@ class ClippingClass extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-/* padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: ListView(
-          children: [
-            Text(
-              "Edit Profile",
-              style: TextStyle(fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color:darkfont,
-                fontFamily: font,),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 4,
-                            color: changecolor),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                              offset: Offset(0, 10))
-                        ],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                              "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                            ))),
-                  ),
-                  Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 4,
-                            color: changecolor,
-                          ),
-                          color:changecolor,
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          color: darkfont,
-                        ),
-                      )),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            buildTextField("Full Name", "Nour Ah", false),
-            buildTextField("E-mail", "ahn32857@gmail.com", false),
-            buildTextField("Password", "********", true),
-            buildTextField("Location", "syria", false),
-            SizedBox(
-              height: 35,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                OutlineButton(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {},
-                  child: Text("CANCEL",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color:darkfont,
-                        fontFamily: font,)),
-                ),
-                RaisedButton(
-                  onPressed: () {},
-                  color: changecolor,
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Text(
-                     "SAVE",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color:darkfont,
-                      fontFamily: font,),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
-        obscureText: isPasswordTextField ? showPassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-              onPressed: () {
-                setState(() {
-                  showPassword = !showPassword;
-                });
-              },
-              icon: Icon(
-                Icons.remove_red_eye,
-                color: darkfont,
-              ),
-            )
-                : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
-            labelText: labelText,
-            labelStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color:changecolor,
-              fontFamily: font,
-            ),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color:darkfont,
-              fontFamily: font,
-            )),
-      ),
-    );
-  }}*/
+}
