@@ -15,6 +15,7 @@ import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/verfiyView.dart';
 import 'package:structurepublic/src/repository/login_repository.dart';
 
+import 'package:structurepublic/src/repository/login_repository.dart'as repo;
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';

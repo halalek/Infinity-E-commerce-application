@@ -10,10 +10,10 @@ import '../repository/user_repository.dart' as repository;
 import 'package:structurepublic/src/repository/login_repository.dart' as repo;
 
 class UserController extends ControllerMVC {
-  Userss user = new Userss();
+   Userss user = new Userss();
   bool loading = false;
   GlobalKey<ScaffoldState> scaffoldKey;
-   OverlayEntry loader;
+  OverlayEntry loader;
 
   UserController() {
     loader = Helper.overlayLoader(context);
@@ -21,6 +21,42 @@ class UserController extends ControllerMVC {
 
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+  getUsers() async {
+    //  setState((){
+    //    user.;
+    //  }
+    // );
+    await repo.getUser().then((value){
+      setState((){
+        if(value==null)
+        {print("error user");}
+        else{
+
+          user=value;
+
+        }
+
+      }
+
+
+      );
+      return user;
+    }
+
+
+    );
+
+    return user;
+
+
+
+  }
 
   @override
   void initState() {
