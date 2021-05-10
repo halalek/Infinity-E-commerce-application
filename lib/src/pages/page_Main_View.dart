@@ -7,9 +7,9 @@ import 'package:http/http.dart';
 import 'package:structurepublic/src/controler/logout_controller.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/shared.dart';
+import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/elements/cardSection.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
-
 
 class PageMain extends StatefulWidget
 {
@@ -30,18 +30,37 @@ class  _PageMain extends StateMVC<PageMain> {
     _con = controller;
   }
 
+  // UserController userController ;
+  // _PageMain() : super(UserController()) {
+  //   // _con = controller;
+  //   userController = controller;
+  //   userController.getUsers();
+  // }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
       color: dark,
-      child: ListView.builder(
+      child:
+      ListView.builder(
         itemCount: _con.listSection.length,
         itemBuilder: (context, i) {
           return CardWidget(sectionData: _con.listSection[i],);
-        },
+
+       },
+
       ),
+
+      // ListView.builder(
+      //  // itemCount: _con.listSection.length,
+      //   itemBuilder: (context, i) {
+      //     return CardsSe(userss: userController.user,);
+      //
+      //  },
+
+      //),
+      //Text(userController.user.name),
 
     );
   }

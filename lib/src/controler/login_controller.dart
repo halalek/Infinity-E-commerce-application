@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/controler/varify_controller.dart';
 import 'package:structurepublic/src/models/route_argument.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
@@ -64,7 +65,9 @@ class LoginController extends ControllerMVC {
         print("Sucsess login");
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('user', json.encode(value.toJson()));
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> StartMain(),),);
+
+        //Navigator.pushReplacement(context, MaterialPageRoute(builder: ( BuildContext context)=> StartMain(),),);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> StartMain(),),);
 
        // varifyController. Checkemail();
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Verfiy() ) );
@@ -73,6 +76,7 @@ class LoginController extends ControllerMVC {
 
       }
     });
+
   }
 
   Future<void> signupfirebase() async
@@ -86,13 +90,19 @@ class LoginController extends ControllerMVC {
         print("Sucsess signin");
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('user', json.encode(value.toJson()));
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> StartMain(),),);
+        Navigator.pushReplacement( context, MaterialPageRoute(builder: (BuildContext context)=> StartMain(),),);
        // varifyController. Checkemail();
       //  Navigator.push(context, MaterialPageRoute(builder: (context) => Verfiy() ) );
 
       }
     });
   }
+
+
+
+
+
+
 
 
 

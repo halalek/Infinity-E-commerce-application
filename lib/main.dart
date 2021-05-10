@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
+import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'generated/l10n.dart';
 import 'route_generator.dart';
@@ -20,13 +21,14 @@ Future<void> main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
   await Firebase.initializeApp();
-  runApp(MaterialApp(home: user == null ? LoginMain() :  MyApp(),));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? LoginMain() :  MyApp(),));
 
 
 }
 
 class MyApp extends StatefulWidget {
   @override
+
   _MyAppState createState() => _MyAppState();
 }
 
@@ -44,10 +46,12 @@ class _MyAppState extends State<MyApp> {
         valueListenable: settingRepo.setting,
         builder: (context, Setting _setting, _) {
           return  MaterialApp(
+              debugShowMaterialGrid: false,
               routes: <String,WidgetBuilder>{
-                '/a':(BuildContext context) =>StartMain(),
+                '/a':(context) =>StartMain(),
               },
               navigatorKey: settingRepo.navigatorKey,
+              //debugShowMaterialGrid: false,
               title: "",
               home:
             //  PageMarket(),
@@ -125,4 +129,5 @@ class _MyAppState extends State<MyApp> {
 
         });
   }
+
 }

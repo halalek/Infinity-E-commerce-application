@@ -230,7 +230,9 @@ class _StartMain extends StateMVC<StartMain> {
                 if(point==3)
                 {
                   // navigetor1("app");
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogoutController(),),);
+                  print("startttttttt");
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
+                  print("endddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
                   //  Navigator.pop(context);
                 }
               }

@@ -24,7 +24,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 Future<List<SectionData>> getSections() async {
   List<SectionData> list = [];
   await FirebaseFirestore.instance
-      .collection("section")
+      .collection("section").where("hide",isEqualTo:false)
       .get()
       .then((value) {
 

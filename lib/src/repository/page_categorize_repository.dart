@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structurepublic/src/controler/varify_controller.dart';
+import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 
@@ -22,14 +23,13 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
 
 //LocationData locationData;
-Future<List<MarketData>> getMarket(SectionData sectionData) async {
-  List<MarketData> list = [];
-
+Future<List<CategorizeData>> getCategorize(MarketData marketData) async {
+  List<CategorizeData> list = [];
   await FirebaseFirestore.instance
-      .collection("market").where("id_section",isEqualTo:sectionData.id.toString()).where("hide",isEqualTo:false).get()
+      .collection("market").doc(marketData.id).collection("categorize").where("hide",isEqualTo:false).get()
       .then((value) {
-   for(int i=0;i<value.docs.length;i++){
-      list.add(MarketData.fromJson(value.docs[i].data()));
+    for(int i=0;i<value.docs.length;i++){
+      list.add(CategorizeData.fromJson(value.docs[i].data()));
     }}
   ).catchError((e) {});
 
@@ -37,28 +37,22 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
 }
 
 
-// await FirebaseFirestore.instance
-//     .collection("market").where("owners",arrayContains:userss.id.toString()).get()
-//     .then((value) {
-// for(int i=0;i<value.docs.length;i++){
-// list.add(MarketData.fromJson(value.docs[i].data()));
-// }}
-// )
+
 
 
 //Future<List<SectionData>> getMarket() async {
-  // List<SectionData> list = [];
-  // await FirebaseFirestore.instance
-  //     .collection("market")
-  //     .get()
-  //     .then((value) {
-  //       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-  //
-  //
-  //   // for(int i=0;i<value.docs.length;i++){
-  //   //   list.add(SectionData.fromJson(value.docs[i].data()));
-  //   // }
-  // })
-  //     .catchError((e) {});
-  // //return list;
+// List<SectionData> list = [];
+// await FirebaseFirestore.instance
+//     .collection("market")
+//     .get()
+//     .then((value) {
+//       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+//
+//
+//   // for(int i=0;i<value.docs.length;i++){
+//   //   list.add(SectionData.fromJson(value.docs[i].data()));
+//   // }
+// })
+//     .catchError((e) {});
+// //return list;
 //}

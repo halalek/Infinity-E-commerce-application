@@ -24,7 +24,7 @@ class LoginMain extends StatefulWidget {
 
 class _LoginMain extends StateMVC<LoginMain> {
 
-  final _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   // UserController _con;
   LoginController _loginrController;
@@ -44,14 +44,16 @@ class _LoginMain extends StateMVC<LoginMain> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Login To My Account'),
       ),
+
       body: Container(
         padding: EdgeInsets.all(16),
         child: Form(
-            key: _formkey,
+            key: _formKey,
             child: Column(
               children: <Widget>[
 
@@ -132,11 +134,11 @@ class _LoginMain extends StateMVC<LoginMain> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    if (_formkey.currentState.validate()) {
+                    if (_formKey.currentState.validate()) {
 
                       _loginrController.loginfirebase();
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => StartMain() ) );
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
                   },
                 ),
 
@@ -147,7 +149,7 @@ class _LoginMain extends StateMVC<LoginMain> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    if (_formkey.currentState.validate()) {
+                    if (_formKey.currentState.validate()) {
 
                       _loginrController.signupfirebase();
 

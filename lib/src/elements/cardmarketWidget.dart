@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/pages/categorizeView.dart';
 
 class CardMarketWidget extends StatelessWidget {
  const CardMarketWidget({Key key,this.marketData}) : super(key: key);
@@ -30,15 +32,20 @@ class CardMarketWidget extends StatelessWidget {
             new SizedBox(
               height: 200,
               width: MediaQuery.of(context).size.width,
-              child:Container(
-               decoration: BoxDecoration(
-              image: DecorationImage(
-              image: new NetworkImage(marketData.image),
 
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-              ),
-           ),)),
+              child:Image(image:CachedNetworkImageProvider(marketData.image),fit: BoxFit.cover),
+
+           //    Container(
+           //     decoration: BoxDecoration(
+           //    image: DecorationImage(
+           //    image: new NetworkImage(marketData.image,fit: BoxFit.cover),
+           //
+           //    fit: BoxFit.fitWidth,
+           //    alignment: Alignment.topCenter,
+           //    ),
+           // ),)
+
+            ),
 
 
 
@@ -53,7 +60,7 @@ class CardMarketWidget extends StatelessWidget {
             //     ),*/
             Expanded(child: ListTile(
               leading:
-              CircleAvatar(backgroundColor: Colors.black12,backgroundImage: new NetworkImage(marketData.imageIcon),),
+              CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon),),
 
               title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
               subtitle: Text( marketData.descriptionAr),
@@ -63,12 +70,16 @@ class CardMarketWidget extends StatelessWidget {
                 child: Text("متصل",style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
                 // child:Icon(Icons.access_time, color: Colors.grey,),
                 onTap: () {
-               //   navigetor("");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Categorize(marketData)) );
+
+                  //   navigetor("");
                   //    delete(context,this.studentlist[position]);
                   //   debugPrint("student print");
                 },),
               onTap: () {
-               // navigetor("");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Categorize(marketData)) );
+
+                // navigetor("");
                 //       navigetortostudent(this.studentlist[position],"Edit Student");
                 //   debugPrint("student print");
               },
@@ -78,7 +89,9 @@ class CardMarketWidget extends StatelessWidget {
           ],
         ),
           onTap: () {
-          //  navigetor("");
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Categorize(marketData)) );
+
+            //  navigetor("");
             //       navigetortostudent(this.studentlist[position],"Edit Student");
             //   debugPrint("student print");
           },

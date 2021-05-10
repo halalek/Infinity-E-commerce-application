@@ -18,6 +18,7 @@ import '../models/setting.dart';
 
 ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
+
 final Userss userss=new Userss();
 //LocationData locationData;
 
@@ -30,7 +31,6 @@ Future<Userss> loginSettings(String email, String password,String name,String ph
     //return result.user;
     return  await getUser() ;
   } else {
-    print("44444444444444444444444444444444444");
     return null;
   }
 }
@@ -94,22 +94,30 @@ Future<Userss> addUser() async {
 
 
 Future<Userss> getUser() async {
-  Userss users;
-  await FirebaseFirestore.instance
-      .collection("users").doc(userss.id)
-      .get()
-      .then((value) {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var user = preferences.getString('user');
+  Userss users=new Userss();
+  if(user==null)
+    {
+      await FirebaseFirestore.instance
+          .collection("users").doc(userss.id)
+          .get()
+          .then((value) {
+        users= Userss.fromJson(value.data());
+      }
+      );
+      return users;
+    }
 
-    // for(int i=0;i<value.docs.length;i++){
-    //   list.add(Userss.fromJson(value.docs[i].data()));
-    // }
+  else
+    {
+      users=Userss.fromJson(json.decode(user));
+      return users ;
 
+    }
 
-    users= Userss.fromJson(value.data());
-  })
-      .catchError((e) {});
-  return users;
 }
+
 
 
 

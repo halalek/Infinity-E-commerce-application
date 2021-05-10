@@ -37,6 +37,10 @@ class Userss {
  {this.id=id; this.name=name; this.email=email; this.phone=phone;}
 
 
+  Userss Userset(Userss userss)
+  {return userss;}
+
+
   void UserssSign(String id, String name, String email, int phone,String token,String role)
   {this.id=id; this.name=name; this.email=email; this.phone=phone;this.token=token;this.role=role;}
 

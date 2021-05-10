@@ -20,10 +20,13 @@ class _LogoutController extends State<LogoutController> {
   var user;
 
   Future getEmail()async{
+    print("llllllllllllllllllllllllllllllll");
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       user = preferences.getString('user');
+
     });
+    print("2222222222222222222222222222222222222222");
   }
 
   Future logOut(BuildContext context)async{
@@ -50,13 +53,14 @@ class _LogoutController extends State<LogoutController> {
 
   @override
   Widget build(BuildContext context) {
+    print("55555555555555555555555555555555555555555555555555555555");
     return Scaffold(
       appBar: AppBar(title: Text('Log Out'),),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Center(child: user== '' ? Text('kkkkkkkkkkkkk') : Text(user)),
+          Center(child: user== " " ? Text('kkkkkkkkkkkkk') : Text(user ?? " ")),
           SizedBox(height: 20,),
           MaterialButton(
             color: Colors.purple,
@@ -65,6 +69,7 @@ class _LogoutController extends State<LogoutController> {
             },child: Text("Log Out",style: TextStyle(color: Colors.white),),),
         ],
       ),
+
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
@@ -6,13 +7,13 @@ import 'package:structurepublic/src/pages/marketView.dart';
 import 'cardmarketWidget.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key key,this.sectionData}) : super(key: key);
+  const CardWidget( { key,this.sectionData}) : super(key: key);
 
   final SectionData sectionData;
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return  Container(
       height: 200,
       width: double.maxFinite,
@@ -66,7 +67,7 @@ class CardWidget extends StatelessWidget {
 
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: new NetworkImage(sectionData.image),
+              image:  CachedNetworkImageProvider(sectionData.image),
               fit: BoxFit.fitWidth,
               alignment: Alignment.topCenter,
             ),
