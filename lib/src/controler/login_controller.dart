@@ -70,7 +70,7 @@ class LoginController extends ControllerMVC {
         preferences.setString('user', json.encode(value.toJson()));
         //Navigator.pushReplacement(context, MaterialPageRoute(builder: ( BuildContext context)=> StartMain(),),);
        // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
-        print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+    //    print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
        // varifyController. Checkemail();
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Verfiy() ) );
 

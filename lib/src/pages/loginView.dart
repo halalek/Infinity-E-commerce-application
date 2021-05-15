@@ -137,8 +137,9 @@ class _LoginMain extends StateMVC<LoginMain> {
                     if (_formKey.currentState.validate()) {
 
                       _loginrController.loginfirebase();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
                     }
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
+
                   },
                 ),
 
@@ -152,6 +153,7 @@ class _LoginMain extends StateMVC<LoginMain> {
                     if (_formKey.currentState.validate()) {
 
                       _loginrController.signupfirebase();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
 
                     }
                   },
