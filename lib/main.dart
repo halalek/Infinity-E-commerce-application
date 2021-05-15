@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                 '/b':(BuildContext context) => editProfilePage(),
               //  '/a':(context) =>StartMain(),
               },
-              navigatorKey: settingRepo.navigatorKey,
+              navigatorKey: settingRepo.navigatorKey, 
               //debugShowMaterialGrid: false,
               title: "",
               home:
