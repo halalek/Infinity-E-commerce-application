@@ -34,7 +34,7 @@ class StartMain extends StatefulWidget {
 
 class _StartMain extends StateMVC<StartMain> {
   UserController _con;
-
+bool show=true;
   _StartMain() : super(UserController()) {
     // _con = controller;
     _con = controller;
@@ -58,7 +58,7 @@ class _StartMain extends StateMVC<StartMain> {
 
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text("exit",
+          Text("Exit",
             style: TextStyle(
               fontSize: 15,
               color: darkfont,
@@ -76,7 +76,7 @@ class _StartMain extends StateMVC<StartMain> {
 
           Container(
 
-            margin: EdgeInsets.all(25),
+            margin: EdgeInsets.all(15),
 
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,18 +84,22 @@ class _StartMain extends StateMVC<StartMain> {
                 MaterialButton(
                     child: Text("YES", style: TextStyle(color: Colors.black,),),
                     color: Colors.grey,
-                    minWidth: 100,
+                    minWidth: 80,
                     onPressed: () async {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogoutController(),),);
                       //  await FirebaseAuth.instance.signOut();
                       // RestartWidget.restartApp(context) ;
 
                     }),
+                Text(""),
                 MaterialButton(
-                  child: Text("No", style: TextStyle(color: Colors.black,),),
+                  child: Text("NO", style: TextStyle(color: Colors.black,),),
                   color: Colors.grey,
-                  minWidth: 100,
-                  onPressed: () {
-                    Navigator.of(context).pop();
+                  minWidth: 80,
+                  onPressed: ()  {
+                   // Navigator.pop(context);
+                  //  Navigator.pop(context, false);
+
                   },),
 
               ],
@@ -105,10 +109,18 @@ class _StartMain extends StateMVC<StartMain> {
 
       ),
     );
-    showDialog(context: context,
-        builder: (BuildContext context) {
-          return alertDialog;
-        });
+
+      showDialog(context: context,
+
+          //barrierDismissible :false,
+          builder: (BuildContext context) {
+            return alertDialog;
+
+          }
+
+      );
+
+
   }
 
   var currentPage = DrawerSections.page_Main_View;
@@ -150,7 +162,8 @@ class _StartMain extends StateMVC<StartMain> {
 
           //logo infinty
         ),
-        body: container,
+        body:
+        container,
         drawer: Drawer(
 
 
@@ -233,9 +246,8 @@ class _StartMain extends StateMVC<StartMain> {
                 if(point==3)
                 {
                   // navigetor1("app");
-                  print("startttttttt");
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
-                  print("endddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> ProfilePage(),),);
+                  //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
                   //  Navigator.pop(context);
                 }
               }
@@ -255,23 +267,23 @@ class _StartMain extends StateMVC<StartMain> {
       child: Column(
 
         children: [
-          menuItem(1, "Dashboard", Icons.dashboard_outlined,
+          menuItem(1, "Dashboard", Icons.dashboard,
               currentPage == DrawerSections.page_Main_View ? true : false),
-          menuItem(2, "Common questions", Icons.contact_support_outlined,
+          menuItem(2, "Common questions", Icons.youtube_searched_for,
               currentPage == DrawerSections.contact_support ? true : false),
           menuItem(3, "Events", Icons.event,
               currentPage == DrawerSections.events ? true : false),
           menuItem(4, "Profile", Icons.account_circle,
               currentPage == DrawerSections.Profile ? true : false),
           Divider(),
-          menuItem(5, "Settings", Icons.settings_outlined,
+          menuItem(5, "Settings", Icons.settings,
               currentPage == DrawerSections.settings ? true : false),
-          menuItem(6, "Notifications", Icons.notifications_outlined,
+          menuItem(6, "Notifications", Icons.notifications_none,
               currentPage == DrawerSections.notifications ? true : false),
           Divider(),
-          menuItem(7, "Privacy policy", Icons.privacy_tip_outlined,
+          menuItem(7, "Privacy policy", Icons.fingerprint,
               currentPage == DrawerSections.privacy_policy ? true : false),
-          menuItem(8, "Exit", Icons.logout, set),
+          menuItem(8, "Exit", Icons.label_important, set),
         ],
       ),
     );

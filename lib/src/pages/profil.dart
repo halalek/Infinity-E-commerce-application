@@ -13,7 +13,8 @@ import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/models/user.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/realLocation.dart';
-import 'package:structurepublic/src/pages/sharedPref.dart';
+import 'package:structurepublic/src/pages/startView.dart';
+//import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 import 'package:structurepublic/src/repository/login_repository.dart'as repo;
 import 'package:location/location.dart';
@@ -33,7 +34,7 @@ class ProfilePage extends StatefulWidget
 
 
 class  _ProfilePage extends StateMVC<ProfilePage> {
-
+  int point = 3;
   void updataName(String name){
     setState(() =>_name = name);
   }
@@ -47,7 +48,8 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
   }
   String _name;
   UserController _con;
-  SharedPref sharedPref=SharedPref();
+  //SharedPref sharedPref=SharedPref();
+  //SharedPreferences preferences =  SharedPreferences.getInstance() as SharedPreferences;
   _ProfilePage() : super(UserController()) {
     // _con = controller;
     _con = controller;
@@ -92,7 +94,7 @@ void location() async{
 
     _con.user.long=currentLocation.longitude;
     _con.user.lat=currentLocation.latitude;
-    sharedPref.save('user', _con.user);
+    //sharedPref.save('user', _con.user);
     // print(repo.updateUser(lat1));
 
     repo.updateUser(_con.user);
@@ -105,121 +107,136 @@ void location() async{
   bool showPassword=false;
   void displayBottomSheet(BuildContext context)  { showModalBottomSheet( context: context, builder: (ctx) {
     return Container( height: MediaQuery.of(context).size.height * 0.4,
-        child: Column(   children: [Row(
-            children: [
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/c.png",
+        child:Column(   children: [
+          Expanded(child:
+          Row(
+              children: [
+         IconButton(
+                  iconSize: 100,
+                  icon: Image.asset("assets/img/c.png",
 
+                  ),
+                  onPressed: (){
+                    setState(() {
+
+                      image="https://www.pngkey.com/png/full/284-2844044_fashion-toys-electrical-items-and-more-girl-with.png";
+                      _con.user.image=image;
+                      print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                      // sharedPref.save('user', _con.user);
+
+                      repo.updateUser(_con.user);
+                    });
+
+
+                  },
+                ) ,
+
+                IconButton(
+                  iconSize: 100,
+                  icon: Image.asset( "assets/img/rose_PNG66944.png",
+
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      image="https://www.joigifts.com/pub/media/catalog/product/cache/afad95d7734d2fa6d0a8ba78597182b7/0/0/0005752_50-red-roses-bouquet.jpeg";
+                      _con.user.image=image;
+                      print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                      //sharedPref.save('user', _con.user);
+
+                      repo.updateUser(_con.user);
+
+                    });
+
+
+                  },
                 ),
-                onPressed: (){
-                  setState(() {
+                IconButton(
+                  iconSize: 100,
+                  icon: Image.asset( "assets/img/ic.png",
+                  ),
+                  onPressed: (){
+                    setState(() {
 
-                    image="https://www.pngkey.com/png/full/284-2844044_fashion-toys-electrical-items-and-more-girl-with.png";});
-                  _con.user.image=image;
-                  sharedPref.save('user', _con.user);
+                      image="http://igav3-metcdn-com.global.ssl.fastly.net/content/uploads/sites/2/2018/10/16091327/49_Hero.png";
+                      _con.user.image=image;
+                      print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                      //sharedPref.save('user', _con.user);
 
-                  repo.updateUser(_con.user);
+                      repo.updateUser(_con.user);
+                    });
 
-                },
-              ),
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/rose_PNG66944.png",
 
+
+                  },
+                ) ,
+
+              ]
+          )),
+          Expanded(child:
+          Row(
+              children: [
+                 IconButton(
+                  iconSize: 100,
+                  icon: Image.asset( "assets/img/c2.png",
+
+                  ),
+                  onPressed: (){
+                    setState(() {
+
+                      image="http://www.seekpng.com/png/full/21-212923_mens-jens-fashion-png.png";
+                      _con.user.image=image;
+                      print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                      //sharedPref.save('user', _con.user);
+                      repo.updateUser(_con.user);
+                    });
+
+                  },
                 ),
-                onPressed: (){
-                  setState(() {
+               IconButton(
+                 iconSize: 100,
+                 icon: Image.asset( "assets/img/f2.png",),
+                 onPressed: (){
+                   setState(() {
+                     image="http://rjeem.com/wp-content/uploads/2019/12/%D8%A8%D9%88%D9%83%D9%8A%D9%87-%D9%88%D8%B1%D8%AF-%D8%A7%D8%A8%D9%8A%D8%B6.png";
 
-                    image="https://www.joigifts.com/pub/media/catalog/product/cache/afad95d7734d2fa6d0a8ba78597182b7/0/0/0005752_50-red-roses-bouquet.jpeg";});
+                     _con.user.image=image;
+                     print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                     // sharedPref.save('user', _con.user);
+                     repo.updateUser(_con.user);
+                   });
+
+                 },
+               ) ,
+           IconButton(
+            iconSize: 100,
+            icon: Image.asset( "assets/img/p.png",
+
+            ),
+            onPressed: (){
+              setState(() {
+
+                image="http://www.seekpng.com/png/full/89-891255_fast-food-png-food.png";
+                if(image!="http://cdn.dribbble.com/users/25514/screenshots/1614757/logo-design-golden-ratio-infinity.gif")
                   _con.user.image=image;
-                  sharedPref.save('user', _con.user);
+                print("imaaaaaaaaaaaaaaaaaaagggggggggggggg");
+                // sharedPref.save('user', _con.user);
+                repo.updateUser(_con.user);
+              });
+            },
+          ),
 
-                  repo.updateUser(_con.user);
-
-                },
-              ),
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/ic.png",
-
-                ),
-                onPressed: (){
-                  setState(() {
-
-                    image="https://igav3-metcdn-com.global.ssl.fastly.net/content/uploads/sites/2/2018/10/16091327/49_Hero.png";});
-
-                  _con.user.image=image;
-                  sharedPref.save('user', _con.user);
-
-                  repo.updateUser(_con.user);
-
-                },
-              ),
-            ]
-        ),Row(
-            children: [
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/c2.png",
-
-                ),
-                onPressed: (){
-                  setState(() {
-
-                    image="https://www.seekpng.com/png/full/21-212923_mens-jens-fashion-png.png";});
-                  _con.user.image=image;
-                  sharedPref.save('user', _con.user);
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                  repo.updateUser(_con.user);
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                },
-              ),
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/f2.png",
-
-                ),
-                onPressed: (){
-                  setState(() {
-
-                    image="https://rjeem.com/wp-content/uploads/2019/12/%D8%A8%D9%88%D9%83%D9%8A%D9%87-%D9%88%D8%B1%D8%AF-%D8%A7%D8%A8%D9%8A%D8%B6.png";});
-
-                  _con.user.image=image;
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                  sharedPref.save('user', _con.user);
-                  repo.updateUser(_con.user);
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                },
-              ),
-              IconButton(
-                iconSize: 120,
-                icon: Image.asset( "assets/img/p.png",
-
-                ),
-                onPressed: (){
-                  setState(() {
-
-                    image="https://www.seekpng.com/png/full/89-891255_fast-food-png-food.png";});
-                  if(image!="https://cdn.dribbble.com/users/25514/screenshots/1614757/logo-design-golden-ratio-infinity.gif")
-                  _con.user.image=image;
-                  sharedPref.save('user', _con.user);
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                  repo.updateUser(_con.user);
-                  print("mmmmmmmmmmmmmmmmmmmmmmmmm");
-                },
-              ),
-            ]
-        ),],
+              ]
+          )) ,
+       ],
         )); }); }
 
   @override
   Widget build(BuildContext context)  {
 
 
-    return Container(
+     return Scaffold(
+     body: Container(
       color: darkAlert,
-
       child: ListView(
 
         children: <Widget>[
@@ -258,12 +275,16 @@ void location() async{
                                   offset: Offset(0, 10))
                             ],
                             shape: BoxShape.circle,
-
+                            //
                             image: DecorationImage(
 
                               fit: BoxFit.fill,
 
-                              image: CachedNetworkImageProvider( "${_con.user.image}"),)),
+                              image:CachedNetworkImageProvider(_con.user.image ?? "https://www.seekpng.com/png/full/89-891255_fast-food-png-food.png"),
+
+                            )
+
+                        ),
 
                       ),
                       Positioned(
@@ -335,7 +356,7 @@ void location() async{
                         VerticalDivider(color: darkfont,width: 20,),
                         Column(
                             children: [ IconButton(
-                              icon: Icon(Icons.add_location_alt_outlined),
+                              icon: Icon(Icons.add_location),
                               onPressed:()async{
                                 location();
                               },
@@ -359,7 +380,7 @@ void location() async{
                         VerticalDivider(color: darkfont,width: 20,),
                         Column(
                             children: [IconButton(
-                              icon: Icon(Icons.shopping_cart_outlined),
+                              icon: Icon(Icons.shopping_cart),
                               onPressed: (){
 
                               },
@@ -402,11 +423,80 @@ void location() async{
                             ])
                           ]),)
                 ), ],
-            ),
-          ),
+            )),
         ],
       ),
-    );
+    ),
+
+         bottomNavigationBar: BottomNavigationBar(
+         currentIndex:  point,
+         selectedFontSize: 13,
+         selectedItemColor: Theme.of(context).primaryColorLight,
+         unselectedItemColor: Colors.black45,
+         unselectedFontSize: 5,
+         items: [
+           BottomNavigationBarItem(
+             icon: Icon(
+               Icons.home,
+               //  color: Colors.black45,
+             ),
+             title: Text(
+               "الرئيسية",
+               // style: TextStyle(color: Colors.black45),
+             ),
+             backgroundColor: Colors.white38,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(
+               Icons.local_grocery_store,
+               //  color: Theme.of(context).primaryColorLight,
+             ),
+             title: Text(
+               "التسوق",
+               //  style: TextStyle(color: Theme.of(context).primaryColorLight),
+             ),
+             // backgroundColor:Colors.white38,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(
+               Icons.show_chart,
+               // color: Colors.black45,
+             ),
+             title: Text(
+               "العروض",
+               //  style: TextStyle(color: Colors.black45),
+             ),
+             //  backgroundColor:Colors.white38,
+           ),
+           BottomNavigationBarItem(
+             icon: Icon(
+               Icons.person,
+               // color: Colors.black45,
+             ),
+             title: Text(
+               "حسابك",
+               //   style: TextStyle(color: Colors.black45),
+             ),
+             // backgroundColor:Colors.white38,
+           ),
+         ],
+         onTap: (index) {
+           setState(() {
+             point=index;
+             if(point==1)
+             {
+               // navigetor1("app");
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> StartMain(),),);
+               //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
+               //  Navigator.pop(context);
+             }
+
+           }
+           );
+         }
+     )
+
+     );
   }
 }
 class ClippingClass extends CustomClipper<Path> {

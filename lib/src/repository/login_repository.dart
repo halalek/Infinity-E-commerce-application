@@ -27,7 +27,7 @@ Future<Userss> loginSettings(String email, String password,String name,String ph
   var result = await FirebaseAuth.instance
       .signInWithEmailAndPassword(email: email, password: password);
   if (result != null) {
-    userss.Usersslogin(result.user.uid, name, email,int.parse(phone));
+    userss.UserssLogin(result.user.uid, name, email,int.parse(phone));
     // getUser
     //return result.user;
     return  await getUser() ;
@@ -50,6 +50,8 @@ Future<Userss>  signupSettings(String email, String password,String name,String 
   }
 }
 Future<void> updateUser(Userss user ) async {
+  print("Llllllllllllllllllllllllllllllllllllllllllllllllllllll");
+  print(user.name );
   await FirebaseFirestore.instance
       .collection("users").doc(user.id).update(
       {"name":user.name,
@@ -60,11 +62,17 @@ Future<void> updateUser(Userss user ) async {
         "image":user.image
       }
   )
-      .then((value) {
+      .then((value) async {////////////////////////////////////
+   SharedPreferences preferences = await SharedPreferences.getInstance();
+    //preferences.clear();
+    preferences.setString('user', json.encode(user));
+   print(json.encode(user) );
         print("kkkkkkkkkkkkkkkkkkk");
     return value;
-  })
+  }
+  )
       .catchError((e) {});
+
   return  await getUser();
 
 }
@@ -91,12 +99,14 @@ Future<Userss> addUser() async {
 
 
 }
-SharedPref sharedPref=SharedPref();
+//SharedPref sharedPref=SharedPref();
 
 Future<Userss> getUser() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
+  //Userss user =Userss.fromJson(await sharedPref.read('user')) ;
   Userss users=new Userss();
+
   if(user==null)
     {
       await FirebaseFirestore.instance
@@ -112,6 +122,7 @@ Future<Userss> getUser() async {
   else
     {
       users=Userss.fromJson(json.decode(user));
+    // users=user;
       return users ;
 
     }
@@ -120,31 +131,31 @@ Future<Userss> getUser() async {
 
 
 
-  Userss user =Userss.fromJson(await sharedPref.read('user')) ;
-  Userss users;
-  if(user==null)
-  {
 
-    await FirebaseFirestore.instance
-        .collection("users").doc(userss.id)
-        .get()
-        .then((value) {
+  //Userss users;
+  // if(user==null)
+  // {
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection("users").doc(userss.id)
+  //       .get()
+  //       .then((value) {
+  //
+  //     users= Userss.fromJson(value.data());
+  //   }
+  //   )
+  //       .catchError((e) {});
+  //   return users;
+  // }
+  //
+  // else
+  // {
+  //   users=user;
+  //   return users ;
+  //
+  // }
 
-      users= Userss.fromJson(value.data());
-    }
-    )
-        .catchError((e) {});
-    return users;
-  }
 
-  else
-  {
-    users=user;
-    return users ;
-
-  }
-
-}
 /*
 
 Future<Userss> userfirebase() async

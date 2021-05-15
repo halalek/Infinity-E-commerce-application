@@ -58,39 +58,4 @@ class UserController extends ControllerMVC {
 
   }
 
-  @override
-  void initState() {
-    super.initState();
-    getUsers();
-  }
-  getUsers() async {
-    //  setState((){
-    //    user.;
-    //  }
-    // );
-      await repo.getUser().then((value){
-      setState((){
-        if(value==null)
-          {print("error user");}
-        else{
-
-          user=value;
-          print(user.name  + "Llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-        }
-
-      }
-
-
-      );
-      return user;
-      }
-
-
-      );
-
-      return user;
-
-
-
-  }
 }

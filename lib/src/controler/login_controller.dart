@@ -11,12 +11,14 @@ import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/controler/varify_controller.dart';
 import 'package:structurepublic/src/models/route_argument.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
+import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/verfiyView.dart';
 import 'package:structurepublic/src/repository/login_repository.dart';
 
 import 'package:structurepublic/src/repository/login_repository.dart'as repo;
 import '../../generated/l10n.dart';
+import '../../main.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,10 +68,9 @@ class LoginController extends ControllerMVC {
         print("Sucsess login");
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('user', json.encode(value.toJson()));
-
         //Navigator.pushReplacement(context, MaterialPageRoute(builder: ( BuildContext context)=> StartMain(),),);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> StartMain(),),);
-
+       // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
+        print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
        // varifyController. Checkemail();
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Verfiy() ) );
 
@@ -91,7 +92,7 @@ class LoginController extends ControllerMVC {
         print("Sucsess signin");
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('user', json.encode(value.toJson()));
-        Navigator.pushReplacement( context, MaterialPageRoute(builder: (BuildContext context)=> StartMain(),),);
+    //    Navigator.pushReplacement( context, MaterialPageRoute(builder: (BuildContext context)=> StartMain(),),);
        // varifyController. Checkemail();
       //  Navigator.push(context, MaterialPageRoute(builder: (context) => Verfiy() ) );
 

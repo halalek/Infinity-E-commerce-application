@@ -20,11 +20,16 @@ Future<void> main() async {
 //  await GlobalConfiguration().loadFromAsset("configurations");
 //  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
 
-  SharedPref sharedPref=SharedPref();
+
+  //SharedPref sharedPref=SharedPref();
   WidgetsFlutterBinding.ensureInitialized();
-  Userss user =Userss.fromJson(await sharedPref.read('user')) ;
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var user = preferences.getString('user');
+
+  //
+ //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
   await Firebase.initializeApp();
-  runApp(MaterialApp(home: user == null ? LoginMain() :  MyApp(),));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? LoginMain() :   MyApp(),));
 
 
 }
@@ -49,19 +54,18 @@ class _MyAppState extends State<MyApp> {
         valueListenable: settingRepo.setting,
         builder: (context, Setting _setting, _) {
           return  MaterialApp(
-              debugShowMaterialGrid: false,
               routes: <String,WidgetBuilder>{
                 '/a':(BuildContext context) =>StartMain(),
                 '/b':(BuildContext context) => editProfilePage(),
-                '/a':(context) =>StartMain(),
+              //  '/a':(context) =>StartMain(),
               },
               navigatorKey: settingRepo.navigatorKey,
               //debugShowMaterialGrid: false,
               title: "",
               home:
             //  PageMarket(),
-             //PageMain(),
               StartMain(),
+              //StartMain(),
               //LoginMain(),
               //MainStateWidget(),
               // initialRoute: '/MainStateWidget',

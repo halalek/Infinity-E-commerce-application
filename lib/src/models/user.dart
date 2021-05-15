@@ -35,20 +35,23 @@ class Userss {
     this.name,
   });
 
- void Usersslogin(String id, String name, String email, int phone)
+ // ignore: non_constant_identifier_names
+ void UserssLogin(String id, String name, String email, int phone)
  {this.id=id; this.name=name; this.email=email; this.phone=phone;}
 
 
-  Userss Userset(Userss userss)
+  // ignore: non_constant_identifier_names
+  Userss UserSet(Userss userss)
   {return userss;}
 
 
+  // ignore: non_constant_identifier_names
   void UserssSign(String id, String name, String email, int phone,String token,String role)
   {this.id=id; this.name=name; this.email=email; this.phone=phone;this.token=token;this.role=role;}
 
 
   factory Userss.fromJson(Map<String, dynamic> json) => Userss(
-    name: json["name"] == null ? null : json["name"],
+     name: json["name"] == null ? null : json["name"],
      id: json["id"] == null ? null : json["id"],
      token: json["token"] == null ? null : json["token"],
      lat: json["lat"] == null ? null : json["lat"],

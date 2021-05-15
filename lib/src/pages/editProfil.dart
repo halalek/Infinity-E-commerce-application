@@ -24,17 +24,18 @@ class editProfilePage extends StatefulWidget
 
 String labelText1,  placeholder;
 bool cheak=false;
-SharedPref sharedPref=SharedPref();
+//SharedPref sharedPref=SharedPref();
 class  _editProfilePage extends StateMVC<editProfilePage> {
   UserController _con;
   TextEditingController nameController1= TextEditingController();
-  String fullName1;
+  int fullName1=0;
   TextEditingController nameController2= TextEditingController();
-  String fullName2;
+  int fullName2=0;
   TextEditingController nameController3= TextEditingController();
-  var fullName3;
+  int fullName3=0;
+Userss jj=new Userss();
 
-  _editProfilePage() : super(UserController()) {
+  _editProfilePage() : super(UserController())  {
     // _con = controller;
     _con = controller;
 
@@ -72,11 +73,8 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
               Padding(
 
                 padding: const EdgeInsets.only(bottom: 35.0),
-                child: TextField(
-                  onSubmitted: (text){
-                  setState(() {fullName1=text;});
-                   print(fullName1);
-                },
+                child:  TextField(
+
                    controller: nameController1,
                   decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: darkfont), ),
@@ -87,8 +85,7 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                      // contentPadding: EdgeInsets.only(bottom: 3),
                       labelText: labelText1="Full Name",
                      labelStyle: TextStyle(
-                  color: const Color(0XFF424242),
-                          ),
+                  color: const Color(0XFF424242),),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText:  _con.user.name,
                       hintStyle: TextStyle(
@@ -96,6 +93,18 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                       )),
+                  // onSubmitted: (text){
+                  //   setState(() {
+                  //     fullName1=2;
+                  //     print("666666666666666");
+                  //     print(fullName1);
+                  //   });
+                  //
+                  // },
+                  onChanged: (text) {
+                    fullName1=2;
+                    print("First text field: $text");
+                  },
 
 
                 ),
@@ -106,10 +115,7 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                 padding: const EdgeInsets.only(bottom: 35.0),
 
                 child: TextField(
-                  onSubmitted: (text){
-                    setState(() {fullName2=text;});
-                    print(fullName2);
-                  },
+
                   controller: nameController2,
                   decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: darkfont), ),
@@ -130,17 +136,21 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                         color: Colors.black,
                       )),
 
-
+                  // onSubmitted: (text){
+                  //   setState(() {fullName2="a";});
+                  //   print("4444444444444444444");
+                  //   print(fullName2);
+                  // },
+                  onChanged: (text) {
+                    fullName2=2;
+                    print("First text field: $text");
+                  },
                 ),
               ),
               Padding(
 
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onSubmitted: (text){
-                    setState(() {fullName3=text;});
-                    print(fullName3);
-                  },
                   controller: nameController3,
                   decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: darkfont), ),
@@ -158,7 +168,16 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                         color: Colors.black,
                       )),
 
+                  // onSubmitted: (text){
+                  //   setState(() {fullName3="a";});
+                  //   print("5555555555");
+                  //   print(fullName3);
+                  // },
 
+                  onChanged: (text) {
+                    fullName3=2;
+                    print("First text field: $text");
+                  },
                 ),
               ),
 
@@ -182,27 +201,48 @@ class  _editProfilePage extends StateMVC<editProfilePage> {
                   
 
                   RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        if(fullName1!=null){
-                        _con.user.name=fullName1;
-                      print(fullName1);
-                      print( _con.user.name);}
-                        if(fullName2!=null){
-                      _con.user.email=fullName2;}
-                        if(fullName3!=null){
-                      _con.user.phone=int.parse(fullName3);}
-                     
-                    sharedPref.save('user', _con.user);
-                      repo.updateUser(_con.user);
+                    onPressed: ()  {
+                        setState((){
+                          if(fullName1==2){
+                            _con.user.name=nameController1.text;}
+                          if(fullName2==2){
+                            _con.user.email=nameController2.text;}
+                          if(fullName3==2){
+                        _con.user.phone=int.parse(nameController3.text)
+                          ;}
+                          print("kjkkkkkkkkkkkkkkkk");
+                          print( _con.user.name);
+                          repo.updateUser(_con.user);
+                        }
 
+                        );
 
-                        Navigator.pop(context,_con.user.name);
-                       Navigator.pushNamed(context, '/b');
-                      });
+                       Navigator.pop(context,_con.user.name);
 
+                      //  _loginrController.loginfirebase();
 
+                  //    Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
                     },
+                  //   onPressed: () {
+                  //     setState(()
+                  //
+                  //     {
+                  //       if(fullName1=="a"){
+                  //         print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                  //       _con.user.name=nameController1.text;}
+                  //       if(fullName2=="a"){
+                  //     _con.user.email=nameController2.text;}
+                  //       if(fullName3=="a"){
+                  //     _con.user.phone=int.parse(nameController3.text);}
+                  //
+                  // //  sharedPref.save('user', _con.user);
+                  //       print("45454545"   + _con.user.name );
+                  //   //  repo.updateUser(_con.user);
+                  //     //  Navigator.pop(context,_con.user.name);
+                  //   //   Navigator.pushNamed(context, '/b');
+                  //     }
+                  //     );
+                  //   },
                     color: changecolor,
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
