@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shape_of_view/shape_of_view.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -45,10 +46,18 @@ class  _PageMarket extends StateMVC<PageMarket>
        body: ListView.builder(
 
          itemCount: _con2.listMarket.length,
-         itemBuilder: (context, i) {
-              return CardMarketWidget(marketData: _con2.listMarket[i],);
-
-         },
+         // itemBuilder: (context, i) {
+         //      return CardMarketWidget(marketData: _con2.listMarket[i],);
+         //
+         // },
+           itemBuilder: (BuildContext context, int index) =>
+               ShapeOfView(
+                 shape: ArcShape(
+                     direction: ArcDirection.Inside,
+                     height: 20,
+                     position: ArcPosition.Bottom
+                 ),
+                   child:CardMarketWidget(marketData: _con2.listMarket[index],), )
        ),
     //ListView(
       //   children: [

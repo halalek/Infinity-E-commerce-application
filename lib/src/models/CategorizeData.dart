@@ -13,9 +13,9 @@ class CategorizeData {
   String nameEn;
   String image;
   bool hide;
+     // ignore: non_constant_identifier_names
 
   factory CategorizeData.fromJson(Map<String, dynamic> json) => CategorizeData(
-
     nameAr: json["name_ar"] == null ? null : json["name_ar"],
     id: json["id"] == null ? null : json["id"],
     nameEn: json["name_en"] == null ? null : json["name_en"],

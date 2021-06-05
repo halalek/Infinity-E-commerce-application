@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/logout_controller.dart';
 import 'package:structurepublic/src/controler/start_controller.dart';
+import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/privacy_policy.dart';
 import 'package:structurepublic/src/pages/profil.dart';
@@ -26,6 +28,46 @@ import 'events.dart';
 import 'my_drawer_header.dart';
 import 'notifications.dart';
 
+
+class Pagemain1 extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _Pagemain1();
+  }
+
+
+}
+
+class _Pagemain1 extends State<Pagemain1>
+{
+  //VideoPlayerController _controller;
+  Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return SplashScreen(
+      seconds: 6,
+      navigateAfterSeconds: StartMain(),
+      title:
+
+      Text(
+        'infinity shopping',
+        style:
+        new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0,color: Theme.of(context).primaryColorDark,),
+        // textAlign: TextAlign.right,
+      ),
+
+      // backgroundColor: Colors.black12,
+      // imageBackground: new AssetImage('img/back.jpg') ,
+      image: Image.asset('assets/img/cardd.gif'),
+      styleTextUnderTheLoader: new TextStyle(),
+      photoSize: 150.0,
+      // loaderColor: Colors.red
+    );
+  }
+}
 class StartMain extends StatefulWidget {
   @override
   _StartMain createState() => _StartMain();
@@ -127,12 +169,12 @@ bool show=true;
   var container;
 
   bool set = false;
-  int point = 1;
+  int point = 0;
 
   @override
   Widget build(BuildContext context) {
     if (currentPage == DrawerSections.page_Main_View) {
-      container = PageMain();
+      container =  Page1();
     } else if (currentPage == DrawerSections.contact_support) {
       container = Common_questionsPage();
     } else if (currentPage == DrawerSections.events) {
@@ -151,19 +193,35 @@ bool show=true;
 
         appBar: AppBar(
           backgroundColor: changecolor,
-          title: Center(child: Image(
+          title: Row(children: [
+            Center(child: Image(
 
 
-            image: AssetImage('assets/img/drawer.png'),
-            width: 200,
-            height: 50,
-          ),),
+              image: AssetImage('assets/img/drawer.png'),
+              width: 200,
+              height: 50,
+            ),),
+    // SizedBox(
+    // width: 20.0,
+    // height: 20.0,
+    // child:GestureDetector(
+    // child: Icon(Icons.refresh,),
+    //   onTap: () {
+    // Navigator.pushReplacement(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (BuildContext context) =>   StartMain(),));},
+    // ))
+
+
+          ],)
 
 
           //logo infinty
         ),
         body:
         container,
+
         drawer: Drawer(
 
 
@@ -190,8 +248,8 @@ bool show=true;
 
         bottomNavigationBar: BottomNavigationBar(
             currentIndex:  point,
-            selectedFontSize: 13,
-            selectedItemColor: Theme.of(context).primaryColorLight,
+            selectedFontSize: 15,
+            selectedItemColor: Theme.of(context).primaryColorDark,
             unselectedItemColor: Colors.black45,
             unselectedFontSize: 5,
             items: [
@@ -245,8 +303,17 @@ bool show=true;
                 point=index;
                 if(point==3)
                 {
+
                   // navigetor1("app");
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> ProfilePage(),),);
+                  //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
+                  //  Navigator.pop(context);
+                }
+                if(point==1)
+                {
+                  //Pagemain1
+                  // navigetor1("app"); //Pagemain1
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=>PageMain(),),);
                   //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
                   //  Navigator.pop(context);
                 }

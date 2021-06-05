@@ -24,7 +24,6 @@ class _LogoutController extends State<LogoutController> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       user = preferences.getString('user');
-
     });
     print("2222222222222222222222222222222222222222");
   }

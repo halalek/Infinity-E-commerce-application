@@ -1,19 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
+import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/pages/page_1.dart';
+import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
 
 
 
 class CardProductDetailWidget extends StatefulWidget {
 
-  final ProductData productData;
-
-
-  const CardProductDetailWidget( this.productData) ;
+   final ProductData productData;
+   const CardProductDetailWidget( this.productData) ;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -36,15 +38,21 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
     duration: const Duration(seconds: 5),
 
   );
-
-  bool select=false;
-  bool cc=false;bool cc1=false;
+  bool  selectfav=false;bool selectfav1=false;
   var fav=Icons.favorite_border ;
-
+   // ignore: non_constant_identifier_names
+    void Search()  {
+     for (int i = 0; i < listfav.length; i++) {
+       if(listfav[i].id == productData.id)
+       {fav= Icons.favorite;
+      selectfav=true;
+         }
+     }
+   }
   @override
   Widget build(BuildContext context) {
-
-    return       Container(
+    Search();
+    return  Container(
       height:400,
       color: Colors.black45,
       child:
@@ -171,22 +179,38 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                             child:
                                             Center(child:Icon(fav),),
                                           ),
-                                            onTap: (){
-                                              setState(() {
-                                                if(cc==false)
+                                            onTap: () {
+                                              setState((){
+
+                                                if(selectfav==false)
                                                 {fav=Icons.favorite;
-                                                cc1=false;
+                                                 selectfav1=false;
+                                                  setFavority(productData);
+                                                print("id " + productData.id);
+
+                                                //Search();
+                                                // Navigator.pushReplacement(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (BuildContext context) => CardProductDetailWidget(productData)));
                                                 }
-                                                if(cc==true)
+                                                if(selectfav==true)
                                                 {
+                                                  //Search();
                                                   fav=Icons.favorite_border;
-                                                  cc1=true;
+                                                  selectfav1=true;
+                                                  deleteFavority(productData);
+                                                  print(";llll");
                                                 }
                                               }
                                               );
-                                              cc=!cc1;
 
-
+                                            selectfav=!selectfav1;
+                                              // Navigator.pushReplacement(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (BuildContext context) => Page1()));
+                                              //   Search();
                                             },
                                             // onLongPress: (){
                                             // setState(() {
@@ -220,6 +244,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
          count--;
      });
    }
+
+
 }
 
 

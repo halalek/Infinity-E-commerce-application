@@ -68,6 +68,7 @@ class LoginController extends ControllerMVC {
         print("Sucsess login");
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('user', json.encode(value.toJson()));
+        preferences.setString('userID', value.id);
         //Navigator.pushReplacement(context, MaterialPageRoute(builder: ( BuildContext context)=> StartMain(),),);
        // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
     //    print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");

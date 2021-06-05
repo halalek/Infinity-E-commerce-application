@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
               title: "",
               home:
             //  PageMarket(),
-              StartMain(),
+              Pagemain1(),
               //StartMain(),
               //LoginMain(),
               //MainStateWidget(),
