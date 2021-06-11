@@ -12,6 +12,7 @@ import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/models/user.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
+import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/realLocation.dart';
@@ -485,21 +486,26 @@ void location() async{
          onTap: (index) {
            setState(() {
              point=index;
-             if(point==1)
-             {
-               // navigetor1("app");
-               Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
-               //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
-               //  Navigator.pop(context);
-             }
+
              if(point==0)
              {
-               //Pagemain1
-               // navigetor1("app"); //Pagemain1
+
                Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=>StartMain(),),);
-               //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
-               //  Navigator.pop(context);
+
              }
+             if(point==1)
+             {
+
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
+
+             }
+             if(point==2)
+             {
+
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageSold(),),);
+
+             }
+
 
            }
            );

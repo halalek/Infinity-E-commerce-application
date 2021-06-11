@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,6 +27,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 String iduser;
 final List<FavorityData> listfav = [];
 List<ProductData> listfav1 = [];
+List<ProductData> list11=[];
 //LocationData locationData;
 Future<List<ProductData>> getFavority(String IDuser) async {
   listfav.clear();
@@ -147,12 +149,66 @@ Future<List<ProductData>> getSuggested(List<ProductData> listProductFav) async {
         }
       }).catchError((e) {});
     }
+
     list1 = Remove(list);
+    if(list1.length == 0)
+      {   print("qazqazqazqaz" + list1.length.toString());
+      list1=await getSuggestedRandome(listProductFav);
+      }
   }
 
-
+  if(listProductFav.length==0) {
+      // await FirebaseFirestore.instance
+      //     .collection("product")
+      //     .where("hide", isEqualTo: false)
+      //     .get()
+      //     .then((value) {
+      //   for (int j = 0; j < value.docs.length; j++) {
+      //       list.add(ProductData.fromJson(value.docs[j].data()));
+      //   }
+      // }).catchError((e) {});
+      //
+      // var rng = new Random();
+      // for (var i = 0; i < (list.length/2); i++) {
+      //   print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" );
+      //   print(rng.nextInt(10));
+      //   list.removeAt(rng.nextInt(list.length));
+      //
+      // }
+      list1=await getSuggestedRandome(listProductFav);
+    }
   return list1;
 }
+
+
+
+
+
+Future<List<ProductData>> getSuggestedRandome(List<ProductData> listProductFav) async {
+  List<ProductData> list = [];
+  await FirebaseFirestore.instance
+      .collection("product")
+      .where("hide", isEqualTo: false)
+      .get()
+      .then((value) {
+
+      for (int j = 0; j < value.docs.length; j++) {
+          list.add(ProductData.fromJson(value.docs[j].data()));
+      }
+  }).catchError((e) {});
+
+  var rng = new Random();
+  for (var i = 0; i < (list.length/2); i++) {
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" );
+    print(rng.nextInt(10));
+    list.removeAt(rng.nextInt(list.length));
+
+  }
+
+  list11=Remove(list);
+  return list11;
+  }
+
 
 List<ProductData> Remove(List<ProductData> listProductFav1) {
   List<ProductData> rem = [];

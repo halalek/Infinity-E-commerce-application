@@ -75,7 +75,8 @@ class CardMarketWidget extends StatelessWidget {
                   //   navigetor("");
                   //    delete(context,this.studentlist[position]);
                   //   debugPrint("student print");
-                },),
+                }
+                ,),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Categorize(marketData)) );
 

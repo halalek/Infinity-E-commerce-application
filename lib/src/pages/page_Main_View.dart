@@ -9,23 +9,21 @@ import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/shared.dart';
 import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/elements/cardSection.dart';
+import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
-class PageMain extends StatefulWidget
-{
+class PageMain extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return _PageMain();
   }
-
 }
 
-
-class  _PageMain extends StateMVC<PageMain> {
+class _PageMain extends StateMVC<PageMain> {
   int point = 1;
   PageMainController _con;
 
@@ -37,20 +35,19 @@ class  _PageMain extends StateMVC<PageMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Container(
-      color: dark,
-      child:
-      ListView.builder(
-        itemCount: _con.listSection.length,
-        itemBuilder: (context, i) {
-          return CardWidget(sectionData: _con.listSection[i],);
-
-        },
-
-      ),
-    ) ,
+        body: Container(
+          color: dark,
+          child: ListView.builder(
+            itemCount: _con.listSection.length,
+            itemBuilder: (context, i) {
+              return CardWidget(
+                sectionData: _con.listSection[i],
+              );
+            },
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex:  point,
+          currentIndex: point,
           selectedFontSize: 15,
           selectedItemColor: Theme.of(context).primaryColorDark,
           unselectedItemColor: Colors.black45,
@@ -103,27 +100,36 @@ class  _PageMain extends StateMVC<PageMain> {
           ],
           onTap: (index) {
             setState(() {
+              point = index;
 
-              point=index;
-              if(point==3)
-              {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> ProfilePage(),),);
-
-              }
-              if(point==0) {
+              if (point == 0) {
                 Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => StartMain(),),);
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StartMain(),
+                  ),
+                );
+              }
+              if (point == 2) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PageSold(),
+                  ),
+                );
+              }
+
+              if (point == 3) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(),
+                  ),
+                );
               }
             });
           },
-        )
-    );
+        ));
     // TODO: implement build
-
-
   }
 }
-
-
-
-

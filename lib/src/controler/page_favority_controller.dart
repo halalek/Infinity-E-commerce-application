@@ -10,12 +10,12 @@ import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/models/SoldData.dart';
 import 'package:structurepublic/src/repository/login_repository.dart';
 import 'package:structurepublic/src/repository/page_market_repository.dart' as repo;
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart'  as repo;
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart'  as repo;
-
-
+import 'package:structurepublic/src/repository/page_sold_repository.dart' as repo;
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';
@@ -29,6 +29,9 @@ class PageFavorityController extends ControllerMVC {
   int z;
   List<ProductData> listProductFav = [];
   List<ProductData> listProductSug = [];
+  List<SoldData> listSold = [];
+  List<SoldData> listSoldRe = [];
+  List<SoldData> remove = [];
  // final CategorizeData categorizeData;
   PageFavorityController() {
     loader = Helper.overlayLoader(context);
@@ -40,6 +43,7 @@ class PageFavorityController extends ControllerMVC {
   @override
   void initState() {
     super.initState();
+    getSold();
     getProductsFav();
 
   }
@@ -92,4 +96,41 @@ getProductSug() async {
     );
   });
 }
+
+
+  getSold() async {
+    setState((){
+      listSold .clear();
+    });
+    await repo.getSold().then((value) {
+      setState((){
+        listSold.addAll(value);
+        for(int i=0 ; i  < listSold.length ; i++)
+          listSold[i].index=i;
+
+        listSoldRe =listSold;
+        for(int i=0 ; i  < listSold.length ; i++)
+          for(int j=i+1 ; j  < listSoldRe.length ; j++)
+            if( listSoldRe[j].id_market == listSold[i].id_market )
+              {remove.add(listSoldRe[j]);
+
+               // listSoldRe.removeAt(j);
+              print(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");}
+
+        for(int i=0 ; i  < remove.length ; i++)
+            {
+            listSoldRe.remove(remove[i]);
+            print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");}
+
+      }
+
+
+      );
+
+      print(listSold.length.toString() + "444444444444444444444444444444444444444444444");
+    });
+
+
+
+  }
 }

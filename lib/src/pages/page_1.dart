@@ -4,7 +4,9 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shape_of_view/shape_of_view.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:structurepublic/src/controler/page_favority_controller.dart';
+import 'package:structurepublic/src/controler/page_sold_controller.dart';
 import 'package:structurepublic/src/elements/cardFavorite.dart';
+import 'package:structurepublic/src/elements/cardStorySold.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/pages/pageFavority.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
@@ -23,7 +25,6 @@ class Page1 extends StatefulWidget {
 class _Page1 extends StateMVC<Page1> {
   var pointt = 0;
   PageFavorityController _con;
-
   _Page1() : super(PageFavorityController()) {
     _con = controller;
   }
@@ -57,13 +58,47 @@ class _Page1 extends StateMVC<Page1> {
           key: _refreshIndicatorKey,
           onRefresh: _refresh,
           child: ListView(children: [
+
+            SizedBox(height: 10,),
+            GestureDetector(child:
+            Container(
+              //width: 10,
+              height: 40,
+              child:
+              Row(children: [
+                Icon(Icons.search,color: Theme.of(context).primaryColorDark,),
+                Text("Search query here... ",style: TextStyle(fontSize: 15),),
+              ],),
+
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColorDark),
+                borderRadius:BorderRadius.circular(20),
+
+              ),
+            ),
+
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()) );
+                }
+            ),
+            SizedBox(height: 10,),
+              SizedBox(height: 40,
+                  child:
+                  Text(
+                    "عروضنا مابتخلص ",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  )
+              ),
+
+            soldProduct(),
             CarouselSlider(
               items: [
                 for (int i = 0; i < imag.length; i++)
                   Container(
                     // width: 50,
                     margin: EdgeInsets.only(
-                        top: 12.0, left: 6.0, right: 6.0, bottom: 6.0),
+                        top: 9.0,  left: 6.0, right: 6.0, bottom: 6.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
@@ -75,7 +110,7 @@ class _Page1 extends StateMVC<Page1> {
               ],
               //Slider Container properties
               options: CarouselOptions(
-                height: 180.0,
+                height: 110.0,
                 enlargeCenterPage: true,
                 autoPlay: true,
                 aspectRatio: 16 / 9,
@@ -85,12 +120,18 @@ class _Page1 extends StateMVC<Page1> {
                 viewportFraction: 0.8,
               ),
             ),
+
+            // ListView.builder(
+            //       scrollDirection: Axis.horizontal,
+            //       itemCount: _con.listSold.length,
+            //       itemBuilder: (BuildContext context, int index) =>
+            //             CardStorySoldWidget(soldData: _con.listSold[index],),
+            //           ),
             Container(
               padding: EdgeInsets.all(6),
               margin: EdgeInsets.all(6),
               child: Column(
                 children: [
-
 
                   // Row(children: [
                   //   Text(
@@ -187,18 +228,26 @@ class _Page1 extends StateMVC<Page1> {
                   //     viewportFraction: 0.8,
                   //   ),
                   // ),
-                  check(_con.listProductFav),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  productFav(_con.listProductFav),
+
+
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Row(
                       children: [
-                        Container(
-                          //  margin: EdgeInsets.all(5),
-                          //  padding: EdgeInsets.all(5),
-                          color: Theme
-                              .of(context)
-                              .primaryColorDark,
-                          height: 30.0,)
-                      ]),
+                        Icon(
+                          Icons.whatshot,
+                          color: Colors.red,
+                        ),
+                        Text(
+                          "الأطباق المقترحة",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                  productSug(_con.listProductSug),
+                  SizedBox(height: 15,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -230,22 +279,11 @@ class _Page1 extends StateMVC<Page1> {
                               )))
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.whatshot,
-                          color: Colors.red,
-                        ),
-                        Text(
-                          "الأطباق المقترحة",
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  check1(_con.listProductSug)
+
+
+
+
+
                   // CarouselSlider(
                   //   items: [
                   //     // CardFavoriteWidget()
@@ -298,7 +336,7 @@ class _Page1 extends StateMVC<Page1> {
     );
   }
 
-  Widget check(List<ProductData> list) {
+  Widget productFav(List<ProductData> list) {
     if (list.length != 0) {
         // TODO: implement build
         return CarouselSlider(
@@ -360,7 +398,7 @@ class _Page1 extends StateMVC<Page1> {
 
 
 
-  Widget check1(List<ProductData> list) {
+  Widget productSug(List<ProductData> list) {
     if (list.length != 0) {
       return CarouselSlider(
         items: [
@@ -411,10 +449,77 @@ class _Page1 extends StateMVC<Page1> {
       //Icon(Icons.favorite_border);
       //  Image(image:AssetImage("assets/img/121.gif"));
     }
-  }//giphy.gif
+  }
+
+
+
+
+
+
+
+  Widget soldProduct() {
+
+      return CarouselSlider(
+        items: [
+          // CardFavoriteWidget()
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child:
+                ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _con.listSoldRe.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                            CardStorySoldWidget(soldData: _con.listSoldRe[index],),
+                          ),
+              ),
+            ],
+          ),
+          //1st Image of Slider
+        ],
+
+        //Slider Container properties
+        options: CarouselOptions(
+          height: 170.0,
+          //enlargeCenterPage: true,
+          // autoPlay: true,
+          aspectRatio: 16 / 9,
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enableInfiniteScroll: false,
+          // autoPlayAnimationDuration: Duration(milliseconds: 800),
+          viewportFraction: 0.8,
+        ),
+      );
+    }
 
 }
 
+
+//   Widget soldProduct() {
+//
+//       return
+//           // CardFavoriteWidget()
+//
+//               Expanded(
+//                 child:
+//                 ListView.builder(
+//                       scrollDirection: Axis.horizontal,
+//                       itemCount: _con.listSoldRe.length,
+//                       itemBuilder: (BuildContext context, int index) =>
+//                           ShapeOfView(
+//                             shape: RoundRectShape(
+//                               borderRadius: BorderRadius.circular(12),
+//                               borderColor: Colors.white, //optional
+//                               borderWidth: 2, //optional
+//                             ),
+//                             child:
+//                             CardStorySoldWidget(soldData: _con.listSoldRe[index],),
+//                           )),
+//           );
+//     }
+//
+// }
 
 
 

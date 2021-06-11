@@ -4,6 +4,7 @@ import 'package:splashscreen/splashscreen.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/logout_controller.dart';
 import 'package:structurepublic/src/controler/start_controller.dart';
+import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/privacy_policy.dart';
@@ -301,22 +302,27 @@ bool show=true;
             onTap: (index) {
               setState(() {
                 point=index;
+
+                if(point==1)
+                {
+
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=>PageMain(),),);
+
+                }
+                if(point==2)
+                {
+
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageSold(),),);
+
+                }
                 if(point==3)
                 {
 
-                  // navigetor1("app");
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> ProfilePage(),),);
-                  //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
-                  //  Navigator.pop(context);
+
                 }
-                if(point==1)
-                {
-                  //Pagemain1
-                  // navigetor1("app"); //Pagemain1
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=>PageMain(),),);
-                  //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>LogoutController(),),);
-                  //  Navigator.pop(context);
-                }
+
+
               }
     );
   }

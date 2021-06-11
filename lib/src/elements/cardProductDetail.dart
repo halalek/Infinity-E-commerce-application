@@ -1,13 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:structurepublic/src/controler/page_Main_controller.dart';
-import 'package:structurepublic/src/controler/page_market_controller.dart';
-import 'package:structurepublic/src/elements/cardFavorite.dart';
-import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
-import 'package:structurepublic/src/models/SectionData.dart';
-import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
 
 

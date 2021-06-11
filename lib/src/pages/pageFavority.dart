@@ -58,18 +58,6 @@ class  _PageFavority extends StateMVC<PageFavority>
                             CardProductDetailWidget(_con.listProductFav[i]),
                       ],
 
-                      // itemCount: _con.listProduct.length,
-                      // itemBuilder:(BuildContext context,int i,int u){
-                      //   return CardProductDetailWidget( _con.listProduct[i]) ;
-                      // },
-                      // items: [0,1,2].map((i) {
-                      //   return Builder(
-                      //     builder: (BuildContext context) {
-                      //       return CardProductDetailWidget( _con.listProduct[i]) ;
-                      //     },
-                      //   );
-                      // }).toList(),
-
                       options: CarouselOptions(
                         height:MediaQuery.of(context).size.height ,
                         enlargeCenterPage: true,

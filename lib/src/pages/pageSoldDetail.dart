@@ -4,33 +4,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:structurepublic/src/controler/page_product_controller.dart';
+import 'package:structurepublic/src/controler/page_sold_controller.dart';
+import 'package:structurepublic/src/elements/CardSoldDetail.dart';
 import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/elements/cardProductDetail.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
+import 'package:structurepublic/src/models/SoldData.dart';
 
 
-class ProductDetail extends StatefulWidget {
+class SoldDetail extends StatefulWidget {
 
-  final ProductData productData;
-  final CategorizeData categorizeData;
-  const ProductDetail( this.productData,this.categorizeData);
+  final SoldData soldData;
+  const SoldDetail( this.soldData);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ProductDetail(this.productData,this.categorizeData);
+    return _SoldDetail(this.soldData);
   }
 }
 
-class _ProductDetail extends StateMVC<ProductDetail>  {
-  final ProductData productData;
-  final CategorizeData categorizeData;
-  PageProductController _con ;
+class _SoldDetail extends StateMVC<SoldDetail>  {
+  final SoldData soldData;
+  PageSoldController _con;
 
 
 
-  _ProductDetail(this.productData,this.categorizeData) : super(PageProductController(categorizeData))
+  _SoldDetail(this.soldData) : super(PageSoldController())
   {
     _con = controller;
 
@@ -49,7 +50,7 @@ class _ProductDetail extends StateMVC<ProductDetail>  {
               children: [
                 Container(
 
-                    decoration: BoxDecoration( image:  DecorationImage(image:CachedNetworkImageProvider(productData.image), fit: BoxFit.cover)),
+                    decoration: BoxDecoration( image:  DecorationImage(image:CachedNetworkImageProvider(soldData.image), fit: BoxFit.cover)),
                     child:
                     CarouselSlider(//_con.listProduct.length
                       items: [
@@ -66,10 +67,10 @@ class _ProductDetail extends StateMVC<ProductDetail>  {
                         //   },
                         // ),
 
-                      CardProductDetailWidget(productData),
-                         for( int i= 0   ;i <  _con.listProduct.length  ;i++)
-                           if(productData.index !=i)
-                             CardProductDetailWidget(_con.listProduct[i]),
+                        CardSoldDetailWidget(soldData),
+                        for( int i= 0   ;i <  _con.listSold.length  ;i++)
+                          if(soldData.index !=i)
+                            CardSoldDetailWidget(_con.listSold[i]),
                       ],
 
                       // itemCount: _con.listProduct.length,
