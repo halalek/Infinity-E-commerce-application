@@ -44,8 +44,6 @@ class PageSoldController extends ControllerMVC {
           listSold[i].index=i;
       }
       );
-
-      print(listSold.length.toString() + "444444444444444444444444444444444444444444444");
     });
 
 

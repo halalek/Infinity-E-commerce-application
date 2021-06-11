@@ -43,15 +43,13 @@ class _MoreStoriesState extends StateMVC<MoreStories> {
           parcent += 0.001;
           if(i==0)
             { finit = _con.listSold.length;
-            print("ffffffffffffffffffffffffffffff"  + finit.toString());}
+          }
           // if(i!=0)
           //   {i++;}
 
           if (parcent > 1 && (i++) < finit)   {
-            print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" + i.toString() );
             _timer.cancel();
            // ++i;
-            print("QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + i.toString() );
            // Navigator.pop(context);
              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MoreStories(_con.listSold[i])));
           }

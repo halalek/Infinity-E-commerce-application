@@ -115,19 +115,17 @@ getProductSug() async {
               {remove.add(listSoldRe[j]);
 
                // listSoldRe.removeAt(j);
-              print(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");}
+          }
 
         for(int i=0 ; i  < remove.length ; i++)
             {
             listSoldRe.remove(remove[i]);
-            print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");}
+            }
 
       }
 
 
       );
-
-      print(listSold.length.toString() + "444444444444444444444444444444444444444444444");
     });
 
 
