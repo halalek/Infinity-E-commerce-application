@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,30 +20,37 @@ import '../models/setting.dart';
 
 ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
-
+String tokenn;
 final Userss userss=new Userss();
 //LocationData locationData;
 
-Future<Userss> loginSettings(String email, String password,String name,String phone) async {
+Future<Userss> loginSettings(String email, String password) async {
+
   var result = await FirebaseAuth.instance
       .signInWithEmailAndPassword(email: email, password: password);
   if (result != null) {
-    userss.UserssLogin(result.user.uid, name, email,int.parse(phone));
+    userss.UserssLogin(result.user.uid, email);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
     // getUser
     //return result.user;
+    await addtokenuser();
     return  await getUser() ;
-  } else {
+  }
+  else {
     return null;
   }
 }
 
 
-Future<Userss>  signupSettings(String email, String password,String name,String phone) async {
+Future<Userss>  signupSettings(String email, String password,String name) async {
   var result = await FirebaseAuth.instance
       .createUserWithEmailAndPassword(email: email, password: password);
 
   if (result != null) {
-    userss.UserssSign(result.user.uid, name, email,int.parse(phone),result.user.getIdToken().toString(),"users");
+    userss.UserssSign(result.user.uid, name, email ,result.user.getIdToken().toString(),"users");
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
    //shared
     return  await addUser() ;
   } else {
@@ -51,7 +59,8 @@ Future<Userss>  signupSettings(String email, String password,String name,String 
 }
 Future<void> updateUser(Userss user ) async {
   print("Llllllllllllllllllllllllllllllllllllllllllllllllllllll");
-  print(user.name );
+  print(user.name);
+  await addtoken();
   await FirebaseFirestore.instance
       .collection("users").doc(user.id).update(
       {"name":user.name,
@@ -59,7 +68,8 @@ Future<void> updateUser(Userss user ) async {
         "phone":user.phone,
         "longe":user.long,
         "lat":user.lat,
-        "image":user.image
+        "image":user.image,
+        "token":tokenn,
       }
   )
       .then((value) async {////////////////////////////////////
@@ -82,16 +92,24 @@ Future<void> updateUser(Userss user ) async {
 
 
 Future<Userss> addUser() async {
+  await addtoken();
   await FirebaseFirestore.instance
       .collection("users").doc(userss.id).set(
-      {"name":userss.name,
-        "email":userss.email,
-        "phone":userss.phone,
-        "id":userss.id,
-        "token":userss.token,
+      {"name":userss.name,//2
+        "email":userss.email,//1
+        "phone":userss.phone,//4
+        "id":userss.id,//1
+        "token":tokenn,
         "role":userss.role,
+         "image":userss.image,
+         "lat":userss.lat,
+         "longe":userss.long,
+         "timesTamp" :userss.timesTamp,
+
+
 
       }
+
   )
       .then((value) {
   }).catchError((e) {});
@@ -99,6 +117,39 @@ Future<Userss> addUser() async {
 
 
 }
+
+Future<void> addtoken()async
+
+{
+ final FirebaseMessaging _fcm=FirebaseMessaging();
+await  _fcm.getToken().then((value) {print("qqqqqqqqqqqqq"  + value );
+ tokenn=value.toString();});
+}
+
+Future<void> addtokenuser()async
+
+{
+  await addtoken();
+  await FirebaseFirestore.instance
+      .collection("users").doc(userss.id).update(
+      {"token":tokenn,}
+
+  )
+      .then((value) {
+  }).catchError((e) {});
+
+}
+Future<void> deleteUser(String userssid) async {
+  print("111111111111111111111111");
+  await FirebaseFirestore.instance
+      .collection("users").doc(userssid).delete()
+      .then((value) {
+    print("deleeeeeeee");
+  }).catchError((e) {});
+
+}
+
+
 //SharedPref sharedPref=SharedPref();
 
 Future<Userss> getUser() async {

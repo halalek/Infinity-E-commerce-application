@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_animations/simple_animations.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
+import 'package:structurepublic/src/pages/loginNumber.dart';
+import 'package:structurepublic/src/pages/page_welcome.dart';
+import 'package:structurepublic/src/pages/signupView.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 
-import '../../generated/l10n.dart';
-import '../controler/user_controller.dart';
-import '../elements/BlockButtonWidget.dart';
-import '../helpers/app_config.dart' as config;
-import '../repository/user_repository.dart' as userRepo;
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'loginEmail.dart';
 import 'page_Main_View.dart';
 
 class LoginMain extends StatefulWidget {
@@ -59,25 +60,7 @@ class _LoginMain extends StateMVC<LoginMain> {
 
 
                 TextFormField(
-                  controller: _loginrController.nameController,
-                  decoration: InputDecoration(
-                    hintText: 'Name',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Name Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 25,
-                ),
-
-
-                TextFormField(
+                  obscureText: true,
                   controller: _loginrController.phoneController,
                   decoration: InputDecoration(
                     hintText: 'Phone',
@@ -99,7 +82,10 @@ class _LoginMain extends StateMVC<LoginMain> {
                   controller: _loginrController.emailController,
                   //_emailcontroller,
                   decoration: InputDecoration(
-                    hintText: 'Email',
+                    hintText: 'Enter your email',
+                    labelText: "Email",
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    suffixIcon: Icon(Icons.email),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -116,7 +102,10 @@ class _LoginMain extends StateMVC<LoginMain> {
                 TextFormField(
                   controller: _loginrController.passwordController,
                   decoration: InputDecoration(
-                    hintText: 'Password',
+                    labelText: "password",
+                    hintText: "Enter your password",
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    suffixIcon: Icon(Icons.lock),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -161,6 +150,248 @@ class _LoginMain extends StateMVC<LoginMain> {
               ],
             )),
       ),
+    );
+  }
+}
+
+
+
+
+
+
+// class FadeAnimation extends StatelessWidget {
+//   final double delay;
+//   final Widget child;
+//
+//   FadeAnimation(this.delay, this.child);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // final tween = MultiTrackTween([
+//     //   Track("opacity").add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
+//     //   Track("translateY").add(
+//     //       Duration(milliseconds: 500), Tween(begin: -30.0, end: 0.0),
+//     //       curve: Curves.easeOut)
+//     // ]);
+//
+//     return ControlledAnimation(
+//       delay: Duration(milliseconds: (500 * delay).round()),
+//       //duration: tween.duration,
+//       //tween: tween,
+//       child: child,
+//       builderWithChild: (context, child, animation) => Opacity(
+//         opacity: animation["opacity"],
+//         child: Transform.translate(
+//             offset: Offset(0, animation["translateY"]),
+//             child: child
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+class LoginMainPage extends StatefulWidget {
+@override
+_LoginMainPage createState() =>  _LoginMainPage();
+}
+
+
+class _LoginMainPage extends StateMVC<LoginMainPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool  _passwordVisible;
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
+  @override
+
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 620,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/img/pp10.PNG'),
+                          fit: BoxFit.cover,
+
+                      )
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      // Positioned(
+                      //   left: 80,
+                      //   width: 200,
+                      //   height: 370,
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //             image: AssetImage('assets/img/pp8.PNG')
+                      //         )
+                      //     ),
+                      //   ),
+                      // ),
+                      // Positioned(
+                      //   left: 20,
+                      //   width: 300,
+                      //   height: 320,
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //             image: AssetImage('assets/img/pp10.PNG')
+                      //         )
+                      //     ),
+                      //   ),
+                      // ),
+                      Positioned(
+                        left: 20,
+                      //  top: 40,
+                        width: 80,
+                        height: 110,
+                        child:  Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/img/light-2.png'),
+                              )
+                          ),
+                        )),
+
+                      // Positioned(
+                      //   child:  Container(
+                      //     margin: EdgeInsets.only(top: 50),
+                      //     child: Center(
+                      //       child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                      //     ),
+                      //   )
+                      // ),
+
+                      Padding(
+                        padding: EdgeInsets.only(left:30.0,top:250,right: 30),
+                        child:
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(5),
+
+                              decoration: BoxDecoration(
+                                  color:   Color.fromRGBO(143, 148, 251, .6),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color.fromRGBO(143, 148, 251, .2),
+                                        blurRadius: 20.0,
+                                        offset: Offset(0, 10)
+                                    )
+                                  ]
+                              ),
+
+
+                                  child:
+                              Column(
+                                children: <Widget>[
+                                  // Container(
+                                  //     margin: EdgeInsets.only(bottom: 10),
+                                  //     child: Center(
+                                  //       child: Text("Login Number", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                                  //     ),
+                                  //
+                                  // ),
+                                  SizedBox(height: 20,),
+                              InkWell(child:
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white
+                                        // gradient: LinearGradient(
+                                        //     colors: [
+                                        //       // Color.fromRGBO(143, 148, 251, 1),
+                                        //       // Color.fromRGBO(143, 148, 251, .6),
+                                        //      // Colors.white
+                                        //     ]
+                                        // )
+                                    ),
+                                    child: Center(
+                                      child: Text("Login Email", style: TextStyle(color:Color.fromRGBO(143, 148, 251, 1), fontWeight: FontWeight.bold,fontSize: 20),),
+                                    ),
+                                  ),
+                                onTap: () {
+
+                                  //_loginrController.loginfirebase();
+                                  Navigator.push(context, MaterialPageRoute(builder: ( context) => LoginEmail() ) );
+
+
+                                },
+                              ),
+                                  Container(
+                                    height: 40,
+                                    // decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(10),
+                                    //     gradient: LinearGradient(
+                                    //         colors: [
+                                    //           Color.fromRGBO(143, 148, 251, 1),
+                                    //           Color.fromRGBO(143, 148, 251, .6),
+                                    //         ]
+                                    //     )
+                                    // ),
+                                    child: Center(
+                                      child: Text("OR", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
+                                    ),
+                                  ),
+                              InkWell(child:
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              Color.fromRGBO(143, 148, 251, 1),
+                                              Color.fromRGBO(143, 148, 251, .6),
+                                            ]
+                                        )
+                                    ),
+                                    child: Center(
+                                      child: Text("Login Number", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20),),
+                                    ),
+                                  ),
+                                onTap: () {
+
+                                    //_loginrController.loginfirebase();
+                                    Navigator.push(context, MaterialPageRoute(builder: ( context) => LoginNumber() ) );
+
+
+                                },
+                              ),
+                                  SizedBox(height: 20,),
+
+                                ],
+                              ),
+                              )
+                          ],
+                        ),
+
+                        ),
+
+
+
+
+
+
+
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
     );
   }
 }

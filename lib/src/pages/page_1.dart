@@ -385,7 +385,13 @@ class _Page1 extends StateMVC<Page1> {
         );
       }
     else if (list.length==0)
-    {return Image(image:AssetImage('assets/img/cardd.gif'),height: 120,fit: BoxFit.fitWidth,);
+    {//return Image(image:AssetImage('assets/img/cardd.gif'),height: 120,fit: BoxFit.fitWidth,);
+      return Center(child:  Icon(
+        Icons.favorite,
+        color: Colors.red,
+        size:40 ,
+
+      ),);
       //Icon(Icons.favorite_border);
     //  Image(image:AssetImage("assets/img/121.gif"));
     }

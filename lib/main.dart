@@ -5,6 +5,7 @@ import 'package:structurepublic/src/models/user.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
+import 'package:structurepublic/src/pages/page_welcome.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/startView.dart';
@@ -25,11 +26,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
-
+var i=1;
   //
  //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
   await Firebase.initializeApp();
-  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? LoginMain() :   MyApp(),));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));
+  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  WelcomePage()));
 
 
 }
@@ -88,7 +90,6 @@ class _MyAppState extends State<MyApp> {
                 dividerColor: config.ColorsApp().secondColor(0.1),
                 focusColor: config.ColorsApp().secondColor(1),
                 hintColor: config.ColorsApp().secondColor(1),
-
                 textTheme: TextTheme(
                   headline5: TextStyle(fontSize: 20.0, color: config.ColorsApp().secondColor(1), height: 1.35),
                   headline4: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600, color: config.ColorsApp().secondColor(1), height: 1.35),

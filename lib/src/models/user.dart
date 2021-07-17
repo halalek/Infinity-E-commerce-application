@@ -36,8 +36,8 @@ class Userss {
   });
 
  // ignore: non_constant_identifier_names
- void UserssLogin(String id, String name, String email, int phone)
- {this.id=id; this.name=name; this.email=email; this.phone=phone;}
+ void UserssLogin(String id,String email)
+ {this.id=id; this.email=email;}
 
 
   // ignore: non_constant_identifier_names
@@ -46,8 +46,8 @@ class Userss {
 
 
   // ignore: non_constant_identifier_names
-  void UserssSign(String id, String name, String email, int phone,String token,String role)
-  {this.id=id; this.name=name; this.email=email; this.phone=phone;this.token=token;this.role=role;}
+  void UserssSign(String id, String name, String email,String token,String role)
+  {this.id=id; this.name=name; this.email=email;this.token=token;this.role=role;this.image="https://www.pngkey.com/png/full/284-2844044_fashion-toys-electrical-items-and-more-girl-with.png";}
 
 
   factory Userss.fromJson(Map<String, dynamic> json) => Userss(

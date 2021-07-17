@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/logout_controller.dart';
@@ -7,6 +8,7 @@ import 'package:structurepublic/src/controler/start_controller.dart';
 import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
+import 'package:structurepublic/src/pages/page_welcome.dart';
 import 'package:structurepublic/src/pages/privacy_policy.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/settings.dart';
@@ -26,6 +28,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'contact_support.dart';
 import 'dashboard.dart';
 import 'events.dart';
+import 'loginView.dart';
 import 'my_drawer_header.dart';
 import 'notifications.dart';
 
@@ -129,7 +132,10 @@ bool show=true;
                     color: Colors.grey,
                     minWidth: 80,
                     onPressed: () async {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogoutController(),),);
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      preferences.remove('user');
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WelcomePage(),),);
+                      //LoginMainPage()
                       //  await FirebaseAuth.instance.signOut();
                       // RestartWidget.restartApp(context) ;
 
