@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:structurepublic/src/models/user.dart';
+import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/page_welcome.dart';
+import 'package:structurepublic/src/pages/productDetail.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/startView.dart';
@@ -30,8 +32,11 @@ var i=1;
   //
  //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
   await Firebase.initializeApp();
-  runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));
-  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  WelcomePage()));
+  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));//basic
+
+
+
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  Pagemain1()));
 
 
 }

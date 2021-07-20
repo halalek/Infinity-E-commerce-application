@@ -1,14 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
-import 'package:structurepublic/src/controler/varify_controller.dart';
-import 'package:structurepublic/src/pages/page_welcome.dart';
-import 'package:structurepublic/src/pages/passwordReset.dart';
-import 'package:structurepublic/src/pages/signupView.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 
 import '../../generated/l10n.dart';
@@ -18,204 +13,39 @@ import '../helpers/app_config.dart' as config;
 import '../repository/user_repository.dart' as userRepo;
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'page_Main_View.dart';
 
 
 
-class LoginMain extends StatefulWidget {
-  @override
-  _LoginMain createState() => _LoginMain();
-}
 
-class _LoginMain extends StateMVC<LoginMain> {
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  // UserController _con;
-  LoginController _loginrController ;
 
-  _LoginMain() : super( LoginController()) {
-    // _con = controller;
-    _loginrController = controller;
-  }
 
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp();
+
+
+extension extString on String {
+  bool get isValidEmaill {
+    final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    return emailRegExp.hasMatch(this);
   }
 
 
+}
 
+class PasswordResetMain extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login To My Account'),
-      ),
-
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-
-
-                TextFormField(
-                  obscureText: true,
-                  controller: _loginrController.phoneController,
-                  decoration: InputDecoration(
-                    hintText: 'Phone',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Phone Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.emailController,
-                  //_emailcontroller,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                    labelText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.email),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Email Input';
-                    }
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 25,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.passwordController,
-                  decoration: InputDecoration(
-                    labelText: "password",
-                    hintText: "Enter your password",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.lock),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Password Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.loginfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-                    }
-
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Signup',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.signupfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-
-                    }
-                  },
-                ),
-              ],
-            )),
-      ),
-    );
-  }
+  _PasswordResetMain createState() =>  _PasswordResetMain();
 }
 
 
-
-
-
-
-// class FadeAnimation extends StatelessWidget {
-//   final double delay;
-//   final Widget child;
-//
-//   FadeAnimation(this.delay, this.child);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // final tween = MultiTrackTween([
-//     //   Track("opacity").add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
-//     //   Track("translateY").add(
-//     //       Duration(milliseconds: 500), Tween(begin: -30.0, end: 0.0),
-//     //       curve: Curves.easeOut)
-//     // ]);
-//
-//     return ControlledAnimation(
-//       delay: Duration(milliseconds: (500 * delay).round()),
-//       //duration: tween.duration,
-//       //tween: tween,
-//       child: child,
-//       builderWithChild: (context, child, animation) => Opacity(
-//         opacity: animation["opacity"],
-//         child: Transform.translate(
-//             offset: Offset(0, animation["translateY"]),
-//             child: child
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-class LoginEmail extends StatefulWidget {
-  @override
-  _LoginEmail createState() =>  _LoginEmail();
-}
-
-
-class _LoginEmail extends StateMVC<LoginEmail> {
+class _PasswordResetMain extends StateMVC<PasswordResetMain> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool  _passwordVisible;
-
 
   // UserController _con;
   LoginController _loginrController;
 
-  _LoginEmail() : super( LoginController()) {
+  _PasswordResetMain() : super( LoginController()) {
     // _con = controller;
     _loginrController = controller;
   }
@@ -235,8 +65,9 @@ class _LoginEmail extends StateMVC<LoginEmail> {
           child: Container(
             child: Column(
               children: <Widget>[
+
                 Container(
-                  height: 620,
+                  height: 700,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/img/12222.png'),
@@ -293,7 +124,7 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                       // ),
 
                       Padding(
-                        padding: EdgeInsets.only(left:30.0,top:220,right: 30),
+                        padding: EdgeInsets.only(left:30.0,top:270,right: 30),
                         child:
                         Column(
                           children: <Widget>[
@@ -320,10 +151,12 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                       Container(
                                         margin: EdgeInsets.only(bottom: 10),
                                         child: Center(
-                                          child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                                          child: Text("Password Reset ", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),),
                                         ),
 
                                       ),
+
+                                      SizedBox(height: 14,),
                                       Container(
                                         padding: EdgeInsets.all(8.0),
                                         // decoration: BoxDecoration(
@@ -332,13 +165,10 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                         child: TextFormField(
                                           keyboardType: TextInputType.emailAddress,
                                           controller: _loginrController.emailController,
-                                          // inputFormatters: <TextInputFormatter>[
-                                          //   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                                          // ],
                                           decoration: InputDecoration(
-                                            hintText: 'Enter your Email',
-                                            labelText: "Email",
 
+                                            hintText: 'Enter your Email ',
+                                            labelText: "Email",
                                             floatingLabelBehavior: FloatingLabelBehavior.always,
                                             suffixIcon: Icon(Icons.email),
                                             fillColor: Colors.white,
@@ -350,58 +180,16 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                             if (value.isEmpty) {
                                               return 'Please Fill Email Input';
                                             }
-                                            if (!value.isValidEmail) {
-                                              return 'Enter the Email correctly';
-                                            }
 
+                                            if(!value.isValidEmaill)
+                                            { return 'Enter the Email correctly';}
 
                                             return null;
                                           },
                                         ),
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: TextFormField(
-                                          obscureText: !_passwordVisible,
-                                          controller: _loginrController.passwordController,
-                                          decoration: InputDecoration(
-                                            labelText: "password",
-                                            hintText: "Enter your password",
-                                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: IconButton(
-                                              icon: Icon(
-                                                // Based on passwordVisible state choose the icon
-                                                _passwordVisible
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
 
-                                              ),
-                                              onPressed: () {
-                                                // Update the state i.e. toogle the state of passwordVisible variable
-                                                setState(() {
-                                                  _passwordVisible = !_passwordVisible;
-                                                });
-                                              },
-                                            ),
-                                            fillColor: Colors.white,
-                                            enabledBorder:OutlineInputBorder(
-                                              borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                                              borderRadius: BorderRadius.circular(15.0),
-                                            ),),
-
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              return 'Please Fill Password Input';
-                                            }
-                                            if (value.length<8 || value.length>15) {
-                                              return  'password must contain between 8 and 15 characters';
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-
-                                      SizedBox(height: 10,),
+                                      SizedBox(height: 14,),
                                       InkWell(child:
                                       Container(
                                         height: 50,
@@ -415,63 +203,24 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                             )
                                         ),
                                         child: Center(
-                                          child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                          child: Text("Sent Password", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                                         ),
                                       ),
                                         onTap: () async {
                                           if (_formKey.currentState.validate()) {
-                                           // new VarifyController(_loginrController).Checkemaill();
-                                              _loginrController.loginfirebase() ;
 
-                                            // _loginrController.Checkemaill() ;
-                                              }
-
-                                            //_loginrController.loginfirebase();
-                                           // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-                                            //SignupMain
-
+                                            //   _loginrController.signupfirebase();
+                                            _loginrController.sendpasswordresetemail();
+                                          }
 
                                         },
-                                      ),
+                                      )
                                     ],
                                   ),
                                 )
                             ),
                             SizedBox(height: 20,),
-                            Row(children: [
 
-                              Text("   Don't have an account?   ", style: TextStyle(color: Colors.black,fontSize: 15),),
-                              InkWell(
-                                child:    Text("Sign up", style: TextStyle(color: Colors.purple,fontSize: 17,fontWeight: FontWeight.bold),),
-                                onTap: () {
-
-
-                                  //_loginrController.loginfirebase();
-                                  Navigator.push(context, MaterialPageRoute(builder: ( context) => SignupMain() ) );
-                                  //SignupMain
-
-                                },
-                              )
-                            ],),
-                            SizedBox(height:12,),
-                            Row(children: [
-
-                              Text("   Forgot your Password ?  ", style: TextStyle(color: Colors.black,fontSize: 15),),
-                              InkWell(
-                                child:    Text("Remember me", style: TextStyle(color: Colors.purple,fontSize: 15,fontWeight: FontWeight.bold),),
-                                onTap: () {
-
-
-                                  //_loginrController.loginfirebase();
-                                  Navigator.push(context, MaterialPageRoute(builder: ( context) => PasswordResetMain() ) );
-                                  //SignupMain
-
-                                },
-
-
-                              )
-
-                            ],),
                           ],
                         ),
 
@@ -555,15 +304,11 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                 //     ],
                 //   ),
                 // )
+
               ],
             ),
           ),
         )
     );
   }
-
-
-
-
-
 }

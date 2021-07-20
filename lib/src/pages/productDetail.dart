@@ -24,6 +24,8 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetail extends StateMVC<ProductDetail>  {
+
+
   final ProductData productData;
   final CategorizeData categorizeData;
   PageProductController _con ;

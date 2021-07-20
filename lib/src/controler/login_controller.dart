@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class LoginController extends ControllerMVC{
   //User user = new User();
   bool loading = false;
   bool loading1 = false;
+  bool loadingpass = false;
   GlobalKey<ScaffoldState> scaffoldKey;
   OverlayEntry loader;
   int start=60;
@@ -49,6 +51,24 @@ class LoginController extends ControllerMVC{
 
 
 
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    print("BACK BUTTON!");
+
+    // Do some stuff. return true;
+  }
+  @override
+  void initState()  {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+
+  }
+  @override
+  void dispose()
+  {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
 //
 //       Navigator.push(context, MaterialPageRoute(builder: (context)=>Dashboard(),),);
 
@@ -57,13 +77,30 @@ class LoginController extends ControllerMVC{
   TextEditingController get phoneController => _phoneController;
   TextEditingController get nameController => _nameController;
 
+
+
+  void sendpasswordresetemail() async{
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text).then((value) {
+     // Get.snackbar("Password Reset email link is been sent", "Success");
+      print("aaaaaaaaaaaaaaaaaa");loadingpass=true;
+      _onLoadingPassword();
+    }).catchError((onError){print("zzzzzzzzzzzzzzzzzzzzzzz"); _onLoadingError();},
+    );
+        //Get.snackbar("Error In Email Reset", onError.message) );
+  }
+
+
+
+
+
+
+
   void checksigup() async
   {
 
     _onLoadingEmail();
     await signupfirebase();
     //await varifyController.Checkemaill();
-
     await varifyController.Checkemaill().then((value) async{
       if(value == true){
         SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -72,8 +109,8 @@ class LoginController extends ControllerMVC{
         loading1=true;
         Navigator.pop(context);//pop dialog
         Navigator.pop(context);//pop signup
-        Navigator.pop(context);//pop signup
-        Navigator.pop(context);
+        Navigator.pop(context);//pop welcomepage
+        Navigator.pop(context);//pop login
         Navigator.pushReplacement( context, MaterialPageRoute(builder: (BuildContext context)=> StartMain(),),);
         print("login");
         //loginfirebase();
@@ -99,6 +136,7 @@ class LoginController extends ControllerMVC{
     await  loginSettings(emailController.text,passwordController.text).then((value) async{
       if(value== null){
         print("error login");
+
       }
       else {
         loading=true;
@@ -228,6 +266,100 @@ class LoginController extends ControllerMVC{
 
     );
   }
+
+
+
+
+
+
+
+
+
+  void _onLoadingPassword() {
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child:
+          new Container(
+            decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.circular(10.0)
+            ),
+            width: 300.0,
+            height:200.0,
+            alignment: AlignmentDirectional.center,
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Center(
+                  child: new SizedBox(
+                    height: 20.0,
+                    width: 20.0,
+                    child: new CircularProgressIndicator(
+                      value: null,
+                      strokeWidth: 2.0,
+                    ),
+                    //Icon(Icons.email,color: Colors.blueAccent,)
+                  ),
+                ),
+                new Center(child:Container(
+                  margin: const EdgeInsets.only(top: 20.0),
+                  child:  Center(
+                    child:  Column(
+                        children: <Widget>[
+                          Center(child:Row(children: <Widget>[
+                            Text("        "),
+                            Icon(Icons.email,color: Colors.blueAccent,size: 33,),
+                            Text(
+                              "       Password Reset  \n   email link is been sent  ",
+                              style: new TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ]),),
+
+                        ]
+                    ),
+
+                  ),
+                ),)
+              ],
+            ),
+          ),
+          // new Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   children: [
+          //     new CircularProgressIndicator(),
+          //     SizedBox(width: 5,),
+          //     new Text("Loading"),
+          //   ],
+          // ),
+        );
+      },
+    );
+
+    new Future.delayed(new Duration(seconds:40),() {
+      if (!loadingpass) {
+        Navigator.pop(context); //pop dialog
+        _onLoadingError();
+      }
+
+      if (loadingpass) {
+        Navigator.pop(context); //pop dialog
+        Navigator.pop(context);
+      }
+
+    }
+
+    );
+  }
+
+
 
   void _onLoadingError() {
     showDialog(

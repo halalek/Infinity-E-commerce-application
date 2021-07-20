@@ -1,9 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
+import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
 
 
+import 'dart:async';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class CardProductDetailWidget extends StatefulWidget {
 
@@ -21,9 +31,27 @@ class CardProductDetailWidget extends StatefulWidget {
 class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    _CardProductDetailWidget(this.productData) ;
 
+
+   void updataNote(String note){
+     setState(() =>_note.text = note);
+     /*productData.note=_note.text;
+     print("productData.note    "   + productData.note);*/  //  Nour save note
+   }
+   void moveToSecondPage() async {
+     final information = await Navigator.push(
+       context,
+       CupertinoPageRoute(
+           fullscreenDialog: true, builder: (context) => MyAppcon()),
+     );
+     updataNote(information);
+
+   }
+
   final ProductData productData;
   int count=0;
   int point=0;
+  //String _note='ملاحظات أضافية (اختياري)';
+   TextEditingController _note = TextEditingController();
    var _snackBar1 = SnackBar(
     content: Center(child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25),),),
     backgroundColor: Colors.black26,
@@ -31,6 +59,18 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
     duration: const Duration(seconds: 5),
 
   );
+
+
+
+
+
+
+
+
+
+
+
+
   bool  selectfav=false;bool selectfav1=false;
   var fav=Icons.favorite_border ;
    // ignore: non_constant_identifier_names
@@ -130,16 +170,90 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                         ),
                                       ],
                                     ),),
-                                    Expanded(child: TextField(
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          hintText: 'ملاحظات أضافية (اختياري)'
-                                      ),
-                                    ),),
+                                   //  Container(
+                                   //     padding: EdgeInsets.only(bottom: 30),
+                                   //      child: Row(
+                                   //         // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                   //          children: [
+                                   //            Expanded(child: TextField(
+                                   //              decoration: InputDecoration(
+                                   //                  border: OutlineInputBorder(),
+                                   //                  hintText: 'ملاحظات أضافية (اختياري)',
+                                   //                prefixIcon: Icon(Icons.mic),
+                                   //              ),
+                                   //              onTap: _onSound,
+                                   //            ),),
+                                   //
+                                   //
+                                   //  ])
+                                   // ),
+
+                                    GestureDetector(child: Container(
+                                      width: 300,
+                                     margin: EdgeInsets.all(10),
+                                     padding: EdgeInsets.only(bottom: 20,top: 30),
+                                      // decoration: BoxDecoration(
+                                      //  // color: Colors.black45,
+                                      //   borderRadius: BorderRadius.circular(8.0),
+                                      //   border: Border.all(
+                                      //     color: Theme.of(context).primaryColorDark
+                                      //   ),
+                                      // ),
+                                      child:Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                       children: [
+                                    //   Text("ملاحظات إضافية (اختياري)"  ,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal),),
+
+                                      Expanded(child: TextField(
+                                       controller: _note ,
+                                                   decoration: InputDecoration(
+                                                      // border: OutlineInputBorder(),
+                                                       hintText: 'ملاحظات أضافية (اختياري)',
+                                                     //prefixIcon: Icon(Icons.mic),
+                                                   ),
+                                                  // onTap: _onSound,
+                                                 ),),
+
+
+                                         InkWell(child: Container(
+
+                                           width: 50,
+                                           padding: EdgeInsets.all(10),
+                                           // decoration: BoxDecoration(
+                                           //   color: Colors.redAccent,
+                                           //   borderRadius: BorderRadius.circular(8.0),
+                                           //   image:  DecorationImage(image: NetworkImage("https://www.awanmasr.com/wp-content/uploads/2021/01/%D8%A3%D8%B6%D8%B1%D8%A7%D8%B1-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7.png"), fit: BoxFit.cover
+                                           //   )
+                                           // ),
+                                           child:
+                                           Icon(Icons.mic,color:  Theme.of(context).primaryColorDark,size: 30,),
+                                         ),
+                                           onTap: () {
+                                             setState((){
+                                               moveToSecondPage();
+                                               // Navigator.push(
+                                               //     context,
+                                               //     MaterialPageRoute(
+                                               //         builder: (BuildContext context) => MyAppcon()));
+                                             }
+                                             );
+
+                                           },
+                                         ),
+
+
+                                      ]),
+                                    ),
+                                      onTap: (){
+                                     //   _onSound();
+                                      },
+                                    ),
+
+
 
 
                                     Container(
-                                      padding: EdgeInsets.all(10),
+                                      padding: EdgeInsets.all(20),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
@@ -237,6 +351,34 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
          count--;
      });
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
