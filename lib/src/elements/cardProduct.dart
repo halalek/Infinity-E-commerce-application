@@ -11,9 +11,9 @@ import 'package:structurepublic/src/pages/productDetail.dart';
 class CardProductWidget extends StatelessWidget {
   final ProductData productData;
   final CategorizeData categorizeData;
+  final MarketData marketData;
 
-
-  const CardProductWidget({this.categorizeData,Key key,this.productData,}) : super(key: key);
+  const CardProductWidget({this.categorizeData,Key key,this.productData,this.marketData}) : super(key: key);
 
 
 
@@ -53,11 +53,11 @@ class CardProductWidget extends StatelessWidget {
                       child: Text(productData.price.toString(),style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
                       // child:Icon(Icons.access_time, color: Colors.grey,),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
                       },),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
                     },
                     shape: RoundedRectangleBorder(
@@ -79,7 +79,7 @@ class CardProductWidget extends StatelessWidget {
         ]
     ),
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
         // navigetor("");
       },

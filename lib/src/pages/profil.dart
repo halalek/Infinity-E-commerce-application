@@ -24,6 +24,8 @@ import 'package:location/location.dart';
 import 'dart:io';
 
 import 'package:structurepublic/src/repository/login_repository.dart';
+
+import 'mydemand.dart';
 class ProfilePage extends StatefulWidget
 {
 
@@ -385,7 +387,7 @@ void location() async{
                             children: [IconButton(
                               icon: Icon(Icons.shopping_cart),
                               onPressed: (){
-
+                                Navigator.of(context).pushNamed('/c');
                               },
                             ),   FlatButton(
                               child:Text("my requests",
@@ -397,7 +399,7 @@ void location() async{
                                   fontFamily: font,
                                 ),),
                               onPressed: (){
-
+                                Navigator.of(context).pushNamed('/c');
                               },)
 
 

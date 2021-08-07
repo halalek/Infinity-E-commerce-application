@@ -2,30 +2,45 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
-
-
+import 'package:structurepublic/src/repository/page_trollery_repository.dart';
+import 'package:structurepublic/src/models/MarketData.dart';
 
 class CardProductDetailWidget extends StatefulWidget {
 
    final ProductData productData;
-   const CardProductDetailWidget( this.productData) ;
+   final MarketData marketData;
+   const CardProductDetailWidget( this.productData,this.marketData) ;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _CardProductDetailWidget(this.productData);
+    return _CardProductDetailWidget(this.productData,this.marketData);
   }
 }
 
 
 
-class _CardProductDetailWidget extends State<CardProductDetailWidget> {
-   _CardProductDetailWidget(this.productData) ;
 
+class _CardProductDetailWidget extends State<CardProductDetailWidget> {
+   _CardProductDetailWidget(this.productData,this.marketData) ;
+   final MarketData marketData;
   final ProductData productData;
   int count=0;
   int point=0;
    var _snackBar1 = SnackBar(
-    content: Center(child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25),),),
+    content: Center(
+
+      child: Column(
+         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+         child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25), )),
+
+         Center(
+        child: Text('لتأكيد أو تعديل الطلب انتقل لصفحة السلة  ',style: TextStyle(fontSize:20, ),),
+
+
+          ),],),),
     backgroundColor: Colors.black26,
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 5),
@@ -44,6 +59,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    }
   @override
   Widget build(BuildContext context) {
+
     Search();
     return  Container(
       height:400,
@@ -156,6 +172,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                           ),
                                             onTap: (){
                                               Scaffold.of(context).showSnackBar(_snackBar1);
+
+                                              setTrollery(productData,count,marketData);
                                             },
                                           ),
 
@@ -193,7 +211,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                                   fav=Icons.favorite_border;
                                                   selectfav1=true;
                                                   deleteFavority(productData);
-                                                  print(";llll");
+
                                                 }
                                               }
                                               );
@@ -229,6 +247,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    void add() {
      setState(() {
        count++;
+
+
      });
    }
    void minus() {

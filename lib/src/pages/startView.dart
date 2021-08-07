@@ -26,7 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'contact_support.dart';
-import 'dashboard.dart';
+
 import 'events.dart';
 import 'loginView.dart';
 import 'my_drawer_header.dart';

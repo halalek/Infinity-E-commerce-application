@@ -17,27 +17,28 @@ import 'package:structurepublic/src/models/MarketData.dart';
 class Products extends StatefulWidget
 {
   final CategorizeData categorizeData;
-
+  final MarketData marketData;
 
 
   int c=0;
 
   @override
-  Products(this.categorizeData,);
+  Products(this.categorizeData,this.marketData);
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _Products(this.categorizeData);
+    return _Products(this.categorizeData,this.marketData);
   }
 }
 
 class  _Products extends StateMVC<Products>
 {
   final CategorizeData categorizeData;
+  final MarketData marketData;
   PageProductController _con ;
 
 
 
-  _Products(this.categorizeData) : super(PageProductController(categorizeData)){_con = controller;}
+  _Products(this.categorizeData, this.marketData) : super(PageProductController(categorizeData)){_con = controller;}
   PageProductController _get(){return _con;}
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class  _Products extends StateMVC<Products>
         shrinkWrap: true,
         itemCount: _con.listProduct.length,
         itemBuilder: (context, i) {
-          return CardProductWidget(categorizeData: categorizeData,productData: _con.listProduct[i]);
+          return CardProductWidget(categorizeData: categorizeData,productData: _con.listProduct[i],marketData: marketData);
         },
       ) ,
     );

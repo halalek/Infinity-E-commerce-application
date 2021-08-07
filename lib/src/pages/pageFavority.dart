@@ -13,10 +13,11 @@ import 'package:structurepublic/src/elements/cardProductDetail.dart';
 import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
-
+import 'package:structurepublic/src/models/MarketData.dart';
 class PageFavority extends StatefulWidget
 {
    ProductData productData;
+   MarketData marketData;
  // final SectionData sectionData;
  PageFavority(this.productData);
 
@@ -31,6 +32,7 @@ class PageFavority extends StatefulWidget
 class  _PageFavority extends StateMVC<PageFavority>
 {
   ProductData productData;
+  MarketData marketData;
  // final SectionData sectionData;
  // PageMarketController _con2;
   PageFavorityController _con;
@@ -52,10 +54,10 @@ class  _PageFavority extends StateMVC<PageFavority>
                     CarouselSlider(//_con.listProduct.length
                       items: [
 
-                        CardProductDetailWidget(productData),
+                        CardProductDetailWidget(productData,marketData),
                         for( int i= 0   ;i <  _con.listProductFav.length  ;i++)
                           if(productData.index !=i)
-                            CardProductDetailWidget(_con.listProductFav[i]),
+                            CardProductDetailWidget(_con.listProductFav[i],marketData),
                       ],
 
                       options: CarouselOptions(

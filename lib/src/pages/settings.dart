@@ -730,8 +730,6 @@ class _SettingsPageState extends State<SettingsPage> {
                            dark= isSwitched1? Colors.black:Colors.white;
                             darkfont=isSwitched1? Colors.white:Colors.black;
                             darkAlert=isSwitched1? Colors.grey[900]:Colors.white;
-                            Navigator.of(context).pop();
-                            Navigator.of(context).popAndPushNamed('/a');
                           });
 
                         },

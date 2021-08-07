@@ -8,29 +8,31 @@ import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/elements/cardProductDetail.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
-
+import 'package:structurepublic/src/models/MarketData.dart';
 
 class ProductDetail extends StatefulWidget {
 
   final ProductData productData;
   final CategorizeData categorizeData;
-  const ProductDetail( this.productData,this.categorizeData);
+  final MarketData marketData;
+  const ProductDetail( this.productData,this.categorizeData,this.marketData);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ProductDetail(this.productData,this.categorizeData);
+    return _ProductDetail( this.productData,this.categorizeData,this.marketData);
   }
 }
 
 class _ProductDetail extends StateMVC<ProductDetail>  {
   final ProductData productData;
   final CategorizeData categorizeData;
+  final MarketData marketData;
   PageProductController _con ;
 
 
 
-  _ProductDetail(this.productData,this.categorizeData) : super(PageProductController(categorizeData))
+  _ProductDetail(this.productData,this.categorizeData, this.marketData) : super(PageProductController(categorizeData))
   {
     _con = controller;
 
@@ -66,10 +68,10 @@ class _ProductDetail extends StateMVC<ProductDetail>  {
                         //   },
                         // ),
 
-                      CardProductDetailWidget(productData),
+                      CardProductDetailWidget(productData,marketData),
                          for( int i= 0   ;i <  _con.listProduct.length  ;i++)
                            if(productData.index !=i)
-                             CardProductDetailWidget(_con.listProduct[i]),
+                             CardProductDetailWidget(_con.listProduct[i],marketData),
                       ],
 
                       // itemCount: _con.listProduct.length,

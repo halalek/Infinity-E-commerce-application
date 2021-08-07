@@ -13,7 +13,10 @@ import 'package:structurepublic/src/controler/page_product_controller.dart';
 import 'package:structurepublic/src/elements/cardCategorize.dart';
 import 'package:structurepublic/src/elements/cardProduct.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
+import 'package:structurepublic/src/models/DemandData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
+import 'package:structurepublic/src/pages/pageTrollery.dart';
+import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
 
 
@@ -72,6 +75,12 @@ class  _Categorize extends StateMVC<Categorize>
 
   @override
   Widget build(BuildContext context) {
+
+   /* d.product=[];
+    remov();
+    print("ggggggggg");
+    print(d.product.length);
+    print("ggggggggg");*/
     // TODO: implement build
     return Scaffold(
         body: ListView(
@@ -233,7 +242,7 @@ class  _Categorize extends StateMVC<Categorize>
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children:List.generate(_categorizeController.listCategorize.length, (index) =>
-                          CardCategorizeWidget(categorizeData: _categorizeController.listCategorize[index],),),
+                          CardCategorizeWidget(categorizeData: _categorizeController.listCategorize[index],marketData: marketData),),
 
                     )),
 
@@ -280,6 +289,7 @@ class  _Categorize extends StateMVC<Categorize>
               title: Text("عودة",style: TextStyle(color: Theme.of(context).primaryColorLight ),),
               backgroundColor:Colors.white38,
             ),
+
             BottomNavigationBarItem(
               icon:Icon(Icons.local_grocery_store,color: Theme.of(context).primaryColorLight,),
               title: Text(" عرض السلة",style: TextStyle(color: Theme.of(context).primaryColorLight),),
@@ -292,12 +302,15 @@ class  _Categorize extends StateMVC<Categorize>
 
             point=index;
             if(point==0)
-            {Navigator.pop(context);}
-            if(point==1)
+            {Navigator.pop(context);
+
+            }
+            if(point==1 &&   d.product.length!=0)
             {
               Navigator.push(context,MaterialPageRoute(builder :(context)
               {
-                //   return shopping_basket();
+
+                   return pageTrollery();
               }));
             }
           });},

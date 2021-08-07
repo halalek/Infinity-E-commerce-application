@@ -10,6 +10,7 @@ import 'package:structurepublic/src/controler/shared.dart';
 import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/elements/cardSection.dart';
 import 'package:structurepublic/src/pages/pageSold.dart';
+import 'package:structurepublic/src/pages/pageTrollery.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
@@ -97,6 +98,7 @@ class _PageMain extends StateMVC<PageMain> {
               ),
               // backgroundColor:Colors.white38,
             ),
+
           ],
           onTap: (index) {
             setState(() {
@@ -127,6 +129,7 @@ class _PageMain extends StateMVC<PageMain> {
                   ),
                 );
               }
+
             });
           },
         ));
