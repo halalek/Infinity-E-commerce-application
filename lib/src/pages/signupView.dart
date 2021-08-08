@@ -73,7 +73,7 @@ class _SignupMain extends StateMVC<SignupMain> {
                   height: 700,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/img/12222.png'),
+                        image: AssetImage('assets/img/hkl.PNG'),
                         fit: BoxFit.cover,
 
                       )
@@ -87,7 +87,7 @@ class _SignupMain extends StateMVC<SignupMain> {
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/img/light-11.png')
+                                  image: AssetImage('assets/img/light-2.png')
                               )
                           ),
                         ),
@@ -154,7 +154,7 @@ class _SignupMain extends StateMVC<SignupMain> {
                                       Container(
                                         margin: EdgeInsets.only(bottom: 10),
                                         child: Center(
-                                          child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                                          child: Text("Sign up", style: TextStyle(color: Colors.red[300], fontSize: 40, fontWeight: FontWeight.bold),),
                                         ),
 
                                       ),
@@ -171,13 +171,25 @@ class _SignupMain extends StateMVC<SignupMain> {
 
                                             hintText: 'Enter your name ',
                                             labelText: "Name",
+                                            labelStyle: TextStyle(color: Colors.red),
                                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: Icon(Icons.person),
+                                            suffixIcon: Icon(Icons.person,color: Colors.black38,),
                                             fillColor: Colors.white,
                                             enabledBorder:OutlineInputBorder(
                                               borderSide: const BorderSide(color: Colors.black, width: 2.0),
                                               borderRadius: BorderRadius.circular(15.0),
-                                            ),),
+                                            ),
+                                              focusedBorder:
+                                              UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                      Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+
+
+                                          ),
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Please Fill Name Input';
@@ -202,13 +214,25 @@ class _SignupMain extends StateMVC<SignupMain> {
 
                                             hintText: 'Enter your Email ',
                                             labelText: "Email",
+                                            labelStyle: TextStyle(color: Colors.red),
                                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: Icon(Icons.phone),
+                                            suffixIcon: Icon(Icons.email,color: Colors.black38,),
                                             fillColor: Colors.white,
                                             enabledBorder:OutlineInputBorder(
                                               borderSide: const BorderSide(color: Colors.black, width: 2.0),
                                               borderRadius: BorderRadius.circular(15.0),
-                                            ),),
+                                            ),
+
+                                              focusedBorder:
+                                              UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                      Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+
+                                          ),
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Please Fill Email Input';
@@ -228,6 +252,7 @@ class _SignupMain extends StateMVC<SignupMain> {
                                           obscureText: !_passwordVisible,
                                           decoration: InputDecoration(
                                             labelText: "password",
+                                            labelStyle: TextStyle(color: Colors.red),
                                             hintText: "Enter your password",
                                             floatingLabelBehavior: FloatingLabelBehavior.always,
                                             suffixIcon: IconButton(
@@ -236,7 +261,7 @@ class _SignupMain extends StateMVC<SignupMain> {
                                                 _passwordVisible
                                                     ? Icons.visibility
                                                     : Icons.visibility_off,
-
+color: Colors.black38,
                                               ),
                                               onPressed: () {
                                                 // Update the state i.e. toogle the state of passwordVisible variable
@@ -249,7 +274,18 @@ class _SignupMain extends StateMVC<SignupMain> {
                                             enabledBorder:OutlineInputBorder(
                                               borderSide: const BorderSide(color: Colors.black, width: 2.0),
                                               borderRadius: BorderRadius.circular(15.0),
-                                            ),),
+                                            ),
+                                              focusedBorder:
+                                              UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                      Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+
+
+                                          ),
 
                                           validator: (value) {
                                             if (value.isEmpty) {
@@ -273,8 +309,11 @@ class _SignupMain extends StateMVC<SignupMain> {
                                             borderRadius: BorderRadius.circular(10),
                                             gradient: LinearGradient(
                                                 colors: [
-                                                  Color.fromRGBO(143, 148, 251, 1),
-                                                  Color.fromRGBO(143, 148, 251, .6),
+                                                  // Color.fromRGBO(143, 148, 251, 1),
+                                                  // Color.fromRGBO(143, 148, 251, .6),
+
+                                                  Colors.red[300],
+                                                  Colors.red
                                                 ]
                                             )
                                         ),

@@ -44,7 +44,8 @@ class PageCategorizeController extends ControllerMVC {
     await repo.getCategorize(this.marketData).then((value) {
       setState((){
         listCategorize.addAll(value);
-
+for(int i=0;i<listCategorize.length;i++)
+  {listCategorize[i].nameMarket=marketData.nameAr;}
       }
 
       );

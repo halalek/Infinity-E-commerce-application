@@ -96,9 +96,6 @@ class CardCategorizeWidget extends StatelessWidget {
             child: RaisedButton(
               onPressed: () {
              Navigator.push(context, MaterialPageRoute(builder: (context) =>Products(categorizeData)) );
-
-
-
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(80.0),),

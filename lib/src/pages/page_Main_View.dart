@@ -19,6 +19,7 @@ class PageMain extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
+    bool comparison;
     return _PageMain();
   }
 }
@@ -36,7 +37,7 @@ class _PageMain extends StateMVC<PageMain> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          color: dark,
+        //  color: dark,
           child: ListView.builder(
             itemCount: _con.listSection.length,
             itemBuilder: (context, i) {

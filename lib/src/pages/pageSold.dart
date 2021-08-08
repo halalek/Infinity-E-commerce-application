@@ -44,7 +44,7 @@ class _PageSold extends StateMVC<PageSold> {
     return Scaffold(
         appBar: AppBar(
           title: Text(" العروض "),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).primaryColorDark,
         ),
         body:   ListView.builder(
             itemCount: _con.listSold.length,

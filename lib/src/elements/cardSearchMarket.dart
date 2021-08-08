@@ -1,75 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/categorizeView.dart';
 
-class CardMarketWidget extends StatelessWidget {
+class CardMarketSearch extends StatelessWidget {
   Color stateColor=Colors.white;
-  CardMarketWidget({Key key,this.marketData}) : super(key: key);
+  CardMarketSearch({Key key,this.marketData}) : super(key: key);
 
- final MarketData marketData;
+  final MarketData marketData;
 
 
- // PageMarketController ggg=new  PageMarketController();
+  // PageMarketController ggg=new  PageMarketController();
 
   @override
   Widget build(BuildContext context) {
-    if (!marketData.active)
+    if (marketData.state=="غير متصل ")
     {stateColor=Colors.black12;}
     return  Container(
       //      padding: EdgeInsets.fromLTRB(10,10,10,0),
-      height: 260,
+      height:100,
       width: double.maxFinite,
       child: Card(
         //  elevation: 5,
-          color: stateColor,
+        color: stateColor,
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: GestureDetector(child:Column(
           children:
           <Widget>[
 
-            // new SizedBox(
-            //   height: 200,
-            //   width: MediaQuery.of(context).size.width,
-            //
-            //   child:Image(image:CachedNetworkImageProvider(marketData.image),fit: BoxFit.cover),
-            //
-            //
-            //
-            // ),
 
-
-
-                Container(
-                    height: 160,
-                    width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-
-                    image: DecorationImage(
-                      image:CachedNetworkImageProvider(marketData.image),fit: BoxFit.cover
-                ,alignment: Alignment.topCenter,
-              ),
-            ),
-                  child: RatingBar(
-                    itemSize: 27,
-                    initialRating: marketData.rate.toDouble(),
-                    direction: Axis.horizontal,
-                    itemCount: 5,
-                    allowHalfRating: true,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                  ),
-                  alignment:Alignment.bottomRight,
-
-                ),
             Expanded(child: ListTile(
 
               leading:

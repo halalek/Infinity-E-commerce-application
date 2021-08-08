@@ -64,7 +64,7 @@ dependencies:
   highlight_text: ^0.7.2
   avatar_glow: ^1.2.0
   flutter_hsvcolor_picker: ^0.0.1
-
+  flutter_rating_bar: 1.2.0
 #  rename: ^1.2.0
 
 

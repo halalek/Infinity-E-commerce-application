@@ -13,6 +13,8 @@ class MarketData {
     this.timesTampClose,
     this.timesTampOpen,
     this.nameEn,
+    this.rate,
+    this.active
   });
 
   String image;
@@ -24,13 +26,19 @@ class MarketData {
   double long;
   int timesTampClose;
   int timesTampOpen;
+  String timeOpen;
+  String timeClose;
   bool hide;
   String nameAr;
   String id;
   String nameEn;
+  String state;
+  num rate;
+  bool active;
 
   factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
     image: json["image"] == null ? null : json["image"],
+    rate: json["rating"] == null ? null : json["rating"],
     imageIcon: json["image_icon"] == null ? null : json["image_icon"],
     hide: json["hide"] == null ? null : json["hide"],
     descriptionEn: json["description_en"] == null ? null : json["description_en"],
@@ -43,6 +51,7 @@ class MarketData {
     timesTampClose: json["timesTampClose"] == null ? null : json["timesTampClose"],
     timesTampOpen: json["timesTampOpen"] == null ? null : json["timesTampOpen"],
     nameEn: json["name_en"] == null ? null : json["name_en"],
+    active: json["active"] == null ? null : json["active"],
 
   );
 
@@ -60,5 +69,7 @@ class MarketData {
      "timesTampClose":timesTampClose == null ? null : timesTampClose,
      "timesTampOpen":timesTampOpen == null ? null : timesTampOpen,
      "name_en": nameEn == null ? null : nameEn,
+     "rating": rate == null ? null : rate,
+     "active":active == null ? null : active,
   };
 }

@@ -12,13 +12,14 @@ class ProductData {
     this.note,
     this.index,
   });
-int index;
+  int index;
   String image;
   bool hide;
   String nameAr;
   String note;
   int price;
   String nameEn;
+  String nameMarket;
   String description_ar;
   String description_en;
   String id_categorize;

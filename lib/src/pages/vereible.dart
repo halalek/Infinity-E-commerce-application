@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/controler/user_controller.dart';
 
-Color changecolor=Colors.blue[200] ;
+Color changecolor=Colors.red[200] ;
 Color dark=Colors.white ;
 Color darkAlert=Colors.white ;
 Color darkfont=Colors.black ;

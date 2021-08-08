@@ -10,6 +10,7 @@ import 'package:structurepublic/src/elements/cardStorySold.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/pages/pageFavority.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
+import 'package:structurepublic/src/pages/page_search.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
@@ -52,7 +53,7 @@ class _Page1 extends StateMVC<Page1> {
     return Scaffold(
       //     appBar: AppBar(
       //     title: Text("المطاعم"),
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       // ),
       body: RefreshIndicator(
           key: _refreshIndicatorKey,
@@ -78,7 +79,8 @@ class _Page1 extends StateMVC<Page1> {
             ),
 
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()) );
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => PageSearch()) );//basic
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PageSearch()));
                 }
             ),
             SizedBox(height: 10,),
@@ -357,9 +359,9 @@ class _Page1 extends StateMVC<Page1> {
                               shape: CutCornerShape(
                                   borderRadius: BorderRadius.circular(20)
                               ),
-                              child: CardFavoriteWidget(
-                                  productData: _con.listProductFav[index])
-                          )
+                              child: Container(child: CardFavoriteWidget(
+                                  productData: _con.listProductFav[index]),color: Colors.white,
+                              ),)
                     // Card(
                     // child: Center(child: Text('Dummy Card Text')),
                     // ),
@@ -407,6 +409,7 @@ class _Page1 extends StateMVC<Page1> {
   Widget productSug(List<ProductData> list) {
     if (list.length != 0) {
       return CarouselSlider(
+
         items: [
           // CardFavoriteWidget()
           Column(
@@ -421,13 +424,17 @@ class _Page1 extends StateMVC<Page1> {
                     itemBuilder: (BuildContext context,
                         int index) =>
                         ShapeOfView(
+
                             shape: CutCornerShape(
+
                                 borderRadius: BorderRadius.circular(
-                                    20)
+                                    20),
+
                             ),
-                            child:
-                            CardFavoriteWidget(productData: _con
-                                .listProductSug[index])
+
+                            child:Container(child: CardFavoriteWidget(productData: _con
+                                .listProductSug[index]),color: Colors.white,)
+
                         )
 
                 ),
@@ -447,6 +454,7 @@ class _Page1 extends StateMVC<Page1> {
           enableInfiniteScroll: false,
           // autoPlayAnimationDuration: Duration(milliseconds: 800),
           viewportFraction: 0.8,
+
         ),
       );
     }

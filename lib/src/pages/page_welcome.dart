@@ -25,7 +25,7 @@ class _WelcomePage extends State<WelcomePage> {
         //  footer: Text("Footer Text here "),
           decoration: const PageDecoration(
         //  pageColor:   Color.fromRGBO(143, 148, 251, .6),
-            titleTextStyle: TextStyle(color: Colors.lightBlue,fontSize: 30,fontWeight: FontWeight.bold)
+            titleTextStyle: TextStyle(color:Colors.redAccent ,fontSize: 30,fontWeight: FontWeight.bold)
           )
       ),
       PageViewModel(
@@ -35,7 +35,7 @@ class _WelcomePage extends State<WelcomePage> {
        // footer: Text("Footer Text  here "),
           decoration: const PageDecoration(
 
-              titleTextStyle: TextStyle(color: Colors.lightBlue,fontSize: 30,fontWeight: FontWeight.bold)
+              titleTextStyle: TextStyle(color: Colors.redAccent,fontSize: 30,fontWeight: FontWeight.bold)
           )
       ),
       PageViewModel(
@@ -44,7 +44,7 @@ class _WelcomePage extends State<WelcomePage> {
         body: "we show the easy way to shop around the world.\nJust stay at home with us",
           decoration: const PageDecoration(
             //pageColor: Colors.black12,
-              titleTextStyle: TextStyle(color: Colors.lightBlue,fontSize: 30,fontWeight: FontWeight.bold)
+              titleTextStyle: TextStyle(color: Colors.redAccent,fontSize: 30,fontWeight: FontWeight.bold)
           )
 
         // footer: Text("Footer Text  here "),
@@ -55,8 +55,8 @@ class _WelcomePage extends State<WelcomePage> {
         body: "Welcome to the infinity store",
    //     footer: Text("Footer Text  here "),
           decoration: const PageDecoration(
-            //pageColor: Colors.black12,
-              titleTextStyle: TextStyle(color: Colors.lightBlue,fontSize: 30,fontWeight: FontWeight.bold)
+
+              titleTextStyle: TextStyle(color: Colors.redAccent,fontSize: 30,fontWeight: FontWeight.bold)
           )
       ),
     ];
@@ -67,17 +67,19 @@ class _WelcomePage extends State<WelcomePage> {
       // appBar: AppBar(
       //   title: Text("Introduction Screen"),
       // ),
+
       body: IntroductionScreen(
+
         globalBackgroundColor: Colors.white,
         pages: getPages(),
         showNextButton: true,
         showSkipButton: true,
         skip: Text("Skip"),
         done: Text("Got it "),
+        dotsDecorator: DotsDecorator(activeColor: Colors.red),
         onDone: () {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => LoginMainPage() ) );
         },
-
       ),
     );
   }

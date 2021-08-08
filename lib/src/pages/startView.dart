@@ -65,10 +65,11 @@ class _Pagemain1 extends State<Pagemain1>
 
       // backgroundColor: Colors.black12,
       // imageBackground: new AssetImage('img/back.jpg') ,
-      image: Image.asset('assets/img/cardd.gif'),
+     // image: Image.asset('assets/img/cardd.gif'),
+        image: Image.asset('assets/img/gifgif.gif'),
       styleTextUnderTheLoader: new TextStyle(),
       photoSize: 150.0,
-      // loaderColor: Colors.red
+       loaderColor: Theme.of(context).primaryColorLight
     );
   }
 }
@@ -84,7 +85,7 @@ bool show=true;
   _StartMain() : super(UserController()) {
     // _con = controller;
     _con = controller;
-    _con.getUsers();
+   _con.getToken();
 
   }
 
@@ -254,6 +255,7 @@ bool show=true;
 
 
         bottomNavigationBar: BottomNavigationBar(
+
             currentIndex:  point,
             selectedFontSize: 15,
             selectedItemColor: Theme.of(context).primaryColorDark,

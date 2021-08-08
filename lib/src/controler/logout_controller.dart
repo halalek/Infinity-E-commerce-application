@@ -40,7 +40,7 @@ class _LogoutController extends State<LogoutController> {
         textColor: Colors.white,
         fontSize: 16.0
     );
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginMain(),),);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginMainPage(),),);
   }
 
 

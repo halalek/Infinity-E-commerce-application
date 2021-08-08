@@ -18,177 +18,143 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'loginEmail.dart';
 import 'page_Main_View.dart';
 
-class LoginMain extends StatefulWidget {
-  @override
-  _LoginMain createState() => _LoginMain();
-}
-
-class _LoginMain extends StateMVC<LoginMain> {
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  // UserController _con;
-  LoginController _loginrController;
-
-  _LoginMain() : super( LoginController()) {
-    // _con = controller;
-    _loginrController = controller;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login To My Account'),
-      ),
-
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-
-
-                TextFormField(
-                  obscureText: true,
-                  controller: _loginrController.phoneController,
-                  decoration: InputDecoration(
-                    hintText: 'Phone',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Phone Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.emailController,
-                  //_emailcontroller,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                    labelText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.email),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Email Input';
-                    }
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 25,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.passwordController,
-                  decoration: InputDecoration(
-                    labelText: "password",
-                    hintText: "Enter your password",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.lock),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Password Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.loginfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-                    }
-
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Signup',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.signupfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-
-                    }
-                  },
-                ),
-              ],
-            )),
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-// class FadeAnimation extends StatelessWidget {
-//   final double delay;
-//   final Widget child;
+// class LoginMain extends StatefulWidget {
+//   @override
+//   _LoginMain createState() => _LoginMain();
+// }
 //
-//   FadeAnimation(this.delay, this.child);
+// class _LoginMain extends StateMVC<LoginMain> {
+//
+//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+//
+//   // UserController _con;
+//   LoginController _loginrController;
+//
+//   _LoginMain() : super( LoginController()) {
+//     // _con = controller;
+//     _loginrController = controller;
+//   }
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     Firebase.initializeApp();
+//   }
+//
+//
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     // final tween = MultiTrackTween([
-//     //   Track("opacity").add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
-//     //   Track("translateY").add(
-//     //       Duration(milliseconds: 500), Tween(begin: -30.0, end: 0.0),
-//     //       curve: Curves.easeOut)
-//     // ]);
 //
-//     return ControlledAnimation(
-//       delay: Duration(milliseconds: (500 * delay).round()),
-//       //duration: tween.duration,
-//       //tween: tween,
-//       child: child,
-//       builderWithChild: (context, child, animation) => Opacity(
-//         opacity: animation["opacity"],
-//         child: Transform.translate(
-//             offset: Offset(0, animation["translateY"]),
-//             child: child
-//         ),
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Login To My Account'),
+//       ),
+//
+//       body: Container(
+//         padding: EdgeInsets.all(16),
+//         child: Form(
+//             key: _formKey,
+//             child: Column(
+//               children: <Widget>[
+//
+//
+//                 TextFormField(
+//                   obscureText: true,
+//                   controller: _loginrController.phoneController,
+//                   decoration: InputDecoration(
+//                     hintText: 'Phone',
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Phone Input';
+//                     }
+//
+//                     return null;
+//                   },
+//                 ),
+//
+//                 SizedBox(
+//                   height: 20,
+//                 ),
+//
+//                 TextFormField(
+//                   controller: _loginrController.emailController,
+//                   //_emailcontroller,
+//                   decoration: InputDecoration(
+//                     hintText: 'Enter your email',
+//                     labelText: "Email",
+//                     floatingLabelBehavior: FloatingLabelBehavior.always,
+//                     suffixIcon: Icon(Icons.email),
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Email Input';
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//
+//                 SizedBox(
+//                   height: 25,
+//                 ),
+//
+//                 TextFormField(
+//                   controller: _loginrController.passwordController,
+//                   decoration: InputDecoration(
+//                     labelText: "password",
+//                     hintText: "Enter your password",
+//                     floatingLabelBehavior: FloatingLabelBehavior.always,
+//                     suffixIcon: Icon(Icons.lock),
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Password Input';
+//                     }
+//
+//                     return null;
+//                   },
+//                 ),
+//
+//                 RaisedButton(
+//                   color: Colors.blue,
+//                   child: Text(
+//                     'Login',
+//                     style: TextStyle(color: Colors.white),
+//                   ),
+//                   onPressed: () async {
+//                     if (_formKey.currentState.validate()) {
+//
+//                       _loginrController.loginfirebase();
+//                       Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
+//                     }
+//
+//                   },
+//                 ),
+//
+//                 RaisedButton(
+//                   color: Colors.blue,
+//                   child: Text(
+//                     'Signup',
+//                     style: TextStyle(color: Colors.white),
+//                   ),
+//                   onPressed: () async {
+//                     if (_formKey.currentState.validate()) {
+//
+//                       _loginrController.signupfirebase();
+//                       Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
+//
+//                     }
+//                   },
+//                 ),
+//               ],
+//             )),
 //       ),
 //     );
 //   }
 // }
+//
+//
 
 
 class LoginMainPage extends StatefulWidget {
@@ -218,7 +184,7 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                   height: 620,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/img/pp10.PNG'),
+                          image: AssetImage('assets/img/pp7.PNG'),
                           fit: BoxFit.cover,
 
                       )
@@ -257,7 +223,8 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                         child:  Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/img/light-2.png'),
+                                  image: AssetImage('assets/img/light-22.png',),
+
                               )
                           ),
                         )),
@@ -280,7 +247,7 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                               padding: EdgeInsets.all(5),
 
                               decoration: BoxDecoration(
-                                  color:   Color.fromRGBO(143, 148, 251, .6),
+                                  color:  Colors.black12,
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
@@ -318,7 +285,7 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                                         // )
                                     ),
                                     child: Center(
-                                      child: Text("Login Email", style: TextStyle(color:Color.fromRGBO(143, 148, 251, 1), fontWeight: FontWeight.bold,fontSize: 20),),
+                                      child: Text("Login Email", style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold,fontSize: 20),),
                                     ),
                                   ),
                                 onTap: () {
@@ -341,7 +308,7 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                                     //     )
                                     // ),
                                     child: Center(
-                                      child: Text("OR", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 10),),
+                                      child: Text("OR", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold,fontSize: 10),),
                                     ),
                                   ),
                               InkWell(child:
@@ -351,8 +318,10 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                                         borderRadius: BorderRadius.circular(10),
                                         gradient: LinearGradient(
                                             colors: [
-                                              Color.fromRGBO(143, 148, 251, 1),
-                                              Color.fromRGBO(143, 148, 251, .6),
+                                            //  Color.fromRGBO(143, 148, 251, 1),
+                                             // Color.fromRGBO(143, 148, 251, .6),
+                                              Colors.red[300],
+                                             Colors.redAccent
                                             ]
                                         )
                                     ),
@@ -363,7 +332,7 @@ class _LoginMainPage extends StateMVC<LoginMainPage> {
                                 onTap: () {
 
                                     //_loginrController.loginfirebase();
-                                    Navigator.push(context, MaterialPageRoute(builder: ( context) => LoginNumber() ) );
+                                    Navigator.push(context, MaterialPageRoute(builder: ( context) => LoginScreen() ) );
 
 
                                 },

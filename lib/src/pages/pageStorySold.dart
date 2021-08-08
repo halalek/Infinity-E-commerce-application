@@ -47,7 +47,7 @@ class _MoreStoriesState extends StateMVC<MoreStories> {
           // if(i!=0)
           //   {i++;}
 
-          if (parcent > 1 && (i++) < finit)   {
+          if (parcent > 1 && (++i) < finit)   {
             _timer.cancel();
            // ++i;
            // Navigator.pop(context);
@@ -161,7 +161,7 @@ class _MoreStoriesState extends StateMVC<MoreStories> {
                   child: GestureDetector(child:
                   Icon(Icons.local_grocery_store,size: 40,color: Theme.of(context).primaryColorDark,),
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SoldDetail(_soldData)));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SoldDetail(_soldData)));
                     },
                   ),
                 ),

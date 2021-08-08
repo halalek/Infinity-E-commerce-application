@@ -28,12 +28,40 @@ Future<List<SoldData>> getSold() async {
   List<SoldData> list = [];
   await FirebaseFirestore.instance
       .collection("sold").where("hide",isEqualTo:false).get()
-      .then((value) {
+      .then((value) async {
     for(int i=0;i<value.docs.length;i++){
       list.add(SoldData.fromJson(value.docs[i].data()));
-    }}
+
+
+      // SoldData soldData = SoldData.fromJson(value.docs[i].data());
+      //
+      // if (DateTime.now().microsecondsSinceEpoch > DateTime.parse(soldData.timeSend)
+      //     .add(Duration(days: soldData.longDay)).microsecondsSinceEpoch) {
+      //   await hideSold(soldData);
+      //   soldData.hide=true;
+      //   list.add(SoldData.fromJson(value.docs[i].data()));
+      // } else if (DateTime.now().microsecondsSinceEpoch<DateTime.parse(soldData.timeSend)
+      //     .add(Duration(days: soldData.longDay)).microsecondsSinceEpoch) {
+      //   print("asasaaaaaaaaaaaaaaaaaaaa");
+      //   list.add(SoldData.fromJson(value.docs[i].data()));
+      // }
+    }
+
+      }
   ).catchError((e) {});
 
   return list;
 }
+
+
+// Future hideSold(SoldData soldData) async {
+//   print("222dddddddddddddddddddddddddddddddddddddd" + soldData.id);
+//   soldData.hide = true;
+//   await FirebaseFirestore.instance
+//       .collection("sold")
+//       .doc(soldData.id)
+//       .set(soldData.toJson())
+//       .then((value) {})
+//       .catchError((e) {});
+// }
 

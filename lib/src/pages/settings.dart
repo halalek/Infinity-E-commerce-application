@@ -280,7 +280,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     width: 500,
                     child: Center(
                       child:ColorPicker(
-                        color: Colors.blue,
+                        color: Colors.red,
                         onChanged: (value){
                           setState(() {
 

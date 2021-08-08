@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
+import 'package:structurepublic/src/pages/comparison.dart';
 import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
 
 
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -30,7 +30,6 @@ class CardProductDetailWidget extends StatefulWidget {
 
 class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    _CardProductDetailWidget(this.productData) ;
-
 
    void updataNote(String note){
      setState(() =>_note.text = note);
@@ -258,7 +257,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           GestureDetector(child: Container(
-                                            width: 100,
+                                            width: 80,
                                             padding: EdgeInsets.all(10),
                                             decoration: BoxDecoration(
                                               color: Colors.black45,
@@ -270,9 +269,28 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                           ),
                                             onTap: (){
                                               Scaffold.of(context).showSnackBar(_snackBar1);
+                                           //   Navigator.push(context, MaterialPageRoute(builder: (context) =>Comparison(productData)) );
                                             },
                                           ),
-
+                                          GestureDetector(child: Container(
+                                            width: 60,
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: Colors.black45,
+                                              borderRadius: BorderRadius.circular(8.0),
+                                            ),
+                                            child:
+                                            Center(child: Text("مقارنة",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                                            ),
+                                          ),
+                                            onTap: (){
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Comparison(productData)) );
+                                            },
+                                          ),
                                           InkWell(child: Container(
 
                                             width: 50,

@@ -38,14 +38,10 @@ class  _Categorize extends StateMVC<Categorize>
   //CategorizeDetail categorizeDetail ;
   PageProductController _con ;
 
-  // _ProductDetail(this.marketData) : super(PageProductController(marketData)){
-  //   PageCategorizeController(marketData);
-  //   _categorizeController = controller;
-  //   _con = controller;
-  // }
 
   _Categorize(this.marketData) : super(PageCategorizeController(marketData),) {
     _categorizeController = controller;
+
     //_con= _categorizeDetail._get();
 
 
@@ -61,6 +57,7 @@ class  _Categorize extends StateMVC<Categorize>
   // _ProductDetail(this.pointt);
   Decoration  _decoration1=BoxDecoration(
     color: Colors.black12,
+
   );
   Decoration  _decoration=BoxDecoration(
     color: Colors.white24,border: Border(
@@ -72,6 +69,7 @@ class  _Categorize extends StateMVC<Categorize>
 
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return Scaffold(
         body: ListView(
@@ -167,12 +165,12 @@ class  _Categorize extends StateMVC<Categorize>
                     Container(
                       height: 130,
                       width: MediaQuery.of(context).size.width,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Search query here... ",
-                          icon: Icon(Icons.search),
-                        ),
-                      ),
+                      child:  Text(marketData.timeOpen +"        " + marketData.timeClose,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w800),textAlign: TextAlign.end,)
+                        // decoration: InputDecoration(
+                        //   hintText: "Search query here... ",
+                        //   icon: Icon(Icons.search),
+                        // ),
+                      ,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image:CachedNetworkImageProvider(marketData.image),
@@ -302,8 +300,10 @@ class  _Categorize extends StateMVC<Categorize>
             }
           });},
         ));
-//
+
   }
+
+
 }
 
 

@@ -4,7 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:structurepublic/src/models/user.dart';
 import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
+import 'package:structurepublic/src/pages/loginNumber.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
+import 'package:structurepublic/src/pages/pageRating.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/page_welcome.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
@@ -28,15 +30,27 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
+  // var id=preferences.getString('userID');
+  // print("aaaaaaaaaaaaaaaaaaa")
 var i=1;
   //
  //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
   await Firebase.initializeApp();
-  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));//basic
+  // runApp(MaterialApp( theme:
+  //      ThemeData(
+  //     primaryColorDark: Colors.redAccent,
+  //     primaryColorLight: Colors.red[300],),
+  //        debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));//basic
 
 
-
-  runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  Pagemain1()));
+runApp(MaterialApp( theme:
+       ThemeData(
+      primaryColorDark: Colors.redAccent,
+      primaryColorLight: Colors.red[300],
+       backgroundColor: Colors.red[300] ),
+         debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp()));//basic
+  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home : LoginScreen()));//MyAppo//Pagemain1()
+  //runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  AuthService().handleAuth(),));//number
 
 
 }
@@ -70,8 +84,7 @@ class _MyAppState extends State<MyApp> {
               //debugShowMaterialGrid: false,
               title: "",
               home:
-            //  PageMarket(),
-              Pagemain1(),
+              Pagemain1(),//basic
               //StartMain(),
               //LoginMain(),
               //MainStateWidget(),
@@ -85,9 +98,12 @@ class _MyAppState extends State<MyApp> {
                 GlobalWidgetsLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
-              theme: _setting.brightness.value == Brightness.light
+              theme:
+              _setting.brightness.value == Brightness.light
                   ? ThemeData(
                 fontFamily: 'Poppins',
+                primaryColorDark: Colors.red[300],
+                primaryColorLight: Colors.deepOrange,
                 primaryColor: Colors.white,
                 floatingActionButtonTheme: FloatingActionButtonThemeData(elevation: 0, foregroundColor: Colors.white),
                 brightness: Brightness.light,

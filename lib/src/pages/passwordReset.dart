@@ -70,7 +70,7 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
                   height: 700,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/img/12222.png'),
+                        image: AssetImage("assets/img/hkl.PNG"),
                         fit: BoxFit.cover,
 
                       )
@@ -84,7 +84,7 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/img/light-11.png')
+                                  image: AssetImage('assets/img/light-2.png')
                               )
                           ),
                         ),
@@ -151,7 +151,7 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
                                       Container(
                                         margin: EdgeInsets.only(bottom: 10),
                                         child: Center(
-                                          child: Text("Password Reset ", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),),
+                                          child: Text("Password Reset ", style: TextStyle(color: Colors.red[300], fontSize: 25, fontWeight: FontWeight.bold),),
                                         ),
 
                                       ),
@@ -168,14 +168,26 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
                                           decoration: InputDecoration(
 
                                             hintText: 'Enter your Email ',
+                                            labelStyle: TextStyle(color: Colors.red),
                                             labelText: "Email",
                                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: Icon(Icons.email),
+                                            suffixIcon: Icon(Icons.email,color: Colors.black38,),
                                             fillColor: Colors.white,
                                             enabledBorder:OutlineInputBorder(
                                               borderSide: const BorderSide(color: Colors.black, width: 2.0),
                                               borderRadius: BorderRadius.circular(15.0),
-                                            ),),
+                                            ),
+                                              focusedBorder:
+                                              UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                      Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+
+
+                                          ),
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Please Fill Email Input';
@@ -197,8 +209,10 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
                                             borderRadius: BorderRadius.circular(10),
                                             gradient: LinearGradient(
                                                 colors: [
-                                                  Color.fromRGBO(143, 148, 251, 1),
-                                                  Color.fromRGBO(143, 148, 251, .6),
+                                                  // Color.fromRGBO(143, 148, 251, 1),
+                                                  // Color.fromRGBO(143, 148, 251, .6),
+                                                  Colors.red[300],
+                                                  Colors.red
                                                 ]
                                             )
                                         ),

@@ -40,11 +40,10 @@ class  _PageMarket extends StateMVC<PageMarket>
     return Scaffold(
       appBar: AppBar(
         title: Text(sectionData.nameAr),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColorDark,
 
       ),
        body: ListView.builder(
-
          itemCount: _con2.listMarket.length,
          // itemBuilder: (context, i) {
          //      return CardMarketWidget(marketData: _con2.listMarket[i],);

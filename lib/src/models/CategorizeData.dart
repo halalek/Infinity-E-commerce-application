@@ -13,6 +13,7 @@ class CategorizeData {
   String nameEn;
   String image;
   bool hide;
+  String nameMarket;
      // ignore: non_constant_identifier_names
 
   factory CategorizeData.fromJson(Map<String, dynamic> json) => CategorizeData(

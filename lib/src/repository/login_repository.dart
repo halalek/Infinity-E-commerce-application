@@ -67,7 +67,7 @@ Future<void> updateUser(Userss user ) async {
       {"name":user.name,
         "email":user.email,
         "phone":user.phone,
-        "longe":user.long,
+        "long":user.long,
         "lat":user.lat,
         "image":user.image,
         "token":tokenn,
@@ -104,7 +104,7 @@ Future<Userss> addUser() async {
         "role":userss.role,
          "image":userss.image,
          "lat":userss.lat,
-         "longe":userss.long,
+         "long":userss.long,
          "timesTamp" :userss.timesTamp,
 
 
@@ -123,7 +123,7 @@ Future<void> addtoken()async
 
 {
  final FirebaseMessaging _fcm=FirebaseMessaging();
-await  _fcm.getToken().then((value) {print("qqqqqqqqqqqqq"  + value );
+await  _fcm.getToken().then((value) {print("qqqqqqqqqqqqq"  + value.toString() );
  tokenn=value.toString();});
 }
 
@@ -154,6 +154,7 @@ Future<void> deleteUser(String userssid) async {
 //SharedPref sharedPref=SharedPref();
 
 Future<Userss> getUser() async {
+  //await addtokenuser();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
   //Userss user =Userss.fromJson(await sharedPref.read('user')) ;
@@ -161,14 +162,16 @@ Future<Userss> getUser() async {
 
   if(user==null)
     {
+      print("haaaaaaaaaaaaaaaaaaaaa;");
       await FirebaseFirestore.instance
-          .collection("users").doc(userss.id)
+          .collection("users").doc(userss.id)//.where("id",isEqualTo:userss.id.toString()).where("role",isEqualTo:"admin")
           .get()
           .then((value) {
         users= Userss.fromJson(value.data());
 
       }
       );
+
       return users;
     }
 

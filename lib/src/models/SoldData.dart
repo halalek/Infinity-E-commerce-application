@@ -15,7 +15,8 @@ class SoldData {
     this.price,
     this.index,
     this.price_last,
-    this.image_icon
+    this.image_icon,
+    this.timeSend
   });
 
   String description_ar;
@@ -34,8 +35,10 @@ class SoldData {
   int price;
   int price_last;
   String image_icon;
+  String timeSend;
   factory SoldData.fromJson(Map<String, dynamic> json) => SoldData(
     timesTamp: json["timesTamp"] == null ? null : json["timesTamp"],
+    timeSend: json["timeSend"] == null ? null : json["timeSend"],
     description_ar: json["description_ar"] == null ? null : json["description_ar"],
     description_en: json["description_en"] == null ? null : json["description_en"],
     hide: json["hide"] == null ? null : json["hide"],
@@ -54,6 +57,7 @@ class SoldData {
 
   Map<String, dynamic> toJson() => {
     "timesTamp": timesTamp == null ? null : timesTamp,
+    "timeSend": timeSend == null ? null : timeSend,
     "description_ar":description_ar == null ? null : description_ar,
     "description_en": description_en == null ? null : description_en,
     "hide":hide == null ? null : hide,

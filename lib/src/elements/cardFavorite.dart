@@ -83,10 +83,12 @@ class CardFavoriteWidget extends StatelessWidget {
 
                   InkWell(
                 child:  Container(
+
                   //    width:110,
                   margin: EdgeInsets.only(left: 6.0,right: 6.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
+
                   ),
                   child: Image(image:CachedNetworkImageProvider(productData.image),fit: BoxFit.cover,width: 125, height: 100,),
                 ),
@@ -106,6 +108,7 @@ class CardFavoriteWidget extends StatelessWidget {
             Row(children: [
               Container(
                 // margin: EdgeInsets.only(left: 15),
+
                 child: Center(
                   child: Text(
                     productData.nameAr,
@@ -120,6 +123,7 @@ class CardFavoriteWidget extends StatelessWidget {
 
             ]),
           ],
+
       );
 
 // return Column(

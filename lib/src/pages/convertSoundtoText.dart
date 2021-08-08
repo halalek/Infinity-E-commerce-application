@@ -98,6 +98,7 @@ class _MyAppState extends State<MyAppcon> {
                 //     style: TextStyle(fontSize: 22.0),
                 //   ),
                 // ),
+
                 Column(
                     children: <Widget>[
                       Text("",style: TextStyle(fontSize: 50),),
@@ -161,7 +162,7 @@ class _MyAppState extends State<MyAppcon> {
 
           Container(
             padding: EdgeInsets.symmetric(vertical: 20),
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).primaryColorDark,
             child: Center(
               child: speech.isListening
                   ? Text(
@@ -187,7 +188,9 @@ class _MyAppState extends State<MyAppcon> {
             ),
           ),
             onTap: (){
-            Navigator.pop(context,lastWords);
+            var parts=lastWords.split('-');
+            var perfix=parts[0].trim();
+            Navigator.pop(context, perfix);
            //   Scaffold.of(context).showSnackBar(_snackBar1);
             },
           ),
@@ -207,7 +210,8 @@ class _MyAppState extends State<MyAppcon> {
         localeId: _currentLocaleId,
         onSoundLevelChange: soundLevelListener,
         cancelOnError: true,
-        listenMode: ListenMode.confirmation);
+        listenMode: ListenMode.confirmation
+    );
     setState(() {});
   }
 

@@ -23,149 +23,127 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'page_Main_View.dart';
-
-
-
-class LoginMain extends StatefulWidget {
-  @override
-  _LoginMain createState() => _LoginMain();
-}
-
-class _LoginMain extends StateMVC<LoginMain> {
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  // UserController _con;
-  LoginController _loginrController ;
-
-  _LoginMain() : super( LoginController()) {
-    // _con = controller;
-    _loginrController = controller;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Firebase.initializeApp();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login To My Account'),
-      ),
-
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-
-
-                TextFormField(
-                  obscureText: true,
-                  controller: _loginrController.phoneController,
-                  decoration: InputDecoration(
-                    hintText: 'Phone',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Phone Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.emailController,
-                  //_emailcontroller,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your email',
-                    labelText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.email),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Email Input';
-                    }
-                    return null;
-                  },
-                ),
-
-                SizedBox(
-                  height: 25,
-                ),
-
-                TextFormField(
-                  controller: _loginrController.passwordController,
-                  decoration: InputDecoration(
-                    labelText: "password",
-                    hintText: "Enter your password",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    suffixIcon: Icon(Icons.lock),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Fill Password Input';
-                    }
-
-                    return null;
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.loginfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-                    }
-
-                  },
-                ),
-
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Signup',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-
-                      _loginrController.signupfirebase();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-
-                    }
-                  },
-                ),
-              ],
-            )),
-      ),
-    );
-  }
-}
-
-
-
-
-
+//
+// class LoginMain extends StatefulWidget {
+//   @override
+//   _LoginMain createState() => _LoginMain();
+// }
+//
+// class _LoginMain extends StateMVC<LoginMain> {
+//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+//
+//   // UserController _con;
+//   LoginController _loginrController;
+//
+//   _LoginMain() : super(LoginController()) {
+//     // _con = controller;
+//     _loginrController = controller;
+//   }
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     Firebase.initializeApp();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Login To My Account'),
+//       ),
+//       body: Container(
+//         padding: EdgeInsets.all(16),
+//         child: Form(
+//             key: _formKey,
+//             child: Column(
+//               children: <Widget>[
+//                 TextFormField(
+//                   obscureText: true,
+//                   controller: _loginrController.phoneController,
+//                   decoration: InputDecoration(
+//                     hintText: 'Phone',
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Phone Input';
+//                     }
+//
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(
+//                   height: 20,
+//                 ),
+//                 TextFormField(
+//                   controller: _loginrController.emailController,
+//                   //_emailcontroller,
+//                   decoration: InputDecoration(
+//                     hintText: 'Enter your email',
+//                     labelText: "Email",
+//                     floatingLabelBehavior: FloatingLabelBehavior.always,
+//                     suffixIcon: Icon(Icons.email),
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Email Input';
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(
+//                   height: 25,
+//                 ),
+//                 TextFormField(
+//                   controller: _loginrController.passwordController,
+//                   decoration: InputDecoration(
+//                     labelText: "password",
+//                     hintText: "Enter your password",
+//                     floatingLabelBehavior: FloatingLabelBehavior.always,
+//                     suffixIcon: Icon(Icons.lock),
+//                   ),
+//                   validator: (value) {
+//                     if (value.isEmpty) {
+//                       return 'Please Fill Password Input';
+//                     }
+//
+//                     return null;
+//                   },
+//                 ),
+//                 RaisedButton(
+//                   color: Colors.blue,
+//                   child: Text(
+//                     'Login',
+//                     style: TextStyle(color: Colors.white),
+//                   ),
+//                   onPressed: () async {
+//                     if (_formKey.currentState.validate()) {
+//                       _loginrController.loginfirebase();
+//                       Navigator.pushReplacement(context,
+//                           MaterialPageRoute(builder: (context) => StartMain()));
+//                     }
+//                   },
+//                 ),
+//                 RaisedButton(
+//                   color: Colors.blue,
+//                   child: Text(
+//                     'Signup',
+//                     style: TextStyle(color: Colors.white),
+//                   ),
+//                   onPressed: () async {
+//                     if (_formKey.currentState.validate()) {
+//                       _loginrController.signupfirebase();
+//                       Navigator.pushReplacement(context,
+//                           MaterialPageRoute(builder: (context) => StartMain()));
+//                     }
+//                   },
+//                 ),
+//               ],
+//             )),
+//       ),
+//     );
+//   }
+// }
 
 // class FadeAnimation extends StatelessWidget {
 //   final double delay;
@@ -198,37 +176,32 @@ class _LoginMain extends StateMVC<LoginMain> {
 //   }
 // }
 
-
-
-
 class LoginEmail extends StatefulWidget {
   @override
-  _LoginEmail createState() =>  _LoginEmail();
+  _LoginEmail createState() => _LoginEmail();
 }
-
 
 class _LoginEmail extends StateMVC<LoginEmail> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool  _passwordVisible;
-
+  bool _passwordVisible;
 
   // UserController _con;
   LoginController _loginrController;
 
-  _LoginEmail() : super( LoginController()) {
+  _LoginEmail() : super(LoginController()) {
     // _con = controller;
     _loginrController = controller;
   }
+
   @override
   void initState() {
     super.initState();
     _passwordVisible = false;
     Firebase.initializeApp();
   }
+
   @override
-
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -236,14 +209,12 @@ class _LoginEmail extends StateMVC<LoginEmail> {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: 620,
+                  height: 640,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/img/12222.png'),
-                        fit: BoxFit.cover,
-
-                      )
-                  ),
+                    image: AssetImage('assets/img/hkl.PNG'),
+                    fit: BoxFit.cover,
+                  )),
                   child: Stack(
                     children: <Widget>[
                       Positioned(
@@ -253,9 +224,7 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/img/light-11.png')
-                              )
-                          ),
+                                  image: AssetImage('assets/img/light-2.png'))),
                         ),
                       ),
                       Positioned(
@@ -265,9 +234,7 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage('assets/img/light-2.png')
-                              )
-                          ),
+                                  image: AssetImage('assets/img/light-2.png'))),
                         ),
                       ),
                       Positioned(
@@ -275,12 +242,11 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                           //  top: 40,
                           width: 80,
                           height: 110,
-                          child:  Container(
+                          child: Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage('assets/img/light-2.png'),
-                                )
-                            ),
+                              image: AssetImage('assets/img/light-2.png'),
+                            )),
                           )),
 
                       // Positioned(
@@ -293,36 +259,37 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                       // ),
 
                       Padding(
-                        padding: EdgeInsets.only(left:30.0,top:220,right: 30),
-                        child:
-                        Column(
+                        padding:
+                            EdgeInsets.only(left: 30.0, top: 220, right: 30),
+                        child: Column(
                           children: <Widget>[
                             Container(
                                 padding: EdgeInsets.all(5),
-
                                 decoration: BoxDecoration(
                                     color: Colors.black12,
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Color.fromRGBO(143, 148, 251, .2),
+                                          color:
+                                              Color.fromRGBO(143, 148, 251, .2),
                                           blurRadius: 20.0,
-                                          offset: Offset(0, 10)
-                                      )
-                                    ]
-                                ),
-
-                                child:Form(
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Form(
                                   key: _formKey,
-                                  child:
-                                  Column(
+                                  child: Column(
                                     children: <Widget>[
                                       Container(
                                         margin: EdgeInsets.only(bottom: 10),
                                         child: Center(
-                                          child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                                          child: Text(
+                                            "Login",
+                                            style: TextStyle(
+                                                color: Colors.red[300],
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-
                                       ),
                                       Container(
                                         padding: EdgeInsets.all(8.0),
@@ -330,22 +297,39 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                         //     border: Border(bottom: BorderSide(color: Colors.grey[100]))
                                         // ),
                                         child: TextFormField(
-                                          keyboardType: TextInputType.emailAddress,
-                                          controller: _loginrController.emailController,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          controller:
+                                              _loginrController.emailController,
                                           // inputFormatters: <TextInputFormatter>[
                                           //   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                                           // ],
                                           decoration: InputDecoration(
-                                            hintText: 'Enter your Email',
-                                            labelText: "Email",
-
-                                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: Icon(Icons.email),
-                                            fillColor: Colors.white,
-                                            enabledBorder:OutlineInputBorder(
-                                              borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                                              borderRadius: BorderRadius.circular(15.0),
-                                            ),),
+                                              hintText: 'Enter your Email',
+                                              labelText: "Email",
+                                              labelStyle:
+                                                  TextStyle(color: Colors.red),
+                                              floatingLabelBehavior:
+                                                  FloatingLabelBehavior.always,
+                                              suffixIcon: Icon(Icons.email,
+                                                  color: Colors.black38),
+                                              fillColor: Colors.white,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black,
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+                                          ),
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Please Fill Email Input';
@@ -353,8 +337,6 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                             if (!value.isValidEmail) {
                                               return 'Enter the Email correctly';
                                             }
-
-
                                             return null;
                                           },
                                         ),
@@ -363,127 +345,164 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                         padding: EdgeInsets.all(8.0),
                                         child: TextFormField(
                                           obscureText: !_passwordVisible,
-                                          controller: _loginrController.passwordController,
+                                          controller: _loginrController
+                                              .passwordController,
                                           decoration: InputDecoration(
-                                            labelText: "password",
-                                            hintText: "Enter your password",
-                                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                                            suffixIcon: IconButton(
-                                              icon: Icon(
-                                                // Based on passwordVisible state choose the icon
-                                                _passwordVisible
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-
+                                              labelText: "password",
+                                              labelStyle:
+                                                  TextStyle(color: Colors.red),
+                                              hintText: "Enter your password",
+                                              floatingLabelBehavior:
+                                                  FloatingLabelBehavior.always,
+                                              suffixIcon: IconButton(
+                                                icon: Icon(
+                                                  // Based on passwordVisible state choose the icon
+                                                  _passwordVisible
+                                                      ? Icons.visibility
+                                                      : Icons.visibility_off,
+                                                  color: Colors.black38,
+                                                ),
+                                                onPressed: () {
+                                                  // Update the state i.e. toogle the state of passwordVisible variable
+                                                  setState(() {
+                                                    _passwordVisible =
+                                                        !_passwordVisible;
+                                                  });
+                                                },
                                               ),
-                                              onPressed: () {
-                                                // Update the state i.e. toogle the state of passwordVisible variable
-                                                setState(() {
-                                                  _passwordVisible = !_passwordVisible;
-                                                });
-                                              },
-                                            ),
-                                            fillColor: Colors.white,
-                                            enabledBorder:OutlineInputBorder(
-                                              borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                                              borderRadius: BorderRadius.circular(15.0),
-                                            ),),
-
+                                              fillColor: Colors.white,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black,
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black38)),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38))
+                                          ),
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               return 'Please Fill Password Input';
                                             }
-                                            if (value.length<8 || value.length>15) {
-                                              return  'password must contain between 8 and 15 characters';
+                                            if (value.length < 8 ||
+                                                value.length > 15) {
+                                              return 'password must contain between 8 and 15 characters';
                                             }
                                             return null;
                                           },
                                         ),
                                       ),
-
-                                      SizedBox(height: 10,),
-                                      InkWell(child:
-                                      Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            gradient: LinearGradient(
-                                                colors: [
-                                                  Color.fromRGBO(143, 148, 251, 1),
-                                                  Color.fromRGBO(143, 148, 251, .6),
-                                                ]
-                                            )
-                                        ),
-                                        child: Center(
-                                          child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                                        ),
+                                      SizedBox(
+                                        height: 10,
                                       ),
+                                      InkWell(
+                                        child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              gradient: LinearGradient(colors: [
+                                                // Color.fromRGBO(143, 148, 251, 1),
+                                                // Color.fromRGBO(143, 148, 251, .6),
+                                                Colors.red[300],
+                                                Colors.red
+                                              ])),
+                                          child: Center(
+                                            child: Text(
+                                              "Login",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
                                         onTap: () async {
-                                          if (_formKey.currentState.validate()) {
-                                           // new VarifyController(_loginrController).Checkemaill();
-                                              _loginrController.loginfirebase() ;
+                                          if (_formKey.currentState
+                                              .validate()) {
+                                            // new VarifyController(_loginrController).Checkemaill();
+                                            _loginrController.loginfirebase();
 
                                             // _loginrController.Checkemaill() ;
-                                              }
+                                          }
 
-                                            //_loginrController.loginfirebase();
-                                           // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
-                                            //SignupMain
-
-
+                                          //_loginrController.loginfirebase();
+                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
+                                          //SignupMain
                                         },
                                       ),
                                     ],
                                   ),
-                                )
+                                )),
+                            SizedBox(
+                              height: 20,
                             ),
-                            SizedBox(height: 20,),
-                            Row(children: [
-
-                              Text("   Don't have an account?   ", style: TextStyle(color: Colors.black,fontSize: 15),),
-                              InkWell(
-                                child:    Text("Sign up", style: TextStyle(color: Colors.purple,fontSize: 17,fontWeight: FontWeight.bold),),
-                                onTap: () {
-
-
-                                  //_loginrController.loginfirebase();
-                                  Navigator.push(context, MaterialPageRoute(builder: ( context) => SignupMain() ) );
-                                  //SignupMain
-
-                                },
-                              )
-                            ],),
-                            SizedBox(height:12,),
-                            Row(children: [
-
-                              Text("   Forgot your Password ?  ", style: TextStyle(color: Colors.black,fontSize: 15),),
-                              InkWell(
-                                child:    Text("Remember me", style: TextStyle(color: Colors.purple,fontSize: 15,fontWeight: FontWeight.bold),),
-                                onTap: () {
-
-
-                                  //_loginrController.loginfirebase();
-                                  Navigator.push(context, MaterialPageRoute(builder: ( context) => PasswordResetMain() ) );
-                                  //SignupMain
-
-                                },
-
-
-                              )
-
-                            ],),
+                            Row(
+                              children: [
+                                Text(
+                                  "   Don't have an account?   ",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15),
+                                ),
+                                InkWell(
+                                  child: Text(
+                                    "Sign up",
+                                    style: TextStyle(
+                                        color: Colors.red[400],
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  onTap: () {
+                                    //_loginrController.loginfirebase();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignupMain()));
+                                    //SignupMain
+                                  },
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "   Forgot your Password ?  ",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15),
+                                ),
+                                InkWell(
+                                  child: Text(
+                                    "Remember me",
+                                    style: TextStyle(
+                                        color: Colors.red[400],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  onTap: () {
+                                    //_loginrController.loginfirebase();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PasswordResetMain()));
+                                    //SignupMain
+                                  },
+                                )
+                              ],
+                            ),
                           ],
                         ),
-
                       ),
-
-
-
-
-
-
-
-
                     ],
                   ),
                 ),
@@ -558,12 +577,6 @@ class _LoginEmail extends StateMVC<LoginEmail> {
               ],
             ),
           ),
-        )
-    );
+        ));
   }
-
-
-
-
-
 }
