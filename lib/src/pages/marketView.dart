@@ -9,6 +9,7 @@ import 'package:http/http.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
 import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
+import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
 class PageMarket extends StatefulWidget
 {
@@ -35,7 +36,8 @@ class  _PageMarket extends StateMVC<PageMarket>
 
   @override
   Widget build(BuildContext context) {
-
+    d.product=[];
+    remov();
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(

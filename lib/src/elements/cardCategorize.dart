@@ -15,11 +15,11 @@ import 'package:structurepublic/src/pages/productsView.dart';
 // ignore: must_be_immutable
 class CardCategorizeWidget extends StatelessWidget {
 
-   const CardCategorizeWidget({Key key,this.categorizeData}) : super(key: key);
+   const CardCategorizeWidget({Key key,this.categorizeData,this.marketData}) : super(key: key);
 
 
   final CategorizeData categorizeData;
-
+   final MarketData marketData;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,10 @@ class CardCategorizeWidget extends StatelessWidget {
           Center(
             child: RaisedButton(
               onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context) =>Products(categorizeData)) );
+             Navigator.push(context, MaterialPageRoute(builder: (context) =>Products(categorizeData,marketData)) );
+
+
+
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(80.0),),
@@ -152,7 +155,7 @@ class CardCategorizeWidget extends StatelessWidget {
           ),
         ),
           onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>Products(categorizeData)) );
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>Products(categorizeData,marketData)) );
 
           },
         ),

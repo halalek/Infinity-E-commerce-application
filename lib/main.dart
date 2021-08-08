@@ -7,6 +7,7 @@ import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/loginNumber.dart';
 import 'package:structurepublic/src/pages/loginView.dart';
 import 'package:structurepublic/src/pages/pageRating.dart';
+import 'package:structurepublic/src/pages/pageTrollery.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/page_welcome.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
@@ -20,7 +21,7 @@ import 'src/repository/settings_repository.dart' as settingRepo;
 import 'src/helpers/app_config.dart' as config;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
+import 'package:structurepublic/src/pages/mydemand.dart';
 Future<void> main() async {
 //  await GlobalConfiguration().loadFromAsset("configurations");
 //  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
@@ -30,8 +31,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
-  // var id=preferences.getString('userID');
-  // print("aaaaaaaaaaaaaaaaaaa")
+
 var i=1;
   //
  //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
@@ -78,13 +78,16 @@ class _MyAppState extends State<MyApp> {
               routes: <String,WidgetBuilder>{
                 '/a':(BuildContext context) =>StartMain(),
                 '/b':(BuildContext context) => editProfilePage(),
+                '/d':(BuildContext context) => pageTrollery(),
+                '/c':(BuildContext context) => Pagemydemand(),
               //  '/a':(context) =>StartMain(),
               },
               navigatorKey: settingRepo.navigatorKey,
               //debugShowMaterialGrid: false,
               title: "",
               home:
-              Pagemain1(),//basic
+            //  PageMarket(),
+              Pagemain1(),
               //StartMain(),
               //LoginMain(),
               //MainStateWidget(),

@@ -29,7 +29,8 @@ class CardMarketWidget extends StatelessWidget {
           color: stateColor,
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: GestureDetector(child:Column(
+        child: GestureDetector(
+          child:Column(
           children:
           <Widget>[
 

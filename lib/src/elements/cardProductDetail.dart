@@ -6,6 +6,8 @@ import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/pages/comparison.dart';
 import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
+import 'package:structurepublic/src/repository/page_trollery_repository.dart';
+import 'package:structurepublic/src/models/MarketData.dart';
 
 
 import 'dart:async';
@@ -18,17 +20,21 @@ import 'package:speech_to_text/speech_to_text.dart';
 class CardProductDetailWidget extends StatefulWidget {
 
    final ProductData productData;
-   const CardProductDetailWidget( this.productData) ;
+   final MarketData marketData;
+   const CardProductDetailWidget( this.productData,this.marketData) ;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _CardProductDetailWidget(this.productData);
+    return _CardProductDetailWidget(this.productData,this.marketData);
   }
 }
 
 
 
+
 class _CardProductDetailWidget extends State<CardProductDetailWidget> {
+   _CardProductDetailWidget(this.productData,this.marketData) ;
+   final MarketData marketData;
    _CardProductDetailWidget(this.productData) ;
 
    void updataNote(String note){
@@ -52,7 +58,20 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
   //String _note='ملاحظات أضافية (اختياري)';
    TextEditingController _note = TextEditingController();
    var _snackBar1 = SnackBar(
-    content: Center(child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25),),),
+    content: Center(
+
+      child: Column(
+         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+         child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25), )),
+
+         Center(
+        child: Text('لتأكيد أو تعديل الطلب انتقل لصفحة السلة  ',style: TextStyle(fontSize:20, ),),
+
+
+          ),],),),
     backgroundColor: Colors.black26,
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 5),
@@ -83,6 +102,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    }
   @override
   Widget build(BuildContext context) {
+
     Search();
     return  Container(
       height:400,
@@ -269,7 +289,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                           ),
                                             onTap: (){
                                               Scaffold.of(context).showSnackBar(_snackBar1);
-                                           //   Navigator.push(context, MaterialPageRoute(builder: (context) =>Comparison(productData)) );
+
+                                              setTrollery(productData,count,marketData);
                                             },
                                           ),
                                           GestureDetector(child: Container(
@@ -325,7 +346,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                                   fav=Icons.favorite_border;
                                                   selectfav1=true;
                                                   deleteFavority(productData);
-                                                  print(";llll");
+
                                                 }
                                               }
                                               );
@@ -361,6 +382,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    void add() {
      setState(() {
        count++;
+
+
      });
    }
    void minus() {

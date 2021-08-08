@@ -11,11 +11,12 @@ import 'package:structurepublic/src/pages/productDetail.dart';
 class CardProductWidget extends StatelessWidget {
   final ProductData productData;
   final CategorizeData categorizeData;
-  const CardProductWidget({
-    this.categorizeData,
-    Key key,
-    this.productData,
-  }) : super(key: key);
+  final MarketData marketData;
+
+  const CardProductWidget({this.categorizeData,Key key,this.productData,this.marketData}) : super(key: key);
+
+
+
 
   // PageMarketController ggg=new  PageMarketController();
 
@@ -39,64 +40,47 @@ class CardProductWidget extends StatelessWidget {
                   new SizedBox(
                     height: 130,
                     width: MediaQuery.of(context).size.width,
-                    // child:Image.network('https://dbq8hrmshvuto.cloudfront.net/a2d/f98c8/0803/4c93/9ebe/05596a8ed7a9/normal/516995.jpg',fit: BoxFit.cover,),
-                    child: Image(
-                      image: CachedNetworkImageProvider(productData.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: ListTile(
-                      //   leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:NetworkImage('https://arab-rate.com/media/reviews/photos/original/cd/77/3e/309-309-79-1578342205.jpg',),),
-                      title: Text(
-                        productData.nameAr,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(productData.description_ar ?? " "),
+                   // child:Image.network('https://dbq8hrmshvuto.cloudfront.net/a2d/f98c8/0803/4c93/9ebe/05596a8ed7a9/normal/516995.jpg',fit: BoxFit.cover,),
+                     child:Image(image:CachedNetworkImageProvider(productData.image),fit: BoxFit.cover,),
 
-                      trailing: GestureDetector(
-                        child: Text(
-                          productData.price.toString(),
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        // child:Icon(Icons.access_time, color: Colors.grey,),
-                        onTap: () {
-                          productData.nameMarket=categorizeData.nameMarket;
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductDetail(
-                                      productData, categorizeData)));
-                        },
-                      ),
+                  ),
+                  Expanded(child: ListTile(
+                    //   leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:NetworkImage('https://arab-rate.com/media/reviews/photos/original/cd/77/3e/309-309-79-1578342205.jpg',),),
+                    title: Text(productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
+                    subtitle: Text(productData.description_ar  ?? " "),
+
+                    trailing:
+                    GestureDetector(
+                      child: Text(productData.price.toString(),style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
+                      // child:Icon(Icons.access_time, color: Colors.grey,),
                       onTap: () {
-                        productData.nameMarket=categorizeData.nameMarket;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductDetail(
-                                    productData, categorizeData)));
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
+
+                      },),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)));
+
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  )
+                  ),)
+
+
                 ],
-              )),
-        )),
-      ]),
-      onTap: () {
-        productData.nameMarket=categorizeData.nameMarket;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    ProductDetail(productData, categorizeData)));
+
+                )
+
+            ) ,
+
+
+          )
+          ),
+
+        ]
+    ),
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
         // navigetor("");
       },
