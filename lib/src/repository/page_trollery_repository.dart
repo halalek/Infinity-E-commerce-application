@@ -12,6 +12,7 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structurepublic/src/controler/page_trollery_controller.dart';
 import 'package:structurepublic/src/controler/varify_controller.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/DemandData.dart';
@@ -29,10 +30,9 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
 
 final  List<Product> listtor = [];
-DemandData d=new DemandData();
 Product p=new Product();
  List<int> tt=[];
-final List<DemandData> listdam = [];
+final List<String> listdam = [];
 List<DemandData> listdam1 = [];
 
 String iduser;
@@ -42,11 +42,11 @@ String b=" ";
 
 
 setTrollery(ProductData productData, int count, MarketData marketData)async {
-
+print("oooooooooooooooooooooo");
   Product p=new Product();
 if(b!=" "&& d.idMarket!=marketData.id)
   {
-     d = new DemandData();
+     d= new DemandData();
     d.product=[];
      tt=[];
      total=0;
@@ -98,6 +98,7 @@ else {
   p.note = productData.note;
   d.idMarket = marketData.id;
   b = d.idMarket;
+  print("aaaaaaaaaaaaaaaaaa" +  marketData.owners.toString());
   d.idAdmins = marketData.owners;
   d.idWorker = ' ';
   d.done = false;
@@ -115,52 +116,25 @@ else {
 
 
   d.product.add(p);
+  print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 }
 }
 
 
-void price()
-{
 
 
-  for (int i = 0; i <  d.product.length; i++) {
-
-    d.product[i].priceTotal= tt[i] *d.product[i].number;
-
-  }
-
-}
-void set()
-{
-  d = new DemandData();
-  p = new Product();
-  d.product=[];
-}
 
 
-int sum(){
-  total=0;
-  for (int i = 0; i <  d.product.length; i++) {
-    d.priceTotal= total + d.product[i].priceTotal;
-    total=d.priceTotal;
-  }
- return d.priceTotal;
-}
-int clear(){
 
-  for (int i = 0; i <  d.product.length; i++) {
-    if(d.product[i].number==0){
-  d.product.removeAt(i);
-  }}
 
-}
 void remov()
 {
   for (int i = 0; i < listtor.length; i++) {
     listtor.removeAt(i);
   }
 }
-void postDamandNode(DemandData demandData)async{
+Future<void> postDamandNode(DemandData demandData)async{
+
   var url = Uri.parse('https://infinityserver2020.herokuapp.com/demand/user/post/');
   var response = await http.post(
     url,
@@ -183,19 +157,14 @@ void postDamandNode(DemandData demandData)async{
       'priceTotal':demandData.priceTotal,
       'rating':0,
       'notification':false,
-
       'iscoupon':demandData.iscoupon,
-
-
 
 
     }),
   );
+  print("111111111111111111111111111");
   print(response.body.toString());
 }
-
-
-
 
 
 
@@ -204,8 +173,8 @@ void postDamandNode(DemandData demandData)async{
 Future<List<DemandData >> gettollery(String IDuser) async {
   listdam.clear();
   List<DemandData> list = [];
-  iduser = IDuser;
-  print("TTTTTTTTTTTTTTT<");
+ // iduser = IDuser;
+  print(IDuser.toString());
   await FirebaseFirestore.instance
       .collection("users")
       .doc(IDuser)
@@ -215,26 +184,45 @@ Future<List<DemandData >> gettollery(String IDuser) async {
     print("TTTTTTTTTTTTTTT<<");
     print(value.docs.length);
     for (int i = 0; i < value.docs.length; i++) {
-      listdam.add(DemandData.fromJson(value.docs[i].data()));
-      print("TTTTTTTTTTTTTTT");
-      print(listdam[i]);
+      listdam.add(value.docs[i].id);
+      // print("TTTTTTTTTTTTTTT");
+      // print(listdam.length);
 
     }
   }).catchError((e) {});
 
-  for (int i = 0; i < listdam.length; i++) {
-    await FirebaseFirestore.instance
-        .collection("myDemand")
-        .where("id", isEqualTo: listdam[i].id)
-        .get()
-        .then((value) {
-      for (int i = 0; i < value.docs.length; i++) {
-        list.add(DemandData.fromJson(value.docs[i].data()));
-        print("TTTTTTTTTTTTTTT");
-        print(value.docs[i].data());
-      }
-    }).catchError((e) {});
- }
+ //  for (int i = 0; i < listdam.length; i++) {
+ //    await FirebaseFirestore.instance
+ //        .collection("myDemand")
+ //        .where("id", isEqualTo: listdam[i].id)
+ //        .get()
+ //        .then((value) {
+ //      for (int i = 0; i < value.docs.length; i++) {
+ //        list.add(DemandData.fromJson(value.docs[i].data()));
+ //        print("TTTTTTTTTTTTTTT");
+ //        print(value.docs[i].data());
+ //      }
+ //    }).catchError((e) {});
+ // }
+
+
+
+   for (int i = 0; i < listdam.length; i++) {
+     print("ppppppppppppppppp");
+     await FirebaseFirestore.instance
+         .collection("myDemand")
+         .where("id", isEqualTo: listdam[i])
+         .get()
+         .then((value) {
+       for (int i = 0; i < value.docs.length; i++) {
+         list.add(DemandData.fromJson(value.docs[i].data()));
+         print("....................................");
+         print(value.docs[i].data());
+         print("1....................................");
+         print(list[i].product[0].nameAr);
+       }
+     }).catchError((e) {});
+  }
   listdam1 = list;
   return list;
 }
@@ -242,17 +230,16 @@ Future<List<DemandData >> gettollery(String IDuser) async {
 settollery(DemandData demandData) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   iduser = preferences.getString('userID');
-    DemandData h = new DemandData();
-    h.id = demandData.id;
+    String h = demandData.id;
     listdam.add(h);
 
     await FirebaseFirestore.instance
         .collection("users")
         .doc(iduser)
         .collection("demand")
-        .doc()
+        .doc(h)
         .set({
-      "id":  h.id,
+      "id":  h,
     })
         .then((value) {})
         .catchError((e) {});
@@ -265,11 +252,31 @@ settollery(DemandData demandData) async {
 
 Future<MarketData> getmarket(DemandData demandData) async {
   MarketData marketData=MarketData();
-  FirebaseFirestore.instance
+  await FirebaseFirestore.instance
       .collection("market").where("id", isEqualTo:demandData.idMarket).get()
       .then((value) {
-    marketData=value as MarketData;
+        print(";;;;;;;;;;;;;;;;1");
+        print(value.docs.length);
+        for(int i=0;i<value.docs.length;i++)
+    marketData=MarketData.fromJson(value.docs[i].data());
+        print(marketData.nameAr);
   }
       ).catchError((e) {});
+  print(";;;;;;;;;;;;;;;;;;;;");
+  print( marketData.nameAr);
   return marketData;
+  }
+
+
+
+
+ setRating(DemandData demandData) async {
+    await FirebaseFirestore.instance
+        .collection("myDemand")
+        .doc(demandData.id).update(
+        {'rating':demandData.rating,
+        }
+    )
+        .then((value) {
+    }).catchError((e) {});
   }

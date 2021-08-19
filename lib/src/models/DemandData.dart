@@ -1,3 +1,5 @@
+import 'package:structurepublic/src/models/MarketData.dart';
+
 class DemandData {
   bool done;
   List<Product> product;
@@ -15,6 +17,7 @@ class DemandData {
   double rating;
   bool iscoupon;
   int index;
+  MarketData marketData;
   DemandData(
       {this.done,
         this.product,
@@ -33,6 +36,7 @@ class DemandData {
         this.iscoupon,
         this.index,
       });
+
 
   DemandData.fromJson(Map<String, dynamic> json) {
     done = json["done"];
@@ -54,8 +58,8 @@ class DemandData {
     timesTampCreat = json['timesTampCreat'];
     priceTotal = json['priceTotal'];
     rating = json['rating'].toDouble();
-    iscoupon=json['iscoupon'].toDouble();
-    index=json['index'].toDouble();
+    iscoupon=json['iscoupon'];
+    index=json['index'];
   }
 
   Map<String, dynamic> toJson() {
@@ -75,9 +79,9 @@ class DemandData {
     data['timesTampdemand'] = this.timesTampdemand;
     data['timesTampCreat'] = this.timesTampCreat;
     data['priceTotal'] = this.priceTotal;
-    data['rating'] = this.rating.toDouble();
-    data['iscoupon'] = this.rating.toDouble();
-    data['index'] = this.rating.toDouble();
+    data['rating'] = this.rating;
+    data['iscoupon'] = this.iscoupon;
+    data['index'] = this.index;
     return data;
   }
 }

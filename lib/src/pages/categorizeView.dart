@@ -10,13 +10,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
 import 'package:structurepublic/src/controler/categorize_controller.dart';
 import 'package:structurepublic/src/controler/page_product_controller.dart';
+import 'package:structurepublic/src/controler/page_trollery_controller.dart';
 import 'package:structurepublic/src/elements/cardCategorize.dart';
 import 'package:structurepublic/src/elements/cardProduct.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/DemandData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/pages/pageTrollery.dart';
-import 'package:structurepublic/src/repository/page_trollery_repository.dart';
+
 
 
 
@@ -44,11 +45,6 @@ class  _Categorize extends StateMVC<Categorize>
 
   _Categorize(this.marketData) : super(PageCategorizeController(marketData),) {
     _categorizeController = controller;
-
-    //_con= _categorizeDetail._get();
-
-
-    //_con=controller;
   }
 
 
@@ -303,12 +299,12 @@ class  _Categorize extends StateMVC<Categorize>
             {Navigator.pop(context);
 
             }
-            if(point==1 &&   d.product.length!=0)
+
+            if(point==1 &&  d.product.length!=0)
             {
               Navigator.push(context,MaterialPageRoute(builder :(context)
               {
-
-                   return pageTrollery();
+                return pageTrollery();
               }));
             }
           });},

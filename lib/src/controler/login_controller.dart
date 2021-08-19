@@ -242,8 +242,9 @@ class LoginController extends ControllerMVC {
         return Dialog(
           child: new Container(
             decoration: new BoxDecoration(
-                color: Colors.blue[200],
-                borderRadius: new BorderRadius.circular(10.0)),
+                color: Colors.red[200],
+             //   borderRadius: new BorderRadius.circular(10.0)
+            ),
             width: 150.0,
             height: 100.0,
             alignment: AlignmentDirectional.center,
@@ -258,6 +259,7 @@ class LoginController extends ControllerMVC {
                     child: new CircularProgressIndicator(
                       value: null,
                       strokeWidth: 7.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red)
                     ),
                   ),
                 ),
@@ -318,6 +320,7 @@ class LoginController extends ControllerMVC {
                     child: new CircularProgressIndicator(
                       value: null,
                       strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red)
                     ),
                     //Icon(Icons.email,color: Colors.blueAccent,)
                   ),
@@ -332,13 +335,13 @@ class LoginController extends ControllerMVC {
                             Text("        "),
                             Icon(
                               Icons.email,
-                              color: Colors.blueAccent,
+                              color: Colors.red[300],
                               size: 33,
                             ),
                             Text(
                               "       Password Reset  \n   email link is been sent  ",
                               style: new TextStyle(
-                                  color: Colors.blueAccent, fontSize: 17),
+                                  color: Colors.red[300], fontSize: 17),
                             ),
                           ]),
                         ),
@@ -453,6 +456,7 @@ class LoginController extends ControllerMVC {
                     child: new CircularProgressIndicator(
                       value: null,
                       strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red)
                     ),
                     //Icon(Icons.email,color: Colors.blueAccent,)
                   ),
@@ -467,13 +471,13 @@ class LoginController extends ControllerMVC {
                             Text("                           "),
                             Icon(
                               Icons.email,
-                              color: Colors.blueAccent,
+                              color: Colors.red,
                               size: 25,
                             ),
                             Text(
                               "   Hi   " + nameController.text,
                               style: new TextStyle(
-                                  color: Colors.blueAccent, fontSize: 16),
+                                  color: Colors.red[300], fontSize: 16),
                             ),
                           ]),
                         ),
@@ -484,7 +488,7 @@ class LoginController extends ControllerMVC {
                         Text(
                           "A message was sent to check the email.. ",
                           style: new TextStyle(
-                              color: Colors.blueAccent, fontSize: 14),
+                              color: Colors.red[300], fontSize: 14),
                         ),
                         Text(
                           "",
@@ -493,7 +497,7 @@ class LoginController extends ControllerMVC {
                         Text(
                           " please  press the sender link ",
                           style: new TextStyle(
-                              color: Colors.blueAccent, fontSize: 16),
+                              color: Colors.red[300], fontSize: 16),
                         ),
                       ]),
                     ),

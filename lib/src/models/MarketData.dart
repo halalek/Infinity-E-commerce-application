@@ -14,7 +14,8 @@ class MarketData {
     this.timesTampOpen,
     this.nameEn,
     this.rate,
-    this.active
+    this.active,
+    this.owners
   });
 
   String image;
@@ -58,6 +59,9 @@ class MarketData {
     timesTampOpen: json["timesTampOpen"] == null ? null : json["timesTampOpen"],
     nameEn: json["name_en"] == null ? null : json["name_en"],
     active: json["active"] == null ? null : json["active"],
+      //owners = json['owners'].cast<String>()
+    owners:  json['owners'].cast<String>(),
+
   );
 
 

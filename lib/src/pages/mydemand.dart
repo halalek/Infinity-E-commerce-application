@@ -1,4 +1,11 @@
 import 'dart:async';
+// ignore: avoid_web_libraries_in_flutter
+
+
+
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shape_of_view/shape_of_view.dart';
+import 'package:structurepublic/src/elements/cardTrollery.dart';
 import 'package:structurepublic/src/models/DemandData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,8 +23,8 @@ import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/models/SoldData.dart';
 import 'package:structurepublic/src/repository/login_repository.dart';
 import 'package:structurepublic/src/repository/page_market_repository.dart' as repo;
-import 'package:structurepublic/src/repository/page_faviroty_repository.dart'  as repo;
-import 'package:structurepublic/src/repository/page_faviroty_repository.dart'  as repo;
+import 'package:structurepublic/src/repository/page_faviroty_repository.dart' as repo;
+import 'package:structurepublic/src/repository/page_faviroty_repository.dart' as repo;
 import 'package:structurepublic/src/repository/page_sold_repository.dart' as repo;
 import '../../generated/l10n.dart';
 import '../helpers/helper.dart';
@@ -27,8 +34,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'editprofil.dart';
 
 
-class Pagemydemand extends StatefulWidget
-{
+class Pagemydemand extends StatefulWidget {
 
 
   @override
@@ -38,47 +44,556 @@ class Pagemydemand extends StatefulWidget
   }
 }
 
-class  _Pageusers extends StateMVC<Pagemydemand> {
+class _Pageusers extends StateMVC<Pagemydemand> {
   PageTrolleryController _con2;
 
   _Pageusers() : super(PageTrolleryController()) {
     _con2 = controller;
-    print("kkkkkkk") ;
+    print("kkkkkkk");
   }
 
   @override
-
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MaterialApp(
 
 
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("MY Demand"),
-          backgroundColor: Theme
-              .of(context)
-              .primaryColor,
+    if (_con2.loading == false) {
 
-        ),
+          return Scaffold(
+              appBar: AppBar(
+              title: Text(" الطلبات "),
+    backgroundColor: Theme
+        .of(context)
+        .primaryColorDark,
+    ),
+    body:Dialog(
+            child: new Container(
+              decoration: new BoxDecoration(
+                color: Colors.red[200],
+                //   borderRadius: new BorderRadius.circular(10.0)
+              ),
+              width: 150.0,
+              height: 100.0,
+              alignment: AlignmentDirectional.center,
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Center(
+                    child: new SizedBox(
+                      height: 30.0,
+                      width: 30.0,
+                      child: new CircularProgressIndicator(
+                          value: null,
+                          strokeWidth: 7.0,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.red)
+                      ),
+                    ),
+                  ),
+                  new Container(
+                    margin: const EdgeInsets.only(top: 25.0),
+                    child: new Center(
+                      child: new Text(
+                        "loading.. wait...",
+                        style: new TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // new Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     new CircularProgressIndicator(),
+            //     SizedBox(width: 5,),
+            //     new Text("Loading"),
+            //   ],
+            // ),
+    )
+          );
 
-        /* body: ListView.builder(
 
-          itemCount: _con2.listuser.length,
 
-          itemBuilder: (BuildContext context, int index) => Carduser(user: _con2.listuser[index],),)*/
-        body: ListView.builder(
-          // shrinkWrap: true,
-          itemCount:_con2.listmydam.length,
+      }
 
-          itemBuilder: (context, i) {
-            print(";;;;;;;;;;;;;;;;;;;;;;;;sggggggah") ;
-            print(_con2.listmydam.length) ;
-            print("heeeeeeeeeeeeeeeeeeeeeffffffffffffffffffffffffff") ;
-            return CardmydemandWidget(_con2.listmydam[i]);
-          },
+    }
+  }
+
+
+class PageDemand extends StatelessWidget {
+
+  List<DemandData> list = [];
+
+  PageDemand(this.list);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(" الطلبات "),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColorDark,
+      ),
+      body:
+
+      ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (BuildContext context, int index) =>
+             CardmydemandWidget(
+                  list[index],
+                ),
+                //  child: Text("4444444444444444444444444444444"),
+              ),
+
+
+    );
+  }
+}
+
+double _rating=2.0;
+class PageDemandBasket extends StatefulWidget {
+
+  DemandData demandData;
+  PageDemandBasket(this.demandData);
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _PageDemandBasket(this.demandData);
+  }
+}
+
+
+class  _PageDemandBasket extends StateMVC<PageDemandBasket> {
+  DemandData demandData;
+
+  _PageDemandBasket(this.demandData);
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("طلباتي "),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColorDark,
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top: 30, bottom: 30, right: 15, left: 15),
+
+        child: ListView(
+          children: <Widget>[
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal, child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+
+
+
+
+                Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.all(10),
+                      width: 150,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "ل.س",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(demandData.priceTotal.toString(),
+                            // demandData.priceTotal.toString(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    for (int i = 0; i < demandData.product.length; i = i + 2)
+                      CardmydemandDetail(demandData.product[i]),
+                    // Text("zzzzzzzzzzzzzzzzzzzzzzz")
+
+
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+
+                    for (int i = 1; i < demandData.product.length; i = i + 2)
+                      CardmydemandDetail(demandData.product[i]),
+
+
+                  ],
+                ),
+              ],
+            ),),
+            SizedBox(
+              height: 70,
+            ),
+            //
+            // if(demandData.rating==0)
+            // GestureDetector(
+            //   child:  Text(
+            // ' تقييم الطلب ',
+            // style: TextStyle(
+            // fontWeight: FontWeight.w300,
+            // fontSize: 24.0,
+            //
+            // ),
+            // ),
+            //   onTap: () {
+            //     _onLoadingDialog();
+            //   },
+            // ),
+
+            SizedBox(
+              height: 35,
+            ),
+if(demandData.rating!=0)
+            RaisedButton(
+              onPressed: () {
+                // clear();
+                getReturnDemand(demandData);
+                // _controller.getBasket();
+                print("UUUUUUUUUUUUUU");
+                //  print(d);
+                //  print("UUUUUUUUUUUUUU");
+                //  postDamandNode(d);
+                //
+                //  settollery(d);
+                // // Scaffold.of(context).showSnackBar(_snackBar2);
+                //  d = new DemandData();
+                //  d.product=[];
+                //  tt=[];
+                //  total=0;
+              },
+
+              color: Theme
+                  .of(context)
+                  .primaryColorDark,
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              elevation: 2,
+
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(
+                "إرسال الطلب ",
+                style: TextStyle(
+                    fontSize: 17,
+                    letterSpacing: 2.2,
+                    color: Colors.white),
+              ),
+            ),
+            if(demandData.rating==0)
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+
+
+
+    RaisedButton(
+      onPressed: () {
+        // clear();
+        getReturnDemand(demandData);
+        // _controller.getBasket();
+        print("UUUUUUUUUUUUUU");
+        //  print(d);
+        //  print("UUUUUUUUUUUUUU");
+        //  postDamandNode(d);
+        //
+        //  settollery(d);
+        // // Scaffold.of(context).showSnackBar(_snackBar2);
+        //  d = new DemandData();
+        //  d.product=[];
+        //  tt=[];
+        //  total=0;
+      },
+
+      color: Theme
+          .of(context)
+          .primaryColorDark,
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      elevation: 2,
+
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)),
+      child: Text(
+        "إرسال الطلب ",
+        style: TextStyle(
+            fontSize: 14,
+            letterSpacing: 2.2,
+            color: Colors.white),
+      ),
+    ),
+
+    RaisedButton(
+      onPressed: () {
+        _onLoadingDialog();
+      },
+
+      color: Theme
+          .of(context)
+          .primaryColorDark,
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      elevation: 2,
+
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)),
+      child: Text(
+        "تقييم الطلب",
+        style: TextStyle(
+            fontSize: 14,
+            letterSpacing: 2.2,
+            color: Colors.white),
+      ),
+    )
+  ],
+)
+
+          ],
+
         ),
       ),
     );
   }
+
+
+
+  Widget _onLoadingDialog() {
+    var _ratingController;
+    double _userRating = 3.0;
+    int _ratingBarMode = 1;
+    double _initialRating = 2.0;
+    bool _isRTLMode = false;
+    bool _isVertical = false;
+
+    // _ratingController = TextEditingController(text: '3.0');
+    // _rating = _initialRating;
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context)
+    {
+      return StatefulBuilder(builder: (context, StateSetter setState) {
+        return
+          Dialog(
+            child: new Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.circular(10.0)),
+              width: 200.0,
+              height: 300.0,
+              alignment: AlignmentDirectional.center,
+              child: Directionality(
+                textDirection: _isRTLMode ? TextDirection.rtl : TextDirection
+                    .ltr,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(
+                        'من فضلك قييم الطلب ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      FlutterRatingBar(
+                          initialRating: _rating,
+                          // direction: _isVertical ? Axis.vertical : Axis.horizontal,
+                          itemCount: 5,
+
+                          allowHalfRating: true,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                          fullRatingWidget: Icon(
+                            Icons.sentiment_very_satisfied,
+                            color: Colors.green,
+                          ),
+                          halfRatingWidget: Icon(
+                            Icons.sentiment_neutral,
+                            color: Colors.amber,
+                          ),
+                          noRatingWidget: Icon(
+                            Icons.sentiment_dissatisfied,
+                            color: Colors.redAccent,
+                          ),
+
+                          // itemBuilder: (context, index) {
+                          //   switch (index) {
+                          //     case 0:
+                          //       return Icon(
+                          //         Icons.sentiment_very_dissatisfied,
+                          //         color: Colors.red,
+                          //       );
+                          //     case 1:
+                          //       return Icon(
+                          //         Icons.sentiment_dissatisfied,
+                          //         color: Colors.redAccent,
+                          //       );
+                          //     case 2:
+                          //       return Icon(
+                          //         Icons.sentiment_neutral,
+                          //         color: Colors.amber,
+                          //       );
+                          //     case 3:
+                          //       return Icon(
+                          //         Icons.sentiment_satisfied,
+                          //         color: Colors.lightGreen,
+                          //       );
+                          //     case 4:
+                          //       return Icon(
+                          //         Icons.sentiment_very_satisfied,
+                          //         color: Colors.green,
+                          //       );
+                          //     default:
+                          //       return Container();
+                          //   }
+                          // },
+
+                          // onRatingUpdate: (rating) {
+                          //
+                          //  //  setstat(() {
+                          //  //    _rating = rating;
+                          //  //  }
+                          //  // );
+                          //
+                          //
+                          //
+                          // },
+                          onRatingUpdate: (rating) {
+                            setState(() {
+                              _rating = rating;
+                            //  Navigator.pop(context);
+                            //  _onLoadingDialog();
+                              //   Navigator.pop(context);
+                              //     Navigator.push(context,MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
+                            });
+                          }
+
+                      ),
+
+                      SizedBox(height: 20.0),
+                      Text(
+                        'Rating: $_rating',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+
+                          InkWell(child:
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      // Colors.green,
+                                      Colors.black38,
+                                      Colors.redAccent
+                                    ]
+                                )
+                            ),
+                            child: Center(
+                              child: Text("إرسال التقييم ", style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),),
+                            ),
+                          ),
+                            onTap: () {
+                              setState(() {
+                                setRating(demandData, _rating);
+                              });
+                            },
+                          ),
+
+                          InkWell(child:
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.black38,
+                                      Colors.redAccent
+                                    ]
+                                )
+                            ),
+                            child: Center(
+                              child: Text("عودة", style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),),
+                            ),
+                          ),
+                            onTap: () {
+                              Navigator.pop(context);
+                              // setState(() {
+                              //   //  _con. getProductsSearch();
+                              // });
+
+
+                            },
+                          ),
+                        ],),
+                    ],
+                  ),
+
+                ),
+              ),
+
+
+            ),
+            // new Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     new CircularProgressIndicator(),
+            //     SizedBox(width: 5,),
+            //     new Text("Loading"),
+            //   ],
+            // ),
+          );
+      });
+    });
+          // Widget _heading(String text) => Column(
+          //   children: [
+          //
+          //   ],
+          // );
+
+
+  }
+
 }
+

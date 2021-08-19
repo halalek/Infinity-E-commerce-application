@@ -9,8 +9,9 @@ import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/marketView.dart';
-import 'package:structurepublic/src/pages/pagMydemand.dart';
+import 'package:structurepublic/src/pages/mydemand.dart';
 import 'package:structurepublic/src/pages/pageFavority.dart';
+import 'package:structurepublic/src/pages/pageTrollery.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
@@ -35,13 +36,20 @@ import 'package:intl/intl.dart';
 
 
   class _CardmydemandWidget extends State<CardmydemandWidget> {
+
   _CardmydemandWidget(this.demandData) ;
-  final DemandData demandData;
-MarketData marketData=MarketData();
+
+  DemandData demandData;
+// MarketData marketData=MarketData();
+//
+//     llll() async {   print("pppaaaaaaaaaaaaaqqqqqqqqqq") ;  await getmarket(this.demandData).then((value) =>print(value.nameAr));
+//     }
 
   @override
+
   Widget build(BuildContext context) {
-    marketData=getmarket(demandData) as MarketData;
+    // print("pppaaaaaaaaaaaaaqqqqqqqqqq");
+    // print(demandData.marketData.nameAr);
     return GestureDetector(child:Row(
         children: [
           Expanded(child: Container(
@@ -63,22 +71,21 @@ MarketData marketData=MarketData();
                   //
                   // ),
                   Expanded(child: ListTile(
-                    leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:CachedNetworkImageProvider(marketData.image)),
-                    title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-                    subtitle: Text((demandData.timesTampCreat).toString()),
+                   leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:CachedNetworkImageProvider(demandData.marketData.imageIcon)),
+                   title: Text(demandData.marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
+                    subtitle: Text((demandData.priceTotal).toString() + "ل.س"),
 
                     trailing:
                     GestureDetector(
                       // chi0ld: Text("llll",style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
-                      child:Icon(Icons.mode_rounded, color: Colors.grey,),
+                      child:Text((demandData.stateAr).toString(),style: TextStyle(fontSize: 16,color: Theme.of(context).primaryColorDark)),
                       onTap: () {
 
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
-                       // Navigator.push(context, MaterialPageRoute(builder: (context) => editProfilePage(user: user,)));
+                         Navigator.push(context, MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
 
                       },),
                     onTap: () {
-                      //  Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
 
                     },
                     shape: RoundedRectangleBorder(
@@ -91,14 +98,10 @@ MarketData marketData=MarketData();
 
                 ) ,
                   onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
 
-            Navigator.push(context,MaterialPageRoute(builder :(context)
-            {
 
-              return pagemydemand(demandData);
-            }));
-
-            //  navigetor("");
+                    //  navigetor("");
             //       navigetortostudent(this.studentlist[position],"Edit Student");
             //   debugPrint("student print");
             },
@@ -113,7 +116,7 @@ MarketData marketData=MarketData();
         ]
     ),
       onTap: (){
-        //  Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
 
         // navigetor("");
       },
@@ -122,76 +125,120 @@ MarketData marketData=MarketData();
   }
 }
 
-/*class Carduser extends StatelessWidget {
 
 
 
-  // PageMarketController ggg=new  PageMarketController();
+class CardmydemandDetail extends StatelessWidget {
+  CardmydemandDetail(this.product);
+
+
+  final Product product;
+
 
   @override
   Widget build(BuildContext context) {
 
-    return GestureDetector(child:Row(
-        children: [
-          Expanded(child: Container(
-            padding: EdgeInsets.fromLTRB(7,7,7,0),
-            height: 100,
-            width: double.maxFinite,
-            child: Card(
-                elevation: 5,
-                //  color: Colors.orange,
-                semanticContainer: true,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                child:Column(children: [
-
-                  // new SizedBox(
-                  //   height: 130,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   // child:Image.network('https://dbq8hrmshvuto.cloudfront.net/a2d/f98c8/0803/4c93/9ebe/05596a8ed7a9/normal/516995.jpg',fit: BoxFit.cover,),
-                  //   child:Image(image:CachedNetworkImageProvider(productData.image),fit: BoxFit.cover,),
-                  //
-                  // ),
-                  Expanded(child: ListTile(
-                    leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:CachedNetworkImageProvider(user.image)),
-                    title: Text(user.name,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-                    subtitle: Text(user.phone.toString() ??  ""),
-
-                    trailing:
-                    GestureDetector(
-                     // child: Text("llll",style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
-                       child:Icon(Icons.mode_rounded, color: Colors.grey,),
-                      onTap: () {
-                        moveToSecondPage();
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Pageedit(use: user)));
-                      },),
-                    onTap: () {
-                      //  Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
-
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),)
 
 
-                ],
+    return Container(
+      width: 160,
 
-                )
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 5,
+        color: Colors.white70,
+        margin: EdgeInsets.all(4),
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Container(
+          margin: EdgeInsets.only(left: 10,right: 10),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
 
-            ) ,
+                Container(
+                  alignment: Alignment.topLeft,
 
+                  child: Text(
 
-          )
+                    (product.priceTotal).toString(),
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  color: Colors.black26,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey,
+                  backgroundImage: CachedNetworkImageProvider(
+                    product.image,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  product.nameAr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20,color: Colors.black),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  color: Colors.grey,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child:
+                Row(
+                  //mainAxisAlignment: MainAxisAlignment.end,
+                  //  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text( "العدد : ",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
+SizedBox(width: 20,),
+                    Text( product.number.toString(),
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
+
+                  ],
+                ),
+                //),
+                SizedBox(
+                  height: 5,
+                ),
+                Divider(
+                  color: Colors.grey,
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
-
-        ]
-    ),
-      onTap: (){
-        //  Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
-
-        // navigetor("");
-      },
+        ),
+      ),
     );
   }
-}*/
+
+
+
+
+
+}

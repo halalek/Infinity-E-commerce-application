@@ -51,11 +51,11 @@ class CardProductSearch extends StatelessWidget {
                       child: Text(productData.price.toString(),style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
                       // child:Icon(Icons.access_time, color: Colors.grey,),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,new MarketData())) );
 
                       },),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,new MarketData())) );
 
                     },
                     shape: RoundedRectangleBorder(
@@ -77,7 +77,7 @@ class CardProductSearch extends StatelessWidget {
         ]
     ),
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData)) );
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,new MarketData())) );
 
         // navigetor("");
       },

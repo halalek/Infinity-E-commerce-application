@@ -35,7 +35,7 @@ class CardProductDetailWidget extends StatefulWidget {
 class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    _CardProductDetailWidget(this.productData,this.marketData) ;
    final MarketData marketData;
-   _CardProductDetailWidget(this.productData) ;
+  // _CardProductDetailWidget(this.productData) ;
 
    void updataNote(String note){
      setState(() =>_note.text = note);
@@ -53,7 +53,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    }
 
   final ProductData productData;
-  int count=0;
+  int count=1;
   int point=0;
   //String _note='ملاحظات أضافية (اختياري)';
    TextEditingController _note = TextEditingController();

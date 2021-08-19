@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
+import 'package:structurepublic/src/controler/page_trollery_controller.dart';
 import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart';
@@ -38,6 +39,9 @@ class  _PageMarket extends StateMVC<PageMarket>
   Widget build(BuildContext context) {
     d.product=[];
     remov();
+
+
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -272,11 +276,5 @@ class  _PageMarket extends StateMVC<PageMarket>
       // ),
     ) ;
   }
-  void navigetor(String app) async
-  {
-    bool result= await Navigator.push(context, MaterialPageRoute(builder :(context)
-    {
-      //return Pagelist_detail();
-    }));
-  }
+
 }

@@ -56,20 +56,21 @@ class CardMarketWidget extends StatelessWidget {
                 ,alignment: Alignment.topCenter,
               ),
             ),
-                  child: RatingBar(
+                  child: FlutterRatingBar(
                     itemSize: 27,
                     initialRating: marketData.rate.toDouble(),
-                    direction: Axis.horizontal,
+                 //   direction: Axis.horizontal,
                     itemCount: 5,
+
                     allowHalfRating: true,
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
+                   // fullRatingWidget: Icon(Icons.favorite),
+                    // itemBuilder: (context, _) => Icon(
+                    //   Icons.star,
+                    //   color: Colors.amber,
+                    // ),
                   ),
                   alignment:Alignment.bottomRight,
-
                 ),
             Expanded(child: ListTile(
 

@@ -47,8 +47,8 @@ runApp(MaterialApp( theme:
        ThemeData(
       primaryColorDark: Colors.redAccent,
       primaryColorLight: Colors.red[300],
-       backgroundColor: Colors.red[300] ),
-         debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp()));//basic
+       backgroundColor: Colors.red[300]),
+         debugShowCheckedModeBanner: false,home: user == null ? WelcomePage() : MyApp(),));//basic
   //runApp(MaterialApp(debugShowCheckedModeBanner: false,home : LoginScreen()));//MyAppo//Pagemain1()
   //runApp(MaterialApp(debugShowCheckedModeBanner: false,home :  AuthService().handleAuth(),));//number
 

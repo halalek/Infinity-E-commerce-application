@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
+import 'package:structurepublic/src/controler/page_trollery_controller.dart';
 import 'package:structurepublic/src/models/DemandData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/categorizeView.dart';
 import 'package:structurepublic/src/pages/pageTrollery.dart';
-import 'package:structurepublic/src/repository/page_trollery_repository.dart';
+
 
 import 'cardProductDetail.dart';
 
@@ -27,10 +29,11 @@ final List<int>t=[];
   @override
   _cardTrolleryWidgetState createState() {
   return _cardTrolleryWidgetState(this.product);
+
   }
   }
 
-  class _cardTrolleryWidgetState extends State<cardTrolleryWidget> {
+  class _cardTrolleryWidgetState extends StateMVC<cardTrolleryWidget> {
   _cardTrolleryWidgetState(this.product);
 
 
@@ -40,15 +43,13 @@ final List<int>t=[];
   @override
   Widget build(BuildContext context) {
 
-    price();
-
-
+   price();
    print("\n::::::::::::::\n");
-   print(d.priceTotal);
+
 
 
 return Container(
-      width: 180,
+      width: 160,
 
       child: Card(
         shape: RoundedRectangleBorder(
@@ -110,21 +111,25 @@ return Container(
                 SizedBox(
                   height: 5,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child:
+                  Row(
+                  //mainAxisAlignment: MainAxisAlignment.end,
+                //  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                      MaterialButton(
-                      onPressed :add,
-                      child: new Icon(Icons.add, color: Colors.black,),
+                      onPressed :addd,
+                       minWidth: 10.0,
+                       child: new Icon(Icons.add, color: Colors.black,),
                       // backgroundColor: Colors.white,
                     ),
 
                      Text( product.number.toString(),
-                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
 
                    MaterialButton(
+                     minWidth: 10.0,
                       onPressed :minus,
                       child: new Icon(
                           const IconData(0xe15b, fontFamily: 'MaterialIcons'),
@@ -132,7 +137,8 @@ return Container(
                       //   backgroundColor: Colors.white,
                     ),
                   ],
-                ),),
+                ),
+          //),
                 SizedBox(
                   height: 5,
                 ),
@@ -150,23 +156,21 @@ return Container(
       ),
     );
   }
-  void add() {
+  void addd() {
     setState(() {
       product.number++;
       price();
-      sum();
+     sum();
       Navigator.of(context).pop();
       Navigator.of(context).pushNamed('/d');
-
-
-
     });
   }
+
   void minus() {
     setState(() {
       if (product.number != 0)
         product.number--;
-      price();
+     price();
       sum();
       Navigator.of(context).pop();
       Navigator.of(context).pushNamed('/d');
@@ -175,6 +179,11 @@ return Container(
 
 
 }
+
+
+
+
+
 
 
 
