@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -69,7 +70,8 @@ class _Pagemain1 extends State<Pagemain1>
         image: Image.asset('assets/img/gifgif.gif'),
       styleTextUnderTheLoader: new TextStyle(),
       photoSize: 150.0,
-       loaderColor: Theme.of(context).primaryColorLight
+       loaderColor: Theme.of(context).primaryColorLight,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     );
   }
 }
@@ -183,19 +185,18 @@ bool show=true;
   Widget build(BuildContext context) {
     if (currentPage == DrawerSections.page_Main_View) {
       container =  Page1();
-    } else if (currentPage == DrawerSections.contact_support) {
-      container = Common_questionsPage();
-    } else if (currentPage == DrawerSections.events) {
-      container = EventsPage();
-    } else if (currentPage == DrawerSections.Profile) {
-      container = ProfilePage();
-    } else if (currentPage == DrawerSections.settings) {
-      container = SettingsPage();
-    } else if (currentPage == DrawerSections.notifications) {
-      container = NotificationsPage();
-    } else if (currentPage == DrawerSections.privacy_policy) {
-      container = PrivacyPolicyPage();
     }
+    else if (currentPage == DrawerSections.contact_support) {
+      container = Common_questionsPage();
+    }
+    else if (currentPage == DrawerSections.Them) {
+     _ThemDialog();
+    }
+    else if (currentPage == DrawerSections.settings) {
+      container = SettingsPage();
+    }
+
+
     return Scaffold(
 
 
@@ -259,6 +260,7 @@ bool show=true;
             currentIndex:  point,
             selectedFontSize: 15,
             selectedItemColor: Theme.of(context).primaryColorDark,
+           // unselectedItemColor: Colors.black45,
             unselectedItemColor: Colors.black45,
             unselectedFontSize: 5,
             items: [
@@ -271,7 +273,7 @@ bool show=true;
                   "الرئيسية",
                   // style: TextStyle(color: Colors.black45),
                 ),
-                backgroundColor: Colors.white38,
+               // backgroundColor: Colors.white38,
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -348,22 +350,24 @@ bool show=true;
       child: Column(
 
         children: [
-          menuItem(1, "Dashboard", Icons.dashboard,
+          menuItem(1, "Chat", Icons.chat,
               currentPage == DrawerSections.page_Main_View ? true : false),
           menuItem(2, "Common questions", Icons.youtube_searched_for,
               currentPage == DrawerSections.contact_support ? true : false),
-          menuItem(3, "Events", Icons.event,
-              currentPage == DrawerSections.events ? true : false),
-          menuItem(4, "Profile", Icons.account_circle,
-              currentPage == DrawerSections.Profile ? true : false),
+          // menuItem(3, "Events", Icons.event,
+          //     currentPage == DrawerSections.events ? true : false),
+          // menuItem(4, "Profile", Icons.account_circle,
+          //     currentPage == DrawerSections.Profile ? true : false),
           Divider(),
           menuItem(5, "Settings", Icons.settings,
               currentPage == DrawerSections.settings ? true : false),
-          menuItem(6, "Notifications", Icons.notifications_none,
-              currentPage == DrawerSections.notifications ? true : false),
-          Divider(),
-          menuItem(7, "Privacy policy", Icons.fingerprint,
-              currentPage == DrawerSections.privacy_policy ? true : false),
+
+
+          // menuItem(6, "Notifications", Icons.notifications_none,
+          //     currentPage == DrawerSections.notifications ? true : false),
+          // Divider(),
+          // menuItem(7, "Privacy policy", Icons.fingerprint,
+          //     currentPage == DrawerSections.privacy_policy ? true : false),
           menuItem(8, "Exit", Icons.label_important, set),
         ],
       ),
@@ -383,16 +387,10 @@ bool show=true;
               currentPage = DrawerSections.page_Main_View;
             } else if (id == 2) {
               currentPage = DrawerSections.contact_support;
-            } else if (id == 3) {
-              currentPage = DrawerSections.events;
-            } else if (id == 4) {
-              currentPage = DrawerSections.Profile;
             } else if (id == 5) {
               currentPage = DrawerSections.settings;
-            } else if (id == 6) {
-              currentPage = DrawerSections.notifications;
-            } else if (id == 7) {
-              currentPage = DrawerSections.privacy_policy;
+            }  else if (id == 3) {
+              currentPage = DrawerSections.Them;
             } else if (id == 8) {
               set = true;
               AlertMe(context);
@@ -427,14 +425,166 @@ bool show=true;
       ),
     );
   }
+
+
+  void _ThemDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: new Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.circular(10.0)),
+              width: 400.0,
+              height:250.0,
+              alignment: AlignmentDirectional.center,
+              child: new   Column(children:[
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Dark",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color:darkfont,
+                      ),
+                    ),
+                    Text("Light",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color:darkfont,
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image(
+                      image: AssetImage( 'assets/img/moon.png',),
+                      width:50,
+                      height:50,
+                    ),
+                    Image(
+                      image: AssetImage( 'assets/img/sun.png',),
+                      width:50,
+                      height:50,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 50,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      child: Container(
+                        height: 30,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(colors: [
+                              // Color.fromRGBO(143, 148, 251, 1),
+                              // Color.fromRGBO(143, 148, 251, .6),
+                              Colors.red[300],
+                              Color.fromRGBO(160, 0, 0, 1),
+                            ])),
+                        child: Center(
+                          child: Text(
+                            "تفعيل ",
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      onTap: () async {
+                        // setState(() async {
+                        //
+                        //   //   _con. getProductsSearch(_chosenValue);
+                        // });
+                        SharedPreferences preferences = await SharedPreferences.getInstance();
+                        preferences.setString('color',"Dark");
+                        //  Navigator.pop(context);
+                        SystemNavigator.pop();
+                        //_loginrController.loginfirebase();
+                        //   Navigator.of(context).pushReplacementNamed('/e');
+                        //SignupMain
+                      },
+                    ),
+
+
+                    InkWell(
+                      child: Container(
+                        height: 30,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(colors: [
+                              // Color.fromRGBO(143, 148, 251, 1),
+                              // Color.fromRGBO(143, 148, 251, .6),
+                              Colors.red[300],
+                              Color.fromRGBO(160, 0, 0, 1),
+                            ])),
+                        child: Center(
+                          child: Text(
+                            "تفعيل ",
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      onTap: () async {
+                        // setState(() async {
+                        //   SharedPreferences preferences = await SharedPreferences.getInstance();
+                        //   preferences.setString('color',"light");
+                        //   //   _con. getProductsSearch(_chosenValue);
+                        // });
+                        SharedPreferences preferences = await SharedPreferences.getInstance();
+                        preferences.setString('color',"light");
+                        // Navigator.pop(context);
+                        SystemNavigator.pop();
+
+                        //   Navigator.push(context, MaterialPageRoute(builder: ( context) => MyApp() ) );
+                        //_loginrController.loginfirebase();
+                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => StartMain() ) );
+                        //SignupMain
+                      },
+                    ),
+                  ],
+                )
+              ])
+          ),
+          // new Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   children: [
+          //     new CircularProgressIndicator(),
+          //     SizedBox(width: 5,),
+          //     new Text("Loading"),
+          //   ],
+          // ),
+        );
+      },
+    );
+
+  }
+
+
+
+
 }
+
+
+
 
 enum DrawerSections {
   page_Main_View,
   contact_support,
-  events,
-  Profile,
   settings,
+  Them,
   notifications,
   privacy_policy,
   send_feedback,

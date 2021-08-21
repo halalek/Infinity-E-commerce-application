@@ -59,7 +59,7 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
 
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return  MaterialApp( locale:Locale('en'),home: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
@@ -323,6 +323,6 @@ class _PasswordResetMain extends StateMVC<PasswordResetMain> {
             ),
           ),
         )
-    );
+    ));
   }
 }

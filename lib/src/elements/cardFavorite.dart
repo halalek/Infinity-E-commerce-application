@@ -100,8 +100,12 @@ class CardFavoriteWidget extends StatelessWidget {
                   // var formatter = new DateFormat('yyyy-MM-dd');
                   // String formattedDate = formatter.format(now);
                   // print("aaaaaaaaaaaaaaaaaaaa"  + formattedDate);
+
+
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PageFavority(productData)//ProductDetail(productData,categorizeDataa)
                   ));
+
+
                   },
               )
             ]),
@@ -115,6 +119,7 @@ class CardFavoriteWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor
                     ),
                   ),
 

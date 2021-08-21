@@ -32,7 +32,8 @@ class CardProductWidget extends StatelessWidget {
           width: double.maxFinite,
           child: Card(
               elevation: 5,
-              color: Colors.white,
+              //color: Colors.white,
+           //   color: Theme.of(context).scaffoldBackgroundColor,
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Column(
@@ -46,8 +47,8 @@ class CardProductWidget extends StatelessWidget {
                   ),
                   Expanded(child: ListTile(
                     //   leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:NetworkImage('https://arab-rate.com/media/reviews/photos/original/cd/77/3e/309-309-79-1578342205.jpg',),),
-                    title: Text(productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-                    subtitle: Text(productData.description_ar  ?? " "),
+                    title: Text(productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Theme.of(context).primaryColor),),
+                    subtitle: Text(productData.description_ar  ?? " ",style: TextStyle( color: Theme.of(context).primaryColor),),
 
                     trailing:
                     GestureDetector(

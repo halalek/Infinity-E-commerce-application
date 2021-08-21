@@ -63,7 +63,7 @@ class _WelcomePage extends State<WelcomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp( locale:Locale('en'),home:Scaffold(
       // appBar: AppBar(
       //   title: Text("Introduction Screen"),
       // ),
@@ -74,14 +74,14 @@ class _WelcomePage extends State<WelcomePage> {
         pages: getPages(),
         showNextButton: true,
         showSkipButton: true,
-        skip: Text("Skip"),
-        done: Text("Got it "),
+        skip: Text("Skip",style: TextStyle(color: Colors.black),),
+        done: Text("Got it ",style: TextStyle(color: Colors.black)),
         dotsDecorator: DotsDecorator(activeColor: Colors.red),
         onDone: () {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context) => LoginMainPage() ) );
         },
       ),
-    );
+    ));
   }
 }
 

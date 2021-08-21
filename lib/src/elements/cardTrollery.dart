@@ -160,9 +160,10 @@ return Container(
     setState(() {
       product.number++;
       price();
-     sum();
+      sum();
+
       Navigator.of(context).pop();
-      Navigator.of(context).pushNamed('/d');
+     Navigator.of(context).pushNamed('/d');
     });
   }
 

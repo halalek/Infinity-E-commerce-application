@@ -26,7 +26,8 @@ class CardMarketWidget extends StatelessWidget {
       width: double.maxFinite,
       child: Card(
         //  elevation: 5,
-          color: stateColor,
+          //color: stateColor,
+       // color: Theme.of(context).scaffoldBackgroundColor,
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: GestureDetector(
@@ -77,8 +78,8 @@ class CardMarketWidget extends StatelessWidget {
               leading:
               CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon),),
 
-              title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-              subtitle: Text( marketData.descriptionAr),
+              title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.red[300],)),
+              subtitle: Text( marketData.descriptionAr,style: TextStyle(color: Theme.of(context).primaryColor) ),
 
               trailing:
               GestureDetector(

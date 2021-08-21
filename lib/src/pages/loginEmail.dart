@@ -202,7 +202,8 @@ class _LoginEmail extends StateMVC<LoginEmail> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp( locale:Locale('en'),home:
+      Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
@@ -478,14 +479,14 @@ class _LoginEmail extends StateMVC<LoginEmail> {
                                 Text(
                                   "   Forgot your Password ?  ",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
+                                      color: Colors.black, fontSize: 14),
                                 ),
                                 InkWell(
                                   child: Text(
                                     "Remember me",
                                     style: TextStyle(
                                         color: Colors.red[400],
-                                        fontSize: 15,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   onTap: () {
@@ -577,6 +578,6 @@ class _LoginEmail extends StateMVC<LoginEmail> {
               ],
             ),
           ),
-        ));
+        )));
   }
 }

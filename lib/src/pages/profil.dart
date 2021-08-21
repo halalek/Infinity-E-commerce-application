@@ -11,6 +11,7 @@ import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/user_controller.dart';
 import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/models/user.dart';
+import 'package:structurepublic/src/pages/cuponView.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
@@ -40,6 +41,9 @@ class ProfilePage extends StatefulWidget
 
 class  _ProfilePage extends StateMVC<ProfilePage> {
   int point = 3;
+
+
+
   void updataName(String name){
     setState(() =>_name = name);
   }
@@ -58,11 +62,27 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
   _ProfilePage() : super(UserController()) {
     // _con = controller;
     _con = controller;
-
+    //_con.getCouponPrice();
   }
 
 
+  var _snackBar1 = SnackBar(
+    content:  new Center(
+      child: new SizedBox(
+        height: 30.0,
+        width: 30.0,
+        child: new CircularProgressIndicator(
+            value: null,
+            strokeWidth: 7.0,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.red)
+        ),
+      ),
+    ),
+    backgroundColor: Colors.black26,
+    // behavior: SnackBarBehavior.floating,
+    duration: const Duration(seconds: 5),
 
+  );
 
 
   String getcon(){
@@ -110,6 +130,9 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
 
   }
   bool showPassword=false;
+
+
+  final globalKey = GlobalKey<ScaffoldState>();
   void displayBottomSheet(BuildContext context)  { showModalBottomSheet( context: context, builder: (ctx) {
     return Container( height: MediaQuery.of(context).size.height * 0.4,
         child:Column(   children: [
@@ -240,8 +263,11 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
 
 
     return Scaffold(
+        key: globalKey,
         body: Container(
-          color: darkAlert,
+          color:Theme.of(context). scaffoldBackgroundColor,
+
+         // color: darkAlert,
           child: ListView(
 
             children: <Widget>[
@@ -320,13 +346,14 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                   )
                 ],
               ),
+             Center(child:Container(
+               //padding: const EdgeInsets.only(left: 180),
+               child :Text(_name==null?"${getcon()}":"${_name}",style: TextStyle(color: Theme.of(context).primaryColor),),
+             ) ,) ,
               Container(
-
-                padding: const EdgeInsets.only(left: 180),
-                child :Text(_name==null?"${getcon()}":"${_name}"),
-              ),
-              Container(
+                  color:Theme.of(context). scaffoldBackgroundColor,
                   padding: const EdgeInsets.only(top: 32.0),
+                  height: 400,
                   child: Column(
                     children: <Widget>[
                       IntrinsicHeight
@@ -347,7 +374,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                       child:      Text("edit profil",
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color:darkfont,
+                                          color: Theme.of(context).primaryColor,
 
                                           fontWeight: FontWeight.bold,
                                           fontFamily: font,
@@ -358,7 +385,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                   ]),
 
 
-                              VerticalDivider(color: darkfont,width: 20,),
+                              VerticalDivider(color: Colors.red[300],width: 20,),
                               Column(
                                   children: [ IconButton(
                                     icon: Icon(Icons.add_location),
@@ -370,7 +397,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                       child:Text("location",
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color:darkfont,
+                                          color:Theme.of(context).primaryColor,
 
                                           fontWeight: FontWeight.bold,
                                           fontFamily: font,
@@ -382,7 +409,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                   ]),
 
 
-                        VerticalDivider(color: darkfont,width: 20,),
+                        VerticalDivider(color:  Colors.red[300],width: 20,),
                         Column(
                             children: [IconButton(
                               icon: Icon(Icons.shopping_cart),
@@ -394,7 +421,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                               child:Text("my requests",
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color:darkfont,
+                                  color:Theme.of(context).primaryColor,
 
                                   fontWeight: FontWeight.bold,
                                   fontFamily: font,
@@ -419,7 +446,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                       child:Column(
                           children: [
                             Row(  children: [
-                              Text("حسوماتك "),
+                              Text("حسوماتك ",style: TextStyle(color: Colors.red[300]),),
                               IconButton(
                                   icon: Icon(Icons.fastfood,color:changecolor,),
 
@@ -448,13 +475,15 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                     ),
                                   ),
                                     onTap: (){
-                                 //     Scaffold.of(context).showSnackBar(_snackBar1);
+                                 //    Scaffold.of(context).showSnackBar(_snackBar1);
+                                      Navigator.push(context,MaterialPageRoute(builder: (context)=>PageCoupon()));
                                     },
                                   ),
-SizedBox(child: Text("    "),),
+                                   SizedBox(child: Text("    "),),
                                   InkWell(child: Container(
 
                                     width: 70,
+                                    height: 50,
                                     padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: Colors.black12,
@@ -463,7 +492,16 @@ SizedBox(child: Text("    "),),
                                       // )
                                     ),
                                     child:
-                                    Center(child:Text("8000 ",style: TextStyle(fontSize: 15,),)),
+                              //      Center(child:Text(_con.pricetotal.toString(),style: TextStyle(fontSize: 15,),)),
+                                    IconButton(
+                                        icon: Icon(Icons.fastfood,color:changecolor,),
+
+                                        onPressed: (){
+                                          globalKey.currentState.showSnackBar(_snackBar1);
+                                          _con.getCouponPrice();
+                                        }
+
+                                    ),
                                   ),
                                     onTap: () {
                                       setState((){

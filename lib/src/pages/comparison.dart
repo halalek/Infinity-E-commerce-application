@@ -66,7 +66,7 @@ class _Comparison extends StateMVC<Comparison> {
     // TODO: implement build
     return Scaffold(
 
-        body: Column(
+        body: SingleChildScrollView(child:Column(
 
             //shrinkWrap: true,
             children: [
@@ -148,7 +148,7 @@ class _Comparison extends StateMVC<Comparison> {
 
 
               Text("",style: TextStyle(fontSize: 10),),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          SingleChildScrollView(child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
 
             if (list.length >= 1)
               CardProductcomp(
@@ -160,8 +160,8 @@ class _Comparison extends StateMVC<Comparison> {
             ),
 
 
-          ])
-        ]));
+          ]))
+        ])));
   }
 
 

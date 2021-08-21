@@ -118,6 +118,7 @@ class _PageSearch extends StateMVC<PageSearch> {
               controller: _con.search,
               decoration: InputDecoration(
                 hintText: "Search query here... ",
+                hintStyle: TextStyle(color: Theme.of(context).primaryColor),
                 icon: Icon(Icons.search),
               ),
             ),

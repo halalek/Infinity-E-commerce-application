@@ -236,13 +236,25 @@ import 'package:structurepublic/src/pages/vereible.dart';
   }
 
    int n;
+  int count=0;
   @override
   Widget build(BuildContext context) {
 
     price();
+    final globalKey = GlobalKey<ScaffoldState>();
 
+    var _snackBar1 = SnackBar(
+      content:  new Center(
+        child: Text("تأكد من اتصال بالانترت وحاول مرة أخرى ")
+      ),
+      backgroundColor: Colors.black26,
+      // behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 5),
+
+    );
     // TODO: implement build
     return Scaffold(
+      key: globalKey,
       appBar: AppBar(
         title: Text("سلة المشتريات "),
         backgroundColor: Theme.of(context).primaryColorDark,
@@ -297,7 +309,8 @@ import 'package:structurepublic/src/pages/vereible.dart';
                           SizedBox(
                             width: 10,
                           ),
-                          Text( (sum()).toString(),
+                          Text(
+                            (sum()).toString(),
                            // demandData.priceTotal.toString(),
                             style: TextStyle(
                               fontSize: 20,
@@ -333,20 +346,54 @@ import 'package:structurepublic/src/pages/vereible.dart';
               height: 70,
             ),
 
+
+            GestureDetector(child:
             Container(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              child: TextField(
-                onChanged: (value) {
-                 // filterSearchResults(value);
-                },
-                controller:_controller.discount,
-                decoration: InputDecoration(
-                  hintText: "Enter the discount code ... ",
-                  icon: Icon(Icons.sentiment_satisfied),
-                ),
+              //width: 10,
+              height: 40,
+              child:
+              Row(children: [
+                Icon(Icons.sentiment_satisfied,color: Theme.of(context).primaryColorDark,),
+                SizedBox(width: 10,),
+                Text("إدخال كود الحسم ",style: TextStyle(fontSize: 15,color: Theme.of(context).primaryColor)),
+              ],),
+
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColorDark),
+                borderRadius:BorderRadius.circular(20),
+
               ),
             ),
+
+                onTap: () {
+              if(_controller.coupon==0 && d.product.length!=0)
+                  {  print(d.product.length);
+                  print("ppppppppppppppppppppppppppppppppppp");
+                    _onLoadingVeriftyCode(d.product);
+                  }
+
+              if(d.product.length==0)
+                {
+                  _onLoadingErroe();
+                  print("`````````````````````````````````");}
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => PageSearch()) );//basic
+                //  Navigator.push(context, MaterialPageRoute(builder: (context) => PageSearch()));
+                }
+            ),
+            // Container(
+            //   height: 100,
+            //   width: MediaQuery.of(context).size.width,
+            //   child: TextFormField(
+            //     // onChanged: (value) {
+            //     //  // filterSearchResults(value);
+            //     // },
+            //     controller:_controller.discount,
+            //     decoration: InputDecoration(
+            //       hintText: "Enter the discount code ... ",
+            //       suffixIcon: Icon(Icons.sentiment_satisfied),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: 35,
             ),
@@ -368,9 +415,14 @@ import 'package:structurepublic/src/pages/vereible.dart';
 
                 RaisedButton(
                   onPressed: () {
-                   clear();
-                   _controller.getBasket();
-                   print("UUUUUUUUUUUUUU");
+                    _onLoadingVerifty();
+                   // globalKey.currentState.showSnackBar(_snackBar1);
+                 //    if(_controller.discount.text!='')
+                 //      {_controller.getCode();}
+                 //    if(_controller.discount.text=='')
+                 // {clear();
+                 //   _controller.getBasket();
+                 //   print("UUUUUUUUUUUUUU");}
                   //  print(d);
                   //  print("UUUUUUUUUUUUUU");
                   //  postDamandNode(d);
@@ -410,4 +462,284 @@ import 'package:structurepublic/src/pages/vereible.dart';
      sum();
     });
   }
+
+
+
+    Widget _onLoadingVerifty() {
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: new Container(
+              decoration: new BoxDecoration(
+                color: Colors.black12,
+                //   borderRadius: new BorderRadius.circular(10.0)
+              ),
+              width: 1000.0,
+              height: 180.0,
+              alignment: AlignmentDirectional.center,
+              child: new Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 35,),
+                  new SizedBox(
+                    // height: 200.0,
+                      width: 900.0,
+                      child: Center(child:new Text("هل تريد تأكيد عملية إرسال الطلب ؟ ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
+                      ),)
+                  ),
+
+                  SizedBox(height: 20,),
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+
+                   RaisedButton(
+                     onPressed: () {
+                       // globalKey.currentState.showSnackBar(_snackBar1);
+                       Navigator.pop(context);
+                       // if(_controller.discount.text!='')
+                       // {
+                       //   print("coooooooooooooooooooooooooooooooooode");
+                       //   _controller.getCode();
+                       //
+                       // }
+
+                       clear();
+
+                       _controller.getBasket();
+                       print("UUUUUUUUUUUUUU");
+                       //  print(d);
+                       //  print("UUUUUUUUUUUUUU");
+                       //  postDamandNode(d);
+                       //
+                       //  settollery(d);
+                       // // Scaffold.of(context).showSnackBar(_snackBar2);
+                       //  d = new DemandData();
+                       //  d.product=[];
+                       //  tt=[];
+                       //  total=0;
+                     },
+
+                     color: changecolor,
+                     padding: EdgeInsets.symmetric(horizontal: 50),
+                     elevation: 2,
+                     shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(20)),
+                     child: Text(
+                       "تأكيد",
+                       style: TextStyle(
+                           fontSize: 14,
+                           letterSpacing: 2.2,
+                           color: Colors.white),
+                     ),
+                   ),
+                   OutlineButton(
+                     padding: EdgeInsets.symmetric(horizontal: 50),
+                     shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(20)),
+                     onPressed: () {    Navigator.of(context).pop();},
+                     child: Text("عودة",
+                         style: TextStyle(
+                             fontSize: 14,
+                             letterSpacing: 2.2,
+                             color: Colors.black)),
+                   ),
+                 ],)
+                ],
+              ),
+            ),
+            // new Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     new CircularProgressIndicator(),
+            //     SizedBox(width: 5,),
+            //     new Text("Loading"),
+            //   ],
+            // ),
+          );
+        },
+      );
+      new Future.delayed(new Duration(seconds: 5), () {
+        //  Navigator.pop(context);
+        // Navigator.pop(context);
+        // if (!loading) {
+        //     // Navigator.pop(context); //pop dialog
+        // }
+
+
+      });
+    }
+
+
+
+    Widget _onLoadingErroe() {
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: new Container(
+              decoration: new BoxDecoration(
+                color: Colors.black12,
+                //   borderRadius: new BorderRadius.circular(10.0)
+              ),
+              width: 1000.0,
+              height: 80.0,
+              alignment: AlignmentDirectional.center,
+              child: new Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 35,),
+                  new SizedBox(
+                    // height: 200.0,
+                      width: 900.0,
+                      child: Center(child:new Text("حاول مرة أخرى  ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
+                      ),)
+                  ),
+
+                  SizedBox(height: 20,),
+                ],
+              ),
+            ),
+            // new Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     new CircularProgressIndicator(),
+            //     SizedBox(width: 5,),
+            //     new Text("Loading"),
+            //   ],
+            // ),
+          );
+        },
+      );
+      new Future.delayed(new Duration(seconds: 5), () {
+        //  Navigator.pop(context);
+        // Navigator.pop(context);
+        // if (!loading) {
+        //     // Navigator.pop(context); //pop dialog
+        // }
+
+
+      });
+    }
+
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    Widget _onLoadingVeriftyCode(List<Product>p) {
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: new Container(
+              decoration: new BoxDecoration(
+                color: Colors.black12,
+                //   borderRadius: new BorderRadius.circular(10.0)
+              ),
+              width: 1000.0,
+              height: 220.0,
+              alignment: AlignmentDirectional.center,
+              child: new Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 35,),
+
+
+                  Container(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: TextFormField(
+                      // onChanged: (value) {
+                      //  // filterSearchResults(value);
+                      // },
+                      controller:_controller.discount,
+                      decoration: InputDecoration(
+                        hintText: "أدخل كود  الحسم ",
+                        suffixIcon: Icon(Icons.sentiment_satisfied,color:Colors.red[200],),
+                          focusedBorder:
+                          UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color:
+                                  Colors.black38)),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.black38))
+                      ),
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please Fill Code Input';
+                          }
+                          return null;
+                        }
+                    ),
+                  ),
+
+
+                  RaisedButton(
+                    onPressed: () {
+
+
+                        // globalKey.currentState.showSnackBar(_snackBar1);
+                        Navigator.pop(context);
+                        if (_controller.discount.text!= '') {
+                          print("coooooooooooooooooooooooooooooooooode");
+                          _controller.getCode(p);
+                        }
+
+                      //  print(d);
+                      //  print("UUUUUUUUUUUUUU");
+                      //  postDamandNode(d);
+                      //
+                      //  settollery(d);
+                      // // Scaffold.of(context).showSnackBar(_snackBar2);
+                      //  d = new DemandData();
+                      //  d.product=[];
+                      //  tt=[];
+                      //  total=0;
+                    },
+
+                    color: changecolor,
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      "تحقق",
+                      style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 2.2,
+                          color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // new Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            //     new CircularProgressIndicator(),
+            //     SizedBox(width: 5,),
+            //     new Text("Loading"),
+            //   ],
+            // ),
+          );
+        },
+      );
+      new Future.delayed(new Duration(seconds: 5), () {
+        //  Navigator.pop(context);
+        // Navigator.pop(context);
+        // if (!loading) {
+        //     // Navigator.pop(context); //pop dialog
+        // }
+
+
+      });
+    }
 }

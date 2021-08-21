@@ -19,7 +19,7 @@ class Setting {
   String scaffoldDarkColor;
   String scaffoldColor;
   String googleMapsKey;
-  ValueNotifier<Locale> mobileLanguage = new ValueNotifier(Locale('en', ''));
+  ValueNotifier<Locale> mobileLanguage = new ValueNotifier(Locale('ar', ''));
   String appVersion;
   bool enableVersion = true;
 

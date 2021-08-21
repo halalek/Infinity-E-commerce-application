@@ -50,6 +50,7 @@ class _Pageusers extends StateMVC<Pagemydemand> {
   _Pageusers() : super(PageTrolleryController()) {
     _con2 = controller;
     print("kkkkkkk");
+    _con2.getDemand();
   }
 
   @override
@@ -342,7 +343,7 @@ Row(
       child: Text(
         "إرسال الطلب ",
         style: TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             letterSpacing: 2.2,
             color: Colors.white),
       ),
@@ -364,7 +365,7 @@ Row(
       child: Text(
         "تقييم الطلب",
         style: TextStyle(
-            fontSize: 14,
+            fontSize: 12,
             letterSpacing: 2.2,
             color: Colors.white),
       ),
@@ -534,6 +535,7 @@ Row(
                             onTap: () {
                               setState(() {
                                 setRating(demandData, _rating);
+                                Navigator.pop(context);
                               });
                             },
                           ),

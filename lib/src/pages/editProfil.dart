@@ -43,11 +43,13 @@ Userss jj=new Userss();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
+    return
 
+      Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColorDark,
+        elevation: 1,
+title: Text("الملف الشخصي"),
 
       ),
       body: Container(
@@ -58,13 +60,13 @@ Userss jj=new Userss();
           },
           child: ListView(
             children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 15,
-              ),
+              // Text(
+              //   "Edit Profile",
+              //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              // ),
+              // SizedBox(
+              //   height: 15,
+              // ),
 
               SizedBox(
                 height: 35,
@@ -83,15 +85,15 @@ Userss jj=new Userss();
 
 
                      // contentPadding: EdgeInsets.only(bottom: 3),
-                      labelText: labelText1="Full Name",
+                      labelText: labelText1="الاسم الكامل",
                      labelStyle: TextStyle(
-                  color: const Color(0XFF424242),),
+                      color: Colors.red[300],),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText:  _con.user.name,
                       hintStyle: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color:Theme.of(context).primaryColor,
                       )),
                   // onSubmitted: (text){
                   //   setState(() {
@@ -124,16 +126,16 @@ Userss jj=new Userss();
 
 
                       // contentPadding: EdgeInsets.only(bottom: 3),
-                      labelText: labelText1="E-mail",
+                      labelText: labelText1="الإيميل",
                       labelStyle: TextStyle(
-                        color: const Color(0XFF424242),
+                        color:Colors.red[300],
                       ),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText:  _con.user.email,
                       hintStyle: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color:Theme.of(context).primaryColor,
                       )),
 
                   // onSubmitted: (text){
@@ -156,16 +158,16 @@ Userss jj=new Userss();
                       enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: darkfont), ),
                       focusedBorder: UnderlineInputBorder( borderSide: BorderSide(color: changecolor), ),
 
-                      labelText: labelText1="Phone",
+                      labelText: labelText1="رقم الهاتف",
                       labelStyle: TextStyle(
-                        color: const Color(0XFF424242),
+                        color:Colors.red[300],
                       ),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText:  _con.user.phone.toString(),
                       hintStyle: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color:Theme.of(context).primaryColor,
                       )),
 
                   // onSubmitted: (text){

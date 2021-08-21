@@ -170,7 +170,7 @@ Future<void> postDamandNode(DemandData demandData)async{
 
 
 
-Future<List<DemandData >> gettollery(String IDuser) async {
+Future<List<DemandData >> getmyDemand(String IDuser) async {
   listdam.clear();
   List<DemandData> list = [];
  // iduser = IDuser;
@@ -227,7 +227,7 @@ Future<List<DemandData >> gettollery(String IDuser) async {
   return list;
 }
 
-settollery(DemandData demandData) async {
+setmyDemand(DemandData demandData) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   iduser = preferences.getString('userID');
     String h = demandData.id;

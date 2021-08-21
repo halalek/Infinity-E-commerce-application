@@ -53,6 +53,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    }
 
   final ProductData productData;
+
   int count=1;
   int point=0;
   //String _note='ملاحظات أضافية (اختياري)';
@@ -102,7 +103,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
    }
   @override
   Widget build(BuildContext context) {
-
+      if(marketData!=null)
+    {productData.nameMarket=marketData.nameAr;}
     Search();
     return  Container(
       height:400,
@@ -308,7 +310,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                             Navigator.pop(context);
                                             Navigator.pop(context);
                                             Navigator.pop(context);
-                                            Navigator.pop(context);
+                                           Navigator.pop(context);
                                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Comparison(productData)) );
                                             },
                                           ),

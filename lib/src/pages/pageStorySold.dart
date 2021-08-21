@@ -115,18 +115,18 @@ class _MoreStoriesState extends StateMVC<MoreStories> {
                     ),
                     Text(
                       _soldData.name_market_ar,
-                      style: TextStyle(fontSize: 18.0),
+                      style: TextStyle(fontSize: 18.0,color: Colors.red[300]),
                     )
                   ],
                 ),
                 ListTile(
                   title: Text(
                     _soldData.name_ar,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                   ),
                   subtitle: Text(_soldData.description_ar,
                       style:
-                      TextStyle(fontSize: 14)),
+                      TextStyle(fontSize: 14,color: Theme.of(context).primaryColor)),
                   trailing: Text(
                     _soldData.price.toString(),
                     style: TextStyle(

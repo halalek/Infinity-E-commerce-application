@@ -37,8 +37,8 @@ class CardSoldWidget extends StatelessWidget {
               // leading:
               // CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon),),
               leading:  CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(soldData.image_icon),),
-              title: Text(soldData.name_ar,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-              subtitle: Text( soldData.description_ar),
+              title: Text(soldData.name_ar,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.red[300]),),
+              subtitle: Text( soldData.description_ar,style: TextStyle(color: Theme.of(context).primaryColor)),
 
               trailing:
               GestureDetector(

@@ -68,7 +68,7 @@ class _Page1 extends StateMVC<Page1> {
               child:
               Row(children: [
                 Icon(Icons.search,color: Theme.of(context).primaryColorDark,),
-                Text("Search query here... ",style: TextStyle(fontSize: 15),),
+                Text("Search query here... ",style: TextStyle(fontSize: 15,color: Theme.of(context).primaryColor),),
               ],),
 
               decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class _Page1 extends StateMVC<Page1> {
                   Text(
                     "عروضنا مابتخلص ",
                     textAlign: TextAlign.start,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
                   )
               ),
 
@@ -174,13 +174,14 @@ class _Page1 extends StateMVC<Page1> {
                     margin: EdgeInsets.all(20),
                     child: Row(
                       children: [
+
+                        Text(
+                          "مفضلتي",
+                          style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
+                        ),
                         Icon(
                           Icons.favorite,
                           color: Colors.red,
-                        ),
-                        Text(
-                          "مفضلتي",
-                          style: TextStyle(fontSize: 15, color: Colors.black),
                         ),
                       ],
                     ),
@@ -237,13 +238,15 @@ class _Page1 extends StateMVC<Page1> {
                     margin: EdgeInsets.all(20),
                     child: Row(
                       children: [
+
+                        Text(
+                          "الأطباق المقترحة",
+                          style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
+                        ),
+
                         Icon(
                           Icons.whatshot,
                           color: Colors.red,
-                        ),
-                        Text(
-                          "الأطباق المقترحة",
-                          style: TextStyle(fontSize: 15, color: Colors.black),
                         ),
                       ],
                     ),
@@ -350,6 +353,7 @@ class _Page1 extends StateMVC<Page1> {
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
+
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: _con.listProductFav.length,
@@ -359,8 +363,9 @@ class _Page1 extends StateMVC<Page1> {
                               shape: CutCornerShape(
                                   borderRadius: BorderRadius.circular(20)
                               ),
-                              child: Container(child: CardFavoriteWidget(
-                                  productData: _con.listProductFav[index]),color: Colors.white,
+                              child: Container(
+                                child: CardFavoriteWidget(
+                                  productData: _con.listProductFav[index]),color: Theme.of(context).cardColor,
                               ),)
                     // Card(
                     // child: Center(child: Text('Dummy Card Text')),
@@ -433,7 +438,7 @@ class _Page1 extends StateMVC<Page1> {
                             ),
 
                             child:Container(child: CardFavoriteWidget(productData: _con
-                                .listProductSug[index]),color: Colors.white,)
+                                .listProductSug[index]),color: Theme.of(context).cardColor,)
 
                         )
 

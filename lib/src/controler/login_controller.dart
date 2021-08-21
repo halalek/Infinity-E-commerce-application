@@ -180,7 +180,7 @@ class LoginController extends ControllerMVC {
       if (value == null) {
         print("error login");
       } else {
-        loading = true;
+        loading = true; 
 
         print("Sucsess login");
         SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -190,12 +190,8 @@ class LoginController extends ControllerMVC {
             "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" + value.id);
         Navigator.pop(context); //pop dialog ////////////////////g
         Navigator.pop(context); //pop login///////////////////// g
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => StartMain(),
-          ),
-        ); /////////////g
+       // Navigator.pushReplacement('/e'); /////////////g
+        Navigator.of(context).pushReplacementNamed('/e');
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: ( context)=> PageMain(),),);
         //    print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
         // varifyController. Checkemail();
@@ -286,7 +282,7 @@ class LoginController extends ControllerMVC {
         );
       },
     );
-    new Future.delayed(new Duration(seconds: 30), () {
+    new Future.delayed(new Duration(seconds: 33), () {
       if (!loading) {
         Navigator.pop(context); //pop dialog
         _onLoadingError();
