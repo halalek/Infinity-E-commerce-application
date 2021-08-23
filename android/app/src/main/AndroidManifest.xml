@@ -18,7 +18,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="structurepublic"
+        android:label="Infinity"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

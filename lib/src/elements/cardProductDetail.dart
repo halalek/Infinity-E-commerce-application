@@ -145,10 +145,10 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                         productData.nameAr,
                                         style: TextStyle(
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,color: Colors.black),
                                       ),
                                       subtitle: Text(
-                                         productData.description_ar),
+                                         productData.description_ar,style: TextStyle(color: Colors.black),),
 
                                       trailing: GestureDetector(
                                         child: Text(
@@ -180,7 +180,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                         ),
 
                                         new Text('$count',
-                                            style: new TextStyle(fontSize: 20.0)),
+                                            style: new TextStyle(fontSize: 20.0,color: Colors.black)),
 
                                         new MaterialButton(
                                           onPressed: minus,
@@ -230,6 +230,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                                    decoration: InputDecoration(
                                                       // border: OutlineInputBorder(),
                                                        hintText: 'ملاحظات أضافية (اختياري)',
+                                                     hintStyle: TextStyle(color: Colors.black)
                                                      //prefixIcon: Icon(Icons.mic),
                                                    ),
                                                   // onTap: _onSound,
@@ -286,7 +287,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                               borderRadius: BorderRadius.circular(8.0),
                                             ),
                                             child:
-                                            Center(child: Text("إضافة",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                            Center(child: Text("إضافة",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
                                             ),
                                           ),
                                             onTap: (){

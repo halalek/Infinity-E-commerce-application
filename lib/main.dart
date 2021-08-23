@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:structurepublic/src/helpers/app_config.dart';
 import 'package:structurepublic/src/models/user.dart';
+import 'package:structurepublic/src/pages/chat.dart';
+import 'package:structurepublic/src/pages/chat_user.dart';
 import 'package:structurepublic/src/pages/convertSoundtoText.dart';
 import 'package:structurepublic/src/pages/editProfil.dart';
 import 'package:structurepublic/src/pages/loginNumber.dart';
@@ -23,7 +25,7 @@ import 'src/helpers/app_config.dart' as config;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:structurepublic/src/pages/mydemand.dart';
-
+import 'package:dcdg/dcdg.dart';
 var user1;
 var color1;
 Future<void> main() async {
@@ -97,6 +99,9 @@ class _MyAppState extends State<MyApp>  {
               //debugShowMaterialGrid: false,
               title: "",
               home:
+              //MyHomePage(),
+              //MyHomePage(),
+              //PageChatUser(),
              (user1 == null ? WelcomePage() :  Pagemain1()),
             //  PageMarket(),
           //    Pagemain1(),/////////baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

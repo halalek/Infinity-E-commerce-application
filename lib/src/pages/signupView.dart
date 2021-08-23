@@ -62,7 +62,7 @@ class _SignupMain extends StateMVC<SignupMain> {
 
   Widget build(BuildContext context) {
 
-    return MaterialApp( locale:Locale('en'),home: Scaffold(
+    return MaterialApp( locale:Locale('en'),  debugShowCheckedModeBanner: false,home: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(

@@ -202,7 +202,7 @@ class _LoginEmail extends StateMVC<LoginEmail> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( locale:Locale('en'),home:
+    return MaterialApp( locale:Locale('en'),  debugShowCheckedModeBanner: false,home:
       Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

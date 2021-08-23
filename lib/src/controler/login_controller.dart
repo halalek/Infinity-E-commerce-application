@@ -484,7 +484,7 @@ class LoginController extends ControllerMVC {
                         Text(
                           "A message was sent to check the email.. ",
                           style: new TextStyle(
-                              color: Colors.red[300], fontSize: 14),
+                              color: Colors.red[300], fontSize: 12),
                         ),
                         Text(
                           "",

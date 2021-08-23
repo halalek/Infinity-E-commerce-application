@@ -6,9 +6,11 @@ import 'package:splashscreen/splashscreen.dart';
 import 'package:structurepublic/src/controler/login_controller.dart';
 import 'package:structurepublic/src/controler/logout_controller.dart';
 import 'package:structurepublic/src/controler/start_controller.dart';
+import 'package:structurepublic/src/pages/chat_user.dart';
 import 'package:structurepublic/src/pages/pageSold.dart';
 import 'package:structurepublic/src/pages/page_1.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
+import 'package:structurepublic/src/pages/page_webinfinity.dart';
 import 'package:structurepublic/src/pages/page_welcome.dart';
 import 'package:structurepublic/src/pages/privacy_policy.dart';
 import 'package:structurepublic/src/pages/profil.dart';
@@ -187,10 +189,14 @@ bool show=true;
       container =  Page1();
     }
     else if (currentPage == DrawerSections.contact_support) {
-      container = Common_questionsPage();
+      container = LinkifyExample();
     }
     else if (currentPage == DrawerSections.Them) {
      _ThemDialog();
+    }
+    //PageChatUser
+    else if (currentPage == DrawerSections.chat) {
+      container = PageChatUser();
     }
     else if (currentPage == DrawerSections.settings) {
       container = SettingsPage();
@@ -210,17 +216,6 @@ bool show=true;
               width: 200,
               height: 50,
             ),),
-    // SizedBox(
-    // width: 20.0,
-    // height: 20.0,
-    // child:GestureDetector(
-    // child: Icon(Icons.refresh,),
-    //   onTap: () {
-    // Navigator.pushReplacement(
-    //           context,
-    //           MaterialPageRoute(
-    //             builder: (BuildContext context) =>   StartMain(),));},
-    // ))
 
 
           ],)
@@ -351,23 +346,12 @@ bool show=true;
 
         children: [
           menuItem(1, "Chat", Icons.chat,
-              currentPage == DrawerSections.page_Main_View ? true : false),
+              currentPage == DrawerSections.chat ? true : false),
           menuItem(2, "Common questions", Icons.youtube_searched_for,
               currentPage == DrawerSections.contact_support ? true : false),
-          // menuItem(3, "Events", Icons.event,
-          //     currentPage == DrawerSections.events ? true : false),
-          // menuItem(4, "Profile", Icons.account_circle,
-          //     currentPage == DrawerSections.Profile ? true : false),
           Divider(),
           menuItem(5, "Settings", Icons.settings,
               currentPage == DrawerSections.settings ? true : false),
-
-
-          // menuItem(6, "Notifications", Icons.notifications_none,
-          //     currentPage == DrawerSections.notifications ? true : false),
-          // Divider(),
-          // menuItem(7, "Privacy policy", Icons.fingerprint,
-          //     currentPage == DrawerSections.privacy_policy ? true : false),
           menuItem(8, "Exit", Icons.label_important, set),
         ],
       ),
@@ -384,7 +368,7 @@ bool show=true;
           Navigator.pop(context);
           setState(() {
             if (id == 1) {
-              currentPage = DrawerSections.page_Main_View;
+              currentPage = DrawerSections.chat;
             } else if (id == 2) {
               currentPage = DrawerSections.contact_support;
             } else if (id == 5) {
@@ -584,6 +568,7 @@ enum DrawerSections {
   page_Main_View,
   contact_support,
   settings,
+  chat,
   Them,
   notifications,
   privacy_policy,

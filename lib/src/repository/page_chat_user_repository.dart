@@ -23,7 +23,7 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
 bool bz=false;
 //LocationData locationData;
-Future<List<MarketData>> getMarket(SectionData sectionData) async {
+Future<List<MarketData>> getAdminMarket() async {
   List<MarketData> list = [];
 
   // DateTime now = DateTime.now();
@@ -35,18 +35,19 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
 
 
   await FirebaseFirestore.instance
-      .collection("market").where("id_section",isEqualTo:sectionData.id.toString()).where("hide",isEqualTo:false).get()
+      .collection("market").get()
       .then((value) {
-   for(int i=0;i<value.docs.length;i++){
-     MarketData marketData=MarketData.fromJson(value.docs[i].data());
+    for(int i=0;i<value.docs.length;i++){
+      MarketData marketData=MarketData.fromJson(value.docs[i].data());
 //
+
       int timeInMillisopen = marketData.timesTampOpen;
       int timeInMillisclose = marketData.timesTampClose;
       var date = DateTime.fromMillisecondsSinceEpoch(timeInMillisopen);
-     var formattedDate = DateFormat('HH:mm a').format(date); // 12/31, 11:59 pm
+      var formattedDate = DateFormat('HH:mm a').format(date); // 12/31, 11:59 pm
 //
 //
-     marketData.timeOpen=formattedDate.toString();
+      marketData.timeOpen=formattedDate.toString();
 //      var timeopenhour=DateFormat('HH ').format(date);
 //      var timeopenminit=DateFormat('mm ').format(date);
       var dateclose = DateTime.fromMillisecondsSinceEpoch(timeInMillisclose);
@@ -54,9 +55,9 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
       marketData.timeClose=formattedDateclose.toString();
       print("timeClose "  +   marketData.timeOpen    +  " "  + marketData.timeClose);
       if(marketData.active)
-        {
-          marketData.state="متصل";
-        }
+      {
+        marketData.state="متصل";
+      }
       else{marketData.state="غير متصل";}
 //      var timeclose=DateFormat('HH ').format(dateclose);
 //      var timecloseminit=DateFormat('mm ').format(dateclose);
@@ -97,12 +98,12 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
 //   {
 //     marketData.state="غير متصل ";
 //   }
-print(" 7777777777777777777777777777"  + marketData.state );
-     list.add(marketData);
+      print(" 7777777777777777777777777777"  + marketData.state );
+      list.add(marketData);
 
     }
 
-      }
+  }
   ).catchError((e) {});
 
   return list;
@@ -122,18 +123,18 @@ print(" 7777777777777777777777777777"  + marketData.state );
 
 
 //Future<List<SectionData>> getMarket() async {
-  // List<SectionData> list = [];
-  // await FirebaseFirestore.instance
-  //     .collection("market")
-  //     .get()
-  //     .then((value) {
-  //       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-  //
-  //
-  //   // for(int i=0;i<value.docs.length;i++){
-  //   //   list.add(SectionData.fromJson(value.docs[i].data()));
-  //   // }
-  // })
-  //     .catchError((e) {});
-  // //return list;
+// List<SectionData> list = [];
+// await FirebaseFirestore.instance
+//     .collection("market")
+//     .get()
+//     .then((value) {
+//       print("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+//
+//
+//   // for(int i=0;i<value.docs.length;i++){
+//   //   list.add(SectionData.fromJson(value.docs[i].data()));
+//   // }
+// })
+//     .catchError((e) {});
+// //return list;
 //}

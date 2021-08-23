@@ -63,7 +63,7 @@ class _WelcomePage extends State<WelcomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( locale:Locale('en'),home:Scaffold(
+    return MaterialApp( locale:Locale('en'),  debugShowCheckedModeBanner: false,home:Scaffold(
       // appBar: AppBar(
       //   title: Text("Introduction Screen"),
       // ),
