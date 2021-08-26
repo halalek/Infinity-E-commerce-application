@@ -57,8 +57,9 @@ Future<List<MarketData>> getAdminMarket() async {
       if(marketData.active)
       {
         marketData.state="متصل";
+        marketData.stateEn="online";
       }
-      else{marketData.state="غير متصل";}
+      else{marketData.state="غير متصل";marketData.stateEn="offline";}
 //      var timeclose=DateFormat('HH ').format(dateclose);
 //      var timecloseminit=DateFormat('mm ').format(dateclose);
 //      print(" formattedDateopen   " +   formattedDate   +  "   formattedDateclose  " +   formattedDateclose );

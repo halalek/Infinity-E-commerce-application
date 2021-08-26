@@ -6,6 +6,8 @@ import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/categorizeView.dart';
 
+import '../../main.dart';
+
 class CardMarketSearch extends StatelessWidget {
   Color stateColor=Colors.white;
   CardMarketSearch({Key key,this.marketData}) : super(key: key);
@@ -38,12 +40,12 @@ class CardMarketSearch extends StatelessWidget {
               leading:
               CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon),),
 
-              title: Text(marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-              subtitle: Text( marketData.descriptionAr),
+              title: Text(language1=="en" ? marketData.nameEn : marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
+              subtitle: Text( language1=="en" ? marketData.descriptionEn : marketData.descriptionAr),
 
               trailing:
               GestureDetector(
-                child: Text(marketData.state.toString(), style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w500),),
+                child: Text(language1=="en" ? marketData.stateEn : marketData.state.toString(), style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w500),),
                 // child:Icon(Icons.access_time, color: Colors.grey,),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Categorize(marketData)) );

@@ -1,3 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structurepublic/src/models/setting.dart';
+
+import '../../main.dart';
+
 class SectionData {
   SectionData({
     this.image,
@@ -13,7 +18,14 @@ class SectionData {
   String nameAr;
   String id;
   int timesTamp;
-  String nameEn;
+  String nameEn="";
+
+
+   String nameLanguage(){
+  if(language1=="en")
+    return nameEn;
+  else return nameAr ;
+  }
 
   factory SectionData.fromJson(Map<String, dynamic> json) => SectionData(
     image: json["image"] == null ? null : json["image"],

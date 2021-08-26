@@ -18,6 +18,8 @@ import 'package:structurepublic/src/models/DemandData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/pages/pageTrollery.dart';
 
+import '../../main.dart';
+
 
 
 
@@ -280,13 +282,13 @@ class  _Categorize extends StateMVC<Categorize>
           items: [
             BottomNavigationBarItem(
               icon:Icon(Icons.arrow_back,color: Theme.of(context).primaryColorLight,),
-              title: Text("عودة",style: TextStyle(color: Theme.of(context).primaryColorLight ),),
+              title: Text(language1=="en" ? "back" :"عودة",style: TextStyle(color: Theme.of(context).primaryColorLight ),),
               backgroundColor:Colors.white38,
             ),
 
             BottomNavigationBarItem(
               icon:Icon(Icons.local_grocery_store,color: Theme.of(context).primaryColorLight,),
-              title: Text(" عرض السلة",style: TextStyle(color: Theme.of(context).primaryColorLight),),
+              title: Text(language1=="en" ?"view card" :" عرض السلة",style: TextStyle(color: Theme.of(context).primaryColorLight),),
               // backgroundColor:Colors.white38,
             ),
 

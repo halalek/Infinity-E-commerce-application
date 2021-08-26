@@ -1,18 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structurepublic/main.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/marketView.dart';
 
 import 'cardmarketWidget.dart';
-
+String nameSection;
 class CardWidget extends StatelessWidget {
   const CardWidget( { key,this.sectionData}) : super(key: key);
-
   final SectionData sectionData;
 
-
   @override
+
   Widget build(context) {
     return  Container(
       height: 200,
@@ -26,10 +27,7 @@ class CardWidget extends StatelessWidget {
           Center(
             child: RaisedButton(
             onPressed: () {
-
               Navigator.push(context, MaterialPageRoute(builder: (context) => PageMarket(sectionData)) );
-
-
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(80.0),),
@@ -50,7 +48,9 @@ class CardWidget extends StatelessWidget {
                 BoxConstraints(maxWidth: 100.0, minHeight: 40.0,maxHeight: 50),
                 alignment: Alignment.center,
                 child: Text(
-                  sectionData.nameAr,
+                  //sectionData.nameAr,
+                  language1=="en" ? sectionData.nameEn : sectionData.nameAr,
+                  //sectionData.nameLanguage(),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -86,6 +86,14 @@ class CardWidget extends StatelessWidget {
 
       ),
     );
+  }
+
+
+  nameLanguage()
+  async {SharedPreferences preferences = await SharedPreferences.getInstance();
+  var language = preferences.getString('language');
+  language=="en" ?  nameSection=sectionData.nameEn : nameSection=sectionData.nameAr ;
+
   }
 }
 

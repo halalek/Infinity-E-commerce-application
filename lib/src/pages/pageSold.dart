@@ -19,6 +19,8 @@ import 'package:structurepublic/src/pages/page_Main_View.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 
+import '../../main.dart';
+
 class PageSold extends StatefulWidget {
   PageSold();
 
@@ -43,7 +45,7 @@ class _PageSold extends StateMVC<PageSold> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text(" العروض "),
+          title: Text(language1=="en" ? "Offers" :" العروض "),
           backgroundColor: Theme.of(context).primaryColorDark,
         ),
         body:   ListView.builder(
@@ -316,6 +318,7 @@ class _PageSold extends StateMVC<PageSold> {
                   //  color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Home" :
                   "الرئيسية",
                   // style: TextStyle(color: Colors.black45),
                 ),
@@ -327,6 +330,7 @@ class _PageSold extends StateMVC<PageSold> {
                   //  color: Theme.of(context).primaryColorLight,
                 ),
                 title: Text(
+                  language1=="en" ? "Shopping " :
                   "التسوق",
                   //  style: TextStyle(color: Theme.of(context).primaryColorLight),
                 ),
@@ -338,6 +342,7 @@ class _PageSold extends StateMVC<PageSold> {
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Offers " :
                   "العروض",
                   //  style: TextStyle(color: Colors.black45),
                 ),
@@ -349,6 +354,7 @@ class _PageSold extends StateMVC<PageSold> {
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Profile" :
                   "حسابك",
                   //   style: TextStyle(color: Colors.black45),
                 ),

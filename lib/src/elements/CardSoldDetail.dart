@@ -5,6 +5,8 @@ import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SoldData.dart';
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart';
 
+import '../../main.dart';
+
 class CardSoldDetailWidget extends StatefulWidget {
   final SoldData soldData;
 
@@ -26,7 +28,7 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
   var _snackBar1 = SnackBar(
     content: Center(
       child: Text(
-        'تم الإضافة إلى السلة ',
+        language1=="en" ? "Added to cart" :'تم الإضافة إلى السلة ',
         style: TextStyle(fontSize: 25),
       ),
     ),
@@ -61,7 +63,7 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
               width: 280, //MediaQuery.of(context).size.width,
               height: 600,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
               child: Column(
                 children: [
@@ -83,11 +85,11 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
                       children: [
                         ListTile(
                           title: Text(
-                            soldData.name_ar,
+                            language1=="en" ? soldData.name_en : soldData.name_ar,
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                           ),
-                          subtitle: Text(soldData.description_ar),
+                          subtitle: Text(language1=="en" ? soldData.description_en :  soldData.description_ar,style: TextStyle(color: Theme.of(context).primaryColor)),
                           trailing: Text(
                             soldData.price.toString(),
                             style: TextStyle(
@@ -106,11 +108,11 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
                             borderWidth: 1,
                             //optional
                           ),
-                          child: Text(
-                            "  السعر قبل العرض   " + soldData.price_last.toString() +" ",
+                          child: Text((language1=="en" ? "Price before sale " :
+                            "  السعر قبل العرض   " )+ soldData.price_last.toString() ,
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 18,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
@@ -122,18 +124,18 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
                                 onPressed: add,
                                 child: new Icon(
                                   Icons.add,
-                                  color: Colors.black,
+                                  color:Theme.of(context).primaryColor,
                                 ),
                                 // backgroundColor: Colors.white,
                               ),
                               new Text('$count',
-                                  style: new TextStyle(fontSize: 20.0)),
+                                  style: new TextStyle(fontSize: 20.0,color: Theme.of(context).primaryColor)),
                               new MaterialButton(
                                 onPressed: minus,
                                 child: new Icon(
                                     const IconData(0xe15b,
                                         fontFamily: 'MaterialIcons'),
-                                    color: Colors.black),
+                                    color: Theme.of(context).primaryColor),
                                 //   backgroundColor: Colors.white,
                               ),
                             ],
@@ -143,7 +145,8 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
                         Expanded(child: TextField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              hintText: 'ملاحظات أضافية (اختياري)'
+                              hintText: language1=="en" ? "Note (Optional)" :  'ملاحظات أضافية (اختياري)',
+                            hintStyle: TextStyle(color: Theme.of(context).primaryColor)
                           ),
                         ),),
 
@@ -161,11 +164,11 @@ class _CardSoldDetailWidget extends State<CardSoldDetailWidget> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   child: Center(
-                                    child: Text(
+                                    child: Text(language1=="en" ? "Add" :
                                       "إضافة",
                                       style: TextStyle(
                                           fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                                     ),
                                   ),
                                 ),

@@ -12,6 +12,8 @@ import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
+import '../../main.dart';
+
 class PageMarket extends StatefulWidget
 {
   final SectionData sectionData;
@@ -45,7 +47,7 @@ class  _PageMarket extends StateMVC<PageMarket>
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(sectionData.nameAr),
+        title: Text(language1=="en" ? sectionData.nameEn :  sectionData.nameAr),
         backgroundColor: Theme.of(context).primaryColorDark,
 
       ),

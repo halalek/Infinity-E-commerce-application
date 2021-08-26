@@ -9,6 +9,8 @@ import 'package:structurepublic/src/models/SoldData.dart';
 import 'package:structurepublic/src/pages/categorizeView.dart';
 import 'package:structurepublic/src/pages/pageSoldDetail.dart';
 
+import '../../main.dart';
+
 class CardSoldWidget extends StatelessWidget {
   const CardSoldWidget({Key key,this.soldData}) : super(key: key);
 
@@ -37,8 +39,8 @@ class CardSoldWidget extends StatelessWidget {
               // leading:
               // CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon),),
               leading:  CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(soldData.image_icon),),
-              title: Text(soldData.name_ar,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.red[300]),),
-              subtitle: Text( soldData.description_ar,style: TextStyle(color: Theme.of(context).primaryColor)),
+              title: Text(language1=="en" ? soldData.name_en :soldData.name_ar,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.red[300]),),
+              subtitle: Text( language1=="en" ? soldData.description_en : soldData.description_ar,style: TextStyle(color: Theme.of(context).primaryColor)),
 
               trailing:
               GestureDetector(

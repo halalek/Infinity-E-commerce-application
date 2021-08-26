@@ -44,7 +44,7 @@ class SearchProductController extends ControllerMVC {
     //getProductsSearch();
   }
 
-  getProductsSearch(String _chosenValue) async {
+  getProductsSearch(String _chosenValue,String langname) async {
       listProduct.clear();
       listMarket.clear();
       print("clearrrrrrrrrrrrrrrrrrrrrrrrrrrr");
@@ -52,7 +52,7 @@ class SearchProductController extends ControllerMVC {
 
     _onLoading();
     print( "eeeeeeeeeeeeeeeeee" +listProduct.length.toString()  + search.text);
-    await repo.getProductSearch(search.text).then((value) {
+    await repo.getProductSearch(search.text,langname).then((value) {
       setState(() {
         listProduct.addAll(value);
         if(_chosenValue=='سعر المنتجات')
@@ -76,7 +76,7 @@ class SearchProductController extends ControllerMVC {
 
 
 
-      await repo.getMarketSearch(search.text).then((value) {
+      await repo.getMarketSearch(search.text,langname).then((value) {
         setState(() {
           listMarket.addAll(value);
           if(_chosenValue=='المطاعم الأعلى تقييماً')

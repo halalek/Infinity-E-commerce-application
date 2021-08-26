@@ -18,6 +18,7 @@ import 'package:structurepublic/src/pages/settings.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
 import '../../generated/l10n.dart';
+import '../../main.dart';
 import '../controler/user_controller.dart';
 import '../elements/BlockButtonWidget.dart';
 import '../helpers/app_config.dart' as config;
@@ -28,6 +29,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'chat_userdalal.dart';
 import 'contact_support.dart';
 
 import 'events.dart';
@@ -196,7 +198,10 @@ bool show=true;
     }
     //PageChatUser
     else if (currentPage == DrawerSections.chat) {
-      container = PageChatUser();
+     container = PageChatUser();
+     // container = PageChatUserdala("0icEpHVaoMlDk6ijQXNk");
+      //0icEpHVaoMlDk6ijQXNk
+     // PageChatUserdala();
     }
     else if (currentPage == DrawerSections.settings) {
       container = SettingsPage();
@@ -230,7 +235,7 @@ bool show=true;
 
 
           child: Container(
-            color: dark,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: SingleChildScrollView(
               child: Stack(
 
@@ -265,6 +270,7 @@ bool show=true;
                   //  color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Home" :
                   "الرئيسية",
                   // style: TextStyle(color: Colors.black45),
                 ),
@@ -276,6 +282,7 @@ bool show=true;
                   //  color: Theme.of(context).primaryColorLight,
                 ),
                 title: Text(
+                  language1=="en" ? "Shopping " :
                   "التسوق",
                   //  style: TextStyle(color: Theme.of(context).primaryColorLight),
                 ),
@@ -287,6 +294,7 @@ bool show=true;
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Offers " :
                   "العروض",
                   //  style: TextStyle(color: Colors.black45),
                 ),
@@ -298,6 +306,7 @@ bool show=true;
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Profile" :
                   "حسابك",
                   //   style: TextStyle(color: Colors.black45),
                 ),
@@ -346,7 +355,7 @@ bool show=true;
 
         children: [
           menuItem(1, "Chat", Icons.chat,
-              currentPage == DrawerSections.chat ? true : false),
+              currentPage == DrawerSections.chat ? true : false,),
           menuItem(2, "Common questions", Icons.youtube_searched_for,
               currentPage == DrawerSections.contact_support ? true : false),
           Divider(),
@@ -389,7 +398,7 @@ bool show=true;
                 child: Icon(
                   icon,
                   size: 20,
-                  color: darkfont,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
               Expanded(
@@ -397,7 +406,7 @@ bool show=true;
                 child: Text(
                   title,
                   style: TextStyle(
-                    color: darkfont,
+                    color: Theme.of(context).primaryColor,
                     fontSize: 16,
                     fontFamily: font,
                   ),

@@ -20,7 +20,7 @@ class MarketData {
 
   String image;
   String imageIcon;
-  String descriptionEn;
+  String descriptionEn="";
   String descriptionAr;
   String idSection;
   double long;
@@ -31,8 +31,9 @@ class MarketData {
   bool hide;
   String nameAr;
   String id;
-  String nameEn;
-  String state;
+  String nameEn="";
+  String state="";
+  String stateEn="";
   num rate;
   bool active;
   double lat; //location DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
@@ -48,16 +49,16 @@ class MarketData {
     rate: json["rating"] == null ? null : json["rating"],
     imageIcon: json["image_icon"] == null ? null : json["image_icon"],
     hide: json["hide"] == null ? null : json["hide"],
-    descriptionEn: json["description_en"] == null ? null : json["description_en"],
-    descriptionAr: json["description_ar"] == null ? null : json["description_ar"],
+    descriptionEn: json["description_en"] == null ? "" : json["description_en"],
+    descriptionAr: json["description_ar"] == null ? "" : json["description_ar"],
     idSection: json["id_section"] == null ? null : json["id_section"],
     lat: json["lat"] == null ? null : json["lat"],
     long: json["long"] == null ? null : json["long"],
-    nameAr: json["name_ar"] == null ? null : json["name_ar"],
+    nameAr: json["name_ar"] == null ? "" : json["name_ar"],
     id: json["id"] == null ? null : json["id"],
     timesTampClose: json["timesTampClose"] == null ? null : json["timesTampClose"],
     timesTampOpen: json["timesTampOpen"] == null ? null : json["timesTampOpen"],
-    nameEn: json["name_en"] == null ? null : json["name_en"],
+    nameEn: json["name_en"] == null ? "" : json["name_en"],
     active: json["active"] == null ? null : json["active"],
       //owners = json['owners'].cast<String>()
     owners:  json['owners'].cast<String>(),

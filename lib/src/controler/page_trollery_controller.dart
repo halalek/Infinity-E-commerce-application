@@ -19,6 +19,7 @@ import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 import 'package:structurepublic/src/repository/coupon_repository.dart'
 as repo;
 import '../../generated/l10n.dart';
+import '../../main.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -198,6 +199,7 @@ print(d.product.length);
                   margin: const EdgeInsets.only(top: 15.0),
                   child: new Center(
                     child: new Text(
+                      language1=="en" ? "The request is sent" :
                       "جاري ارسال الطلب ",
                       style: new TextStyle(color: Colors.red, fontSize: 21),
                     ),
@@ -250,7 +252,7 @@ print(d.product.length);
                   margin: const EdgeInsets.only(top: 18.0),
                   child: new Center(
                     child: new Text(
-                     coupon.toString() + " تم التفعيل  لديك خصم بقيمة ",
+                     coupon.toString() + language1=="en" ? "You have a discount of" : " تم التفعيل  لديك خصم بقيمة ",
                       style: new TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),

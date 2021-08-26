@@ -11,6 +11,8 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
+
 
 
 class MyAppcon extends StatefulWidget {
@@ -65,9 +67,13 @@ class _MyAppState extends State<MyAppcon> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
 
-        body: Column(children: [
+        body: Container(color:Theme.of(context).scaffoldBackgroundColor,
+
+    child:
+        Column(children: [
 
           Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Column(
               children: <Widget>[
              Text("",style: TextStyle(fontSize: 100),),
@@ -92,32 +98,15 @@ class _MyAppState extends State<MyAppcon> {
             ),
           ),
 
-                // Center(
-                //   child: Text(
-                //     'Recognized Words',
-                //     style: TextStyle(fontSize: 22.0),
-                //   ),
-                // ),
 
                 Column(
                     children: <Widget>[
                       Text("",style: TextStyle(fontSize: 50),),
-                      // Container(
-                      //
-                      //   color: Theme.of(context).selectedRowColor,
-                      //   padding: EdgeInsets.only(bottom: 100),
-                      //   child: Center(
-                      //     child: Text(
-                      //       lastWords,
-                      //       textAlign: TextAlign.center,
-                      //     ),
-                      //   ),
-                      // ),
                      Center(
                           child: Text(
                             lastWords,
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20,color: Theme.of(context).primaryColor),
                           ),
                         ),
                       Text("",style: TextStyle(fontSize: 50),),
@@ -129,34 +118,7 @@ class _MyAppState extends State<MyAppcon> {
                                     : startListening,
                               ),
 
-                      // Positioned.fill(
-                      //   bottom: 100,
-                      //   child: Align(
-                      //     alignment: Alignment.bottomCenter,
-                      //     child: Container(
-                      //       width: 40,
-                      //       height: 40,
-                      //       alignment: Alignment.center,
-                      //       decoration: BoxDecoration(
-                      //         boxShadow: [
-                      //           BoxShadow(
-                      //               blurRadius: .26,
-                      //               spreadRadius: level * 1.5,
-                      //               color: Colors.black.withOpacity(.05))
-                      //         ],
-                      //         color: Colors.white,
-                      //         borderRadius:
-                      //         BorderRadius.all(Radius.circular(50)),
-                      //       ),
-                      //       child: IconButton(
-                      //         icon: Icon(Icons.mic),
-                      //         onPressed: !_hasSpeech || speech.isListening
-                      //             ? null
-                      //             : startListening,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+
               ],
             ),
 
@@ -184,7 +146,7 @@ class _MyAppState extends State<MyAppcon> {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child:
-            Center(child: Text("  إضافة الملاحظة ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            Center(child: Text( language1=="en" ? "Add a Note" : "  إضافة الملاحظة ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor,),),
             ),
           ),
             onTap: (){
@@ -196,7 +158,7 @@ class _MyAppState extends State<MyAppcon> {
           ),
         ]),
       ),
-    );
+      ));
   }
 
   void startListening() {

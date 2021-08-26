@@ -16,6 +16,7 @@ import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 
+import '../../main.dart';
 import 'page_Main_View.dart';
 
 List<ProductData> list = [];
@@ -90,7 +91,7 @@ class _Comparison extends StateMVC<Comparison> {
                   )
                 ),
                 child: Center(
-                  child: Text(
+                  child: Text(language1=="en" ? "Select" :
                     "اختر المنتج ",
                     style: TextStyle(
                         color: Colors.black,
@@ -148,9 +149,10 @@ class _Comparison extends StateMVC<Comparison> {
 
 
               Text("",style: TextStyle(fontSize: 10),),
-          SingleChildScrollView(child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          SingleChildScrollView(scrollDirection:Axis.horizontal,child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
 
-            if (list.length >= 1)
+
+            if (list.length >= 1 )
               CardProductcomp(
                 productData: list[0],
               ),

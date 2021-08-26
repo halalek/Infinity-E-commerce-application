@@ -10,6 +10,7 @@ import 'package:structurepublic/src/pages/marketView.dart';
 import 'package:structurepublic/src/pages/pageFavority.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
 
+import '../../main.dart';
 import 'cardmarketWidget.dart';
 import 'package:intl/intl.dart';
 class CardFavoriteWidget extends StatelessWidget {
@@ -93,6 +94,7 @@ class CardFavoriteWidget extends StatelessWidget {
                   child: Image(image:CachedNetworkImageProvider(productData.image),fit: BoxFit.cover,width: 125, height: 100,),
                 ),
                 onTap: (){
+
                   categorizeDataa.id = productData.id_categorize;
                   print("bbbbbbbbbbbbbbbbbbb"  + productData.id_categorize);
                   print("aaaaaaaaaaaaaaaaaaaa"  + categorizeDataa.id);
@@ -100,8 +102,10 @@ class CardFavoriteWidget extends StatelessWidget {
                   // var formatter = new DateFormat('yyyy-MM-dd');
                   // String formattedDate = formatter.format(now);
                   // print("aaaaaaaaaaaaaaaaaaaa"  + formattedDate);
-
-
+                //  count=1;
+                  countt=1;
+                  print("44444444444444444444444444444444444444444444444");
+                  print(countt);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PageFavority(productData)//ProductDetail(productData,categorizeDataa)
                   ));
 
@@ -114,8 +118,7 @@ class CardFavoriteWidget extends StatelessWidget {
                 // margin: EdgeInsets.only(left: 15),
 
                 child: Center(
-                  child: Text(
-                    productData.nameAr,
+                  child: Text( language1=="en" ? productData.nameEn : productData.nameAr,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,

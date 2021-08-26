@@ -14,8 +14,11 @@ import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
+
+
 class PageFavority extends StatefulWidget
 {
+
    ProductData productData;
    MarketData marketData;
  // final SectionData sectionData;

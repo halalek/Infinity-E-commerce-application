@@ -11,6 +11,8 @@ import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/productsView.dart';
 
+import '../../main.dart';
+
 
 // ignore: must_be_immutable
 class CardCategorizeWidget extends StatelessWidget {
@@ -109,7 +111,7 @@ class CardCategorizeWidget extends StatelessWidget {
                   BoxConstraints(maxWidth: 100.0, minHeight: 40.0,maxHeight: 50),
                   alignment: Alignment.center,
                   child: Text(
-                    categorizeData.nameAr,
+                    language1=="en" ? categorizeData.nameEn : categorizeData.nameAr,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black, fontSize: 15),
                   ),

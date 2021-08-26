@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:shape_of_view/shape_of_view.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:structurepublic/generated/l10n.dart';
 import 'package:structurepublic/src/controler/page_favority_controller.dart';
 import 'package:structurepublic/src/controler/page_sold_controller.dart';
 import 'package:structurepublic/src/elements/cardFavorite.dart';
 import 'package:structurepublic/src/elements/cardStorySold.dart';
+import 'package:structurepublic/src/helpers/app_config.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/pages/pageFavority.dart';
 import 'package:structurepublic/src/pages/page_Main_View.dart';
@@ -14,6 +16,8 @@ import 'package:structurepublic/src/pages/page_search.dart';
 import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
+
+import '../../main.dart';
 
 class Page1 extends StatefulWidget {
   @override
@@ -86,8 +90,7 @@ class _Page1 extends StateMVC<Page1> {
             SizedBox(height: 10,),
               SizedBox(height: 40,
                   child:
-                  Text(
-                    "عروضنا مابتخلص ",
+                  Text( language1=="en" ? "     Infinity Offers" :  "      عروضنا مابتخلص ",
                     textAlign: TextAlign.start,
                     style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
                   )
@@ -123,60 +126,20 @@ class _Page1 extends StateMVC<Page1> {
               ),
             ),
 
-            // ListView.builder(
-            //       scrollDirection: Axis.horizontal,
-            //       itemCount: _con.listSold.length,
-            //       itemBuilder: (BuildContext context, int index) =>
-            //             CardStorySoldWidget(soldData: _con.listSold[index],),
-            //           ),
+
             Container(
               padding: EdgeInsets.all(6),
               margin: EdgeInsets.all(6),
               child: Column(
                 children: [
 
-                  // Row(children: [
-                  //   Text(
-                  //     "حسوماتك",
-                  //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  //   ),
-                  // ]),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //   children: [
-                  //     Container(
-                  //       child: Center(
-                  //         child: Text(
-                  //           "حسوماتي",
-                  //           style: TextStyle(fontSize: 15, color: Colors.black),
-                  //         ),
-                  //       ),
-                  //       decoration: BoxDecoration(
-                  //           color:  Theme.of(context).primaryColor,
-                  //           borderRadius: BorderRadius.circular(20)),
-                  //       width: 160,
-                  //     ),
-                  //     Container(
-                  //       child: Center(
-                  //         child: Text(
-                  //           "1500 ل.س",
-                  //           style: TextStyle(fontSize: 15, color: Colors.black),
-                  //         ),
-                  //       ),
-                  //       decoration: BoxDecoration(
-                  //           color: Colors.black12,
-                  //           borderRadius: BorderRadius.circular(20)),
-                  //       width: 110,
-                  //     ),
-                  //   ],
-                  // ),
+
                   Container(
                     margin: EdgeInsets.all(20),
                     child: Row(
                       children: [
 
-                        Text(
-                          "مفضلتي",
+                        Text( language1=="en" ? "Favority" :   "مفضلتي",
                           style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
                         ),
                         Icon(
@@ -188,49 +151,7 @@ class _Page1 extends StateMVC<Page1> {
                   ),
                   // CardFavoriteWidget(),
 
-                  // CarouselSlider(
-                  //   items: [
-                  //     // CardFavoriteWidget()
-                  //     Column(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //
-                  //       children: <Widget>[
-                  //         Expanded(
-                  //           child: ListView.builder(
-                  //               shrinkWrap: true,
-                  //               scrollDirection: Axis.horizontal,
-                  //               itemCount: _con.listProductFav.length,
-                  //
-                  //               itemBuilder: (BuildContext context, int index) =>
-                  //                   ShapeOfView(
-                  //                       shape: CutCornerShape(
-                  //                           borderRadius: BorderRadius.circular(20)
-                  //                       ),
-                  //                       child: CardFavoriteWidget(productData: _con.listProductFav[index])
-                  //                   )
-                  //               // Card(
-                  //               // child: Center(child: Text('Dummy Card Text')),
-                  //               // ),
-                  //               ),
-                  //         ),
-                  //
-                  //       ],
-                  //     ),
-                  //     //1st Image of Slider
-                  //   ],
-                  //
-                  //   //Slider Container properties
-                  //   options: CarouselOptions(
-                  //     height: 130.0,
-                  //     //enlargeCenterPage: true,
-                  //     // autoPlay: true,
-                  //     aspectRatio: 16 / 9,
-                  //     autoPlayCurve: Curves.fastOutSlowIn,
-                  //     enableInfiniteScroll: false,
-                  //     // autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  //     viewportFraction: 0.8,
-                  //   ),
-                  // ),
+
                   productFav(_con.listProductFav),
 
 
@@ -240,7 +161,7 @@ class _Page1 extends StateMVC<Page1> {
                       children: [
 
                         Text(
-                          "الأطباق المقترحة",
+                          language1=="en" ? "Suggested products" :   "المنتجات المقترحة",
                           style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
                         ),
 
@@ -464,7 +385,7 @@ class _Page1 extends StateMVC<Page1> {
       );
     }
     else if (list.length==0)
-    {return Image(image:AssetImage('assets/img/cardd.gif'),height: 120,fit: BoxFit.fitWidth,);
+    {return Image(image:AssetImage('assets/img/1211.gif'),height: 120,fit: BoxFit.fitWidth,);
       //Icon(Icons.favorite_border);
       //  Image(image:AssetImage("assets/img/121.gif"));
     }

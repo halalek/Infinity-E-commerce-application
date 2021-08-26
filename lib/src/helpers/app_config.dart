@@ -38,7 +38,7 @@ class App {
 
 class ColorsApp {
   var cl=Colors.red[300];
-  var cl2=Colors.brown[800];
+  var cl2=Colors.brown[700];
   Color mainColor(double opacity) {
     try {
       return cl.withOpacity(opacity);

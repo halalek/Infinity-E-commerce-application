@@ -16,6 +16,8 @@ import 'package:structurepublic/src/pages/pageSoldDetail.dart';
 import 'package:structurepublic/src/pages/pageStorySold.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
+
 
 class CardStorySoldWidget extends StatefulWidget {
   SoldData _soldData;
@@ -85,7 +87,7 @@ class _CardStorySoldWidget extends State<CardStorySoldWidget>  {
                 SizedBox(
                   width: 8.0,
                 ),
-                Text(
+                Text(language1=="en" ? soldData.name_market_en :
                   soldData.name_market_ar,
                   style: TextStyle(fontSize: 18.0),
                 )
@@ -93,10 +95,10 @@ class _CardStorySoldWidget extends State<CardStorySoldWidget>  {
             ),
             ListTile(
               title: Text(
-                soldData.name_ar,
+                language1=="en" ? soldData.name_en : soldData.name_ar,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(soldData.description_ar,
+              subtitle: Text(language1=="en" ? soldData.description_en : soldData.description_ar,
                   style:
                   TextStyle(fontSize: 14)),
               trailing: Text(

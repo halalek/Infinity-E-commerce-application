@@ -9,6 +9,7 @@ import 'package:structurepublic/src/controler/categorize_controller.dart';
 import 'package:structurepublic/src/controler/page_product_controller.dart';
 import 'package:structurepublic/src/elements/cardCategorize.dart';
 import 'package:structurepublic/src/elements/cardProduct.dart';
+import 'package:structurepublic/src/elements/cardProductDetail.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 
@@ -42,6 +43,7 @@ class  _Products extends StateMVC<Products>
   PageProductController _get(){return _con;}
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return Scaffold(
       body:

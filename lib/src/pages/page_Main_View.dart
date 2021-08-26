@@ -16,6 +16,8 @@ import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
+
 class PageMain extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -24,7 +26,6 @@ class PageMain extends StatefulWidget {
     return _PageMain();
   }
 }
-
 class _PageMain extends StateMVC<PageMain> {
   int point = 1;
   PageMainController _con;
@@ -33,7 +34,6 @@ class _PageMain extends StateMVC<PageMain> {
     // _con = controller;
     _con = controller;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +61,7 @@ class _PageMain extends StateMVC<PageMain> {
                 // color: Theme.of(context).primaryColorLight,
               ),
               title: Text(
+                language1=="en" ? "Home" :
                 "الرئيسية",
                 //   style: TextStyle(color: Theme.of(context).primaryColorLight),
               ),
@@ -72,6 +73,7 @@ class _PageMain extends StateMVC<PageMain> {
                 //  color: Colors.black45,
               ),
               title: Text(
+                language1=="en" ? "Shopping " :
                 "التسوق",
                 //  style: TextStyle(color: Colors.black45),
               ),
@@ -83,6 +85,7 @@ class _PageMain extends StateMVC<PageMain> {
                 //color: Colors.black45,
               ),
               title: Text(
+                language1=="en" ? "Offers " :
                 "العروض",
                 // style: TextStyle(color: Colors.black45),
               ),
@@ -94,6 +97,7 @@ class _PageMain extends StateMVC<PageMain> {
                 // color: Colors.black45,
               ),
               title: Text(
+                language1=="en" ? "Profile" :
                 "حسابك",
                 // style: TextStyle(color: Colors.black45),
               ),

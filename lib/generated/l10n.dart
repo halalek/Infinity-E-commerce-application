@@ -24,13 +24,12 @@ class S {
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       S.current = S();
-      
-      return S.current;
-    });
-  } 
+        return S.current;
+      });
+    }
 
-  static S of(BuildContext context) {
-    return Localizations.of<S>(context, S);
+    static S of(BuildContext context) {
+      return Localizations.of<S>(context, S);
   }
 
   /// `Login`

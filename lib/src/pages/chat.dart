@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
+import '../../main.dart';
 
 class MyHomeChat extends StatefulWidget {
   MarketData marketData;
@@ -94,18 +95,21 @@ class _MyHomeChat extends State<MyHomeChat> {
     final ChatUser user = ChatUser(
       name: marketData.nameAr,
       uid:marketData.id ,
+      lastName:userid,
+      firstName:marketData.id,
       //   avatar: "https://www.wrappixel.com/ampleadmin/assets/images/users/4.jpg",
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text(marketData.nameAr),
+        title: Text(language1=="en" ? marketData.nameEn : marketData.nameAr),
         backgroundColor: Theme.of(context).primaryColorDark,
         leading:CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(marketData.imageIcon) ,maxRadius: 0.1,),
       ),
       body:
         StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-              .collection('messages').where("user.uid",isEqualTo:marketData.id)
+            .collection('messages').where("user.lastName",isEqualTo:userid).where("user.firstName",isEqualTo:marketData.id)
+            //  .collection('messages').where("user.uid",isEqualTo:marketData.id).where("user.lastName",isEqualTo:userid)
             //  .orderBy("createdAt")
               .snapshots(),
           builder: (context, snapshot) {
@@ -163,7 +167,8 @@ class _MyHomeChat extends State<MyHomeChat> {
                     messages.add(ChatMessage(
                         text: reply.value,
                         createdAt: DateTime.now(),
-                        user: user));
+                        user: user,
+                    image:"bWJHMEuGs5ZqTdZrJLppfe4yNAV2"));
 
                     messages = [...messages];
                   });
@@ -240,35 +245,3 @@ class _MyHomeChat extends State<MyHomeChat> {
 
 
 
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:transparent_image/transparent_image.dart';
-//
-// class MyApppp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final title = 'Fade in images';
-//
-//     return MaterialApp(
-//       title: title,
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text(title),
-//         ),
-//         body: Stack(
-//           children: <Widget>[
-//             Center(child: CircularProgressIndicator()),
-//             Center(
-//               child: FadeInImage.memoryNetwork(
-//                 placeholder: kTransparentImage,
-//                 image: 'https://picsum.photos/250?image=9',
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

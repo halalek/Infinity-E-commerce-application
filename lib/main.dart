@@ -23,11 +23,12 @@ import 'src/models/setting.dart';
 import 'src/repository/settings_repository.dart' as settingRepo;
 import 'src/helpers/app_config.dart' as config;
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:structurepublic/src/pages/mydemand.dart';
 import 'package:dcdg/dcdg.dart';
-var user1;
+var user1,userid;
 var color1;
+var language1;int countt=0;
 Future<void> main() async {
 //  await GlobalConfiguration().loadFromAsset("configurations");
 //  print(CustomTrace(StackTrace.current, message: "base_url: ${GlobalConfiguration().getString('base_url')}"));
@@ -37,8 +38,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var user = preferences.getString('user');
+  userid=preferences.getString('userID');
   var color = preferences.getString('color');
-user1=user;color1=color;
+  var language = preferences.getString('language');
+user1=user;color1=color;language1=language;
+print(language1.toString());
+print("444444444444444444444444444444444444444444");
 var i=1;
   //
  //Userss user = Userss.fromJson(await sharedPref.read('user')) ;
@@ -99,27 +104,23 @@ class _MyAppState extends State<MyApp>  {
               //debugShowMaterialGrid: false,
               title: "",
               home:
-              //MyHomePage(),
-              //MyHomePage(),
-              //PageChatUser(),
+             // Pagemain1(),
              (user1 == null ? WelcomePage() :  Pagemain1()),
-            //  PageMarket(),
-          //    Pagemain1(),/////////baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
               //StartMain(),
-              //LoginMain(),
-              //MainStateWidget(),
               // initialRoute: '/MainStateWidget',
               onGenerateRoute: RouteGenerator.generateRoute,
               debugShowCheckedModeBanner: false,
-              locale:( _setting.mobileLanguage.value),
+             //locale: _setting.mobileLanguage.value,
+              locale: (language1=="en" ?  Locale('en') : _setting.mobileLanguage.value ),
               localizationsDelegates: [
                 S.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
+             //   AppLocalization,
               ],
               supportedLocales: S.delegate.supportedLocales,
               theme:
-              _setting.brightness.value ==( color1=="Dark" ? Brightness.dark : Brightness.light)
+              _setting.brightness.value == ( color1=="Dark" ? Brightness.dark : Brightness.light)
                   ? ThemeData(
                 fontFamily: 'Poppins',
                 primaryColorDark: Colors.red[300],

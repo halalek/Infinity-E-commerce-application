@@ -24,10 +24,10 @@ ValueNotifier<Setting> setting = new ValueNotifier(new Setting());
 final navigatorKey = GlobalKey<NavigatorState>();
 
 //LocationData locationData;
-Future<List<ProductData>> getProductSearch(String searchQuery ) async {
+Future<List<ProductData>> getProductSearch(String searchQuery,String name ) async {
   List<ProductData> list = [];
   await FirebaseFirestore.instance
-      .collection("product").where("hide",isEqualTo:false).where("name_ar",isGreaterThanOrEqualTo: searchQuery,
+      .collection("product").where("hide",isEqualTo:false).where(name,isGreaterThanOrEqualTo: searchQuery,
     isLessThan: searchQuery.substring(0, searchQuery.length - 1) + String.fromCharCode(searchQuery.codeUnitAt(searchQuery.length - 1) + 1),
   ).get()
       .then((value) {
@@ -40,10 +40,10 @@ Future<List<ProductData>> getProductSearch(String searchQuery ) async {
   return list;
 }
 
-Future<List<MarketData>> getMarketSearch(String searchQuery) async {
+Future<List<MarketData>> getMarketSearch(String searchQuery,String name) async {
   List<MarketData> list = [];
   await FirebaseFirestore.instance
-      .collection("market").where("hide",isEqualTo:false).where("name_ar",isGreaterThanOrEqualTo: searchQuery,
+      .collection("market").where("hide",isEqualTo:false).where(name,isGreaterThanOrEqualTo: searchQuery,
     isLessThan: searchQuery.substring(0, searchQuery.length - 1) + String.fromCharCode(searchQuery.codeUnitAt(searchQuery.length - 1) + 1),
   ).get()
       .then((value) {

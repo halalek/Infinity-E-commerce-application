@@ -14,6 +14,8 @@ import 'package:structurepublic/src/elements/cardmarketWidget.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
+import '../../main.dart';
+
 class PageCoupon extends StatefulWidget
 {
 
@@ -47,7 +49,7 @@ class  _PageCoupon extends StateMVC< PageCoupon>
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("حسوماتي"),
+        title: Text(language1=="en" ? "My Vouchers" : "حسوماتي"),
         backgroundColor: Theme.of(context).primaryColorDark,
 
       ),

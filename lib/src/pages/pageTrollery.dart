@@ -18,6 +18,8 @@ import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
+
 //import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
 
@@ -256,7 +258,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
     return Scaffold(
       key: globalKey,
       appBar: AppBar(
-        title: Text("سلة المشتريات "),
+        title: Text(   language1=="en" ? "Your Cart" : "سلة المشتريات "),
         backgroundColor: Theme.of(context).primaryColorDark,
       ),
       body:Container(
@@ -272,6 +274,8 @@ import 'package:structurepublic/src/pages/vereible.dart';
 
                 Column(
                   children: <Widget>[
+                  //  language1=="en" ? aenglish() :arabic(),
+                    //         "ل.س",
                     Container(
                       alignment: Alignment.centerRight,
                       padding: EdgeInsets.all(10),
@@ -279,36 +283,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            "ل.س",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                         /* RaisedButton(
-                            onPressed: () {
-                              setState(() {
-                                sum();
-                              });
 
-                            },
-
-                            color: changecolor,
-                            padding: EdgeInsets.symmetric(horizontal: 50),
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(1)),
-                            child: Text(
-                               (sum()).toString(),
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.white),
-                            ),
-                          ),*/
-                          SizedBox(
-                            width: 10,
-                          ),
                           Text(
                             (sum()).toString(),
                            // demandData.priceTotal.toString(),
@@ -317,9 +292,25 @@ import 'package:structurepublic/src/pages/vereible.dart';
                               color: Colors.green,
                             ),
                           ),
+
+                          SizedBox(
+                            width: 10,
+                          ),
+
+                          Text( language1=="en" ? "SYP" :
+                          "ل.س",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.green,
+                            ),
+                          ),
+
+
                         ],
                       ),
                     ),
+
+
                     SizedBox(
                       height: 20,
                     ),
@@ -355,7 +346,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
               Row(children: [
                 Icon(Icons.sentiment_satisfied,color: Theme.of(context).primaryColorDark,),
                 SizedBox(width: 10,),
-                Text("إدخال كود الحسم ",style: TextStyle(fontSize: 15,color: Theme.of(context).primaryColor)),
+                Text(   language1=="en" ? "Add voucher" : "إدخال كود الحسم ",style: TextStyle(fontSize: 15,color: Theme.of(context).primaryColor)),
               ],),
 
               decoration: BoxDecoration(
@@ -488,7 +479,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                   new SizedBox(
                     // height: 200.0,
                       width: 900.0,
-                      child: Center(child:new Text("هل تريد تأكيد عملية إرسال الطلب ؟ ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
+                      child: Center(child:new Text(   language1=="en" ? "Do you want to send ? " : "هل تريد تأكيد عملية إرسال الطلب ؟ ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
                       ),)
                   ),
 
@@ -530,7 +521,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                      shape: RoundedRectangleBorder(
                          borderRadius: BorderRadius.circular(20)),
                      child: Text(
-                       "تأكيد",
+                       language1=="en" ? "Yes" : "تأكيد",
                        style: TextStyle(
                            fontSize: 14,
                            letterSpacing: 2.2,
@@ -542,7 +533,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                      shape: RoundedRectangleBorder(
                          borderRadius: BorderRadius.circular(20)),
                      onPressed: () {    Navigator.of(context).pop();},
-                     child: Text("عودة",
+                     child: Text(   language1=="en" ? "back" : "عودة",
                          style: TextStyle(
                              fontSize: 14,
                              letterSpacing: 2.2,
@@ -599,7 +590,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                   new SizedBox(
                     // height: 200.0,
                       width: 900.0,
-                      child: Center(child:new Text("حاول مرة أخرى  ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
+                      child: Center(child:new Text(   language1=="en" ? "Try again" : "حاول مرة أخرى  ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20),
                       ),)
                   ),
 
@@ -661,7 +652,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                       // },
                       controller:_controller.discount,
                       decoration: InputDecoration(
-                        hintText: "أدخل كود  الحسم ",
+                        hintText:    language1=="en" ? "Add voucher" :"أدخل كود  الحسم ",
                         suffixIcon: Icon(Icons.sentiment_satisfied,color:Colors.red[200],),
                           focusedBorder:
                           UnderlineInputBorder(
@@ -711,6 +702,7 @@ import 'package:structurepublic/src/pages/vereible.dart';
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     child: Text(
+                      language1=="en" ? "confirm" :
                       "تحقق",
                       style: TextStyle(
                           fontSize: 14,
@@ -742,4 +734,9 @@ import 'package:structurepublic/src/pages/vereible.dart';
 
       });
     }
+
+
+
+
+
 }

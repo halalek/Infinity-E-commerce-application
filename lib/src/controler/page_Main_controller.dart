@@ -13,26 +13,20 @@ import '../models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class PageMainController extends ControllerMVC {
-  //User user = new User();
   bool loading = false;
   GlobalKey<ScaffoldState> scaffoldKey;
   OverlayEntry loader;
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
   List<SectionData> listSection = [];
 
   PageMainController() {
     loader = Helper.overlayLoader(context);
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
-
-
   @override
   void initState() {
     super.initState();
     getSections();
   }
-
   getSections() async {
     setState((){
       listSection.clear();

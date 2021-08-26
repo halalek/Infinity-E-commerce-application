@@ -21,6 +21,7 @@ import 'package:structurepublic/src/pages/profil.dart';
 import 'package:structurepublic/src/pages/startView.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
 import 'convertSoundtoText.dart';
 
 class PageSearch extends StatefulWidget {
@@ -140,7 +141,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                       ])),
                   child: Center(
                     child: Text(
-                      "بحث",
+                      language1=="en" ? "Search" : "بحث",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
@@ -148,7 +149,11 @@ class _PageSearch extends StateMVC<PageSearch> {
                 ),
                 onTap: () {
                   setState(() {
-                    _con.getProductsSearch(_chosenValue);
+
+                   if(language1=="en")
+                      _con.getProductsSearch(_chosenValue,"name_en");
+                  else if(language1!="en")
+                     _con.getProductsSearch(_chosenValue,"name_ar");
                   });
 
                   //_loginrController.loginfirebase();
@@ -170,6 +175,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                       ])),
                   child: Center(
                     child: Text(
+                      language1=="en" ? "Filter" :
                       "الفلترة",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -198,7 +204,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                       ])),
                   child: Center(
                     child: Text(
-                      "البحث الصوتي ",
+                      language1=="en" ? "Voice Search" :  "البحث الصوتي ",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
@@ -228,6 +234,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                       ])),
                   child: Center(
                     child: Text(
+                      language1=="en" ? "Comparison" :
                       "مقارنة المنتجات",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -265,7 +272,8 @@ class _PageSearch extends StateMVC<PageSearch> {
                   //  color: Colors.black45,
                 ),
                 title: Text(
-                  "المطاعم",
+                  language1=="en" ? "Shop" :
+                  "المتاجر",
                   // style: TextStyle(color: Colors.black45),
                 ),
                 backgroundColor: Colors.white38,
@@ -276,7 +284,8 @@ class _PageSearch extends StateMVC<PageSearch> {
                   //  color: Theme.of(context).primaryColorLight,
                 ),
                 title: Text(
-                  "الأطباق",
+                  language1=="en" ? "Product" :
+                  "المنتجات",
                   //  style: TextStyle(color: Theme.of(context).primaryColorLight),
                 ),
                 // backgroundColor:Colors.white38,
@@ -345,7 +354,7 @@ class _PageSearch extends StateMVC<PageSearch> {
         return Dialog(
           child: new Container(
             decoration: new BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: new BorderRadius.circular(10.0)),
             width: 400.0,
             height: 600.0,
@@ -374,7 +383,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                           Color.fromRGBO(160, 0, 0, 1),
                         ])),
                     child: Center(
-                      child: Text(
+                      child: Text(language1=="en" ? "Sort by" :
                         "الترتيب حسب  ",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
@@ -383,7 +392,12 @@ class _PageSearch extends StateMVC<PageSearch> {
                   ),
                   onTap: () {
                     setState(() {
-                      _con.getProductsSearch(_chosenValue);
+                      if(language1=="en")
+                        _con.getProductsSearch(_chosenValue,"name_en");
+
+                     else if(language1!="en")
+                        _con.getProductsSearch(_chosenValue,"name_ar");
+
                     });
 
                     //_loginrController.loginfirebase();
@@ -404,13 +418,12 @@ class _PageSearch extends StateMVC<PageSearch> {
                   child: DropdownButton<String>(
                     value: _chosenValue,
                     //elevation: 5,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
 
-                    items: <String>[
-                      'نوع المنتجات',
-                      'سعر المنتجات',
-                      'المطاعم الأعلى تقييماً',
-                      'المطاعم المتوفرة',
+                    items: <String>[ language1=="en" ? "Products type" : 'نوع المنتجات',
+                      language1=="en" ? "Products price" : 'سعر المنتجات',
+                      language1=="en" ? "Top shop" : 'المطاعم الأعلى تقييماً',
+                      language1=="en" ? "Active shop" :  'المطاعم المتوفرة',
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -418,9 +431,10 @@ class _PageSearch extends StateMVC<PageSearch> {
                       );
                     }).toList(),
                     hint: Text(
+                      language1=="en" ? "Sort" :
                       "الترتيب ",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
@@ -457,6 +471,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                         ])),
                     child: Center(
                       child: Text(
+                        language1=="en" ? "Prices are greater than " :
                         "المنتجات التي أسعارها أكبر من ",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
@@ -485,7 +500,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                   child: DropdownButton<String>(
                     value: _chosenLargePrice,
                     //elevation: 5,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
 
                     items: <String>[
                       '1000',
@@ -500,11 +515,11 @@ class _PageSearch extends StateMVC<PageSearch> {
                       );
                     }).toList(),
                     hint: Text(
+                      language1=="en" ? "Price " :
                       "السعر",
                       style: TextStyle(
-                          color: Colors.black,
                           fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w600,color: Theme.of(context).primaryColor),
                     ),
                     onChanged: (String value) {
                       setState(() {
@@ -539,7 +554,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                           Color.fromRGBO(160, 0, 0, 1),
                         ])),
                     child: Center(
-                      child: Text(
+                      child: Text( language1=="en" ? "Prices are less than " :
                         "المنتجات التي أسعارها أقل من ",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
@@ -564,11 +579,12 @@ class _PageSearch extends StateMVC<PageSearch> {
                   ),
                 ),
                 Container(
+
                   padding: const EdgeInsets.all(0.0),
                   child: DropdownButton<String>(
                     value: _chosenLessPrice,
                     //elevation: 5,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
 
                     items: <String>[
                       '1000',
@@ -583,9 +599,10 @@ class _PageSearch extends StateMVC<PageSearch> {
                       );
                     }).toList(),
                     hint: Text(
+                      language1=="en" ? "Price" :
                       "السعر",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
@@ -607,6 +624,7 @@ class _PageSearch extends StateMVC<PageSearch> {
                   ),
                 ),
                 Text(
+                  language1=="en" ? "When finished,press the search" :
                   "عند الانتهاء قم بالضغط على زر البحث   ",
                   style: TextStyle(
                       color: Colors.redAccent, fontWeight: FontWeight.bold),

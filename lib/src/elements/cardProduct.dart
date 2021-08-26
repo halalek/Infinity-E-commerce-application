@@ -2,11 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:structurepublic/src/controler/page_Main_controller.dart';
 import 'package:structurepublic/src/controler/page_market_controller.dart';
+import 'package:structurepublic/src/elements/cardProductDetail.dart';
 import 'package:structurepublic/src/models/CategorizeData.dart';
 import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
+
+import '../../main.dart';
 
 class CardProductWidget extends StatelessWidget {
   final ProductData productData;
@@ -23,6 +26,7 @@ class CardProductWidget extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
+
     return GestureDetector(
       child: Row(children: [
         Expanded(
@@ -47,18 +51,20 @@ class CardProductWidget extends StatelessWidget {
                   ),
                   Expanded(child: ListTile(
                     //   leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:NetworkImage('https://arab-rate.com/media/reviews/photos/original/cd/77/3e/309-309-79-1578342205.jpg',),),
-                    title: Text(productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Theme.of(context).primaryColor),),
-                    subtitle: Text(productData.description_ar  ?? " ",style: TextStyle( color: Theme.of(context).primaryColor),),
+                    title: Text(language1=="en" ? productData.nameEn :  productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Theme.of(context).primaryColor),),
+                    subtitle: Text(language1=="en" ? productData.description_en :  productData.description_ar  ?? " ",style: TextStyle( color: Theme.of(context).primaryColor),),
 
                     trailing:
                     GestureDetector(
                       child: Text(productData.price.toString(),style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
                       // child:Icon(Icons.access_time, color: Colors.grey,),
                       onTap: () {
+                        countt=0;
                         Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
                       },),
                     onTap: () {
+                      countt=0;
                       Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)));
 
                     },
@@ -81,6 +87,7 @@ class CardProductWidget extends StatelessWidget {
         ]
     ),
       onTap: (){
+        countt=0;
         Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetail(productData,categorizeData,marketData)) );
 
         // navigetor("");
@@ -101,8 +108,12 @@ class CardProductcomp extends StatelessWidget {
 
   // PageMarketController ggg=new  PageMarketController();
 
+
+
   @override
   Widget build(BuildContext context) {
+    print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    print(countt);
     return Container(
       color: Colors.black12,
       height: 460,
@@ -114,7 +125,7 @@ class CardProductcomp extends StatelessWidget {
               width: 170, //MediaQuery.of(context).size.width,
               height: 450,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
               ),
               child: Column(
                 children: [
@@ -134,22 +145,24 @@ class CardProductcomp extends StatelessWidget {
                     child: GestureDetector(
                         child: Column(
                       children: [
-
                         Text(
+                          language1=="en" ? productData.nameMarketen :
                            productData.nameMarket ,
                           style: TextStyle(
                               fontSize: 15,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w400,color: Theme.of(context).primaryColor),
                         ),
+
                         Text(
                           "",
                           style: TextStyle(
                             fontSize: 10,),
                         ),
                         Text(
+                          language1=="en" ? productData.nameEn :
                           productData.nameAr,
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 22, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                         ),
                         Text(
                           " ",
@@ -158,10 +171,11 @@ class CardProductcomp extends StatelessWidget {
                               fontWeight: FontWeight.w400),
                         ),
                         Text(
+                          language1=="en" ? productData.description_en :
                           productData.description_ar,
                           style: TextStyle(
                               fontSize: 20,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w400,color: Theme.of(context).primaryColor),
                         ),
                         Text(
                           " ",
@@ -185,5 +199,6 @@ class CardProductcomp extends StatelessWidget {
       ]),
     );
   }
+
 }
 

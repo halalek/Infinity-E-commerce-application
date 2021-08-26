@@ -21,12 +21,14 @@ import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/models/SoldData.dart';
+import 'package:structurepublic/src/pages/vereible.dart';
 import 'package:structurepublic/src/repository/login_repository.dart';
 import 'package:structurepublic/src/repository/page_market_repository.dart' as repo;
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart' as repo;
 import 'package:structurepublic/src/repository/page_faviroty_repository.dart' as repo;
 import 'package:structurepublic/src/repository/page_sold_repository.dart' as repo;
 import '../../generated/l10n.dart';
+import '../../main.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,7 +64,7 @@ class _Pageusers extends StateMVC<Pagemydemand> {
 
           return Scaffold(
               appBar: AppBar(
-              title: Text(" الطلبات "),
+              title: Text(language1=="en" ? "my requests " :" الطلبات "),
     backgroundColor: Theme
         .of(context)
         .primaryColorDark,
@@ -134,7 +136,7 @@ class PageDemand extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(" الطلبات "),
+        title: Text(language1=="en" ? "my requests " :" الطلبات "),
         backgroundColor: Theme
             .of(context)
             .primaryColorDark,
@@ -179,7 +181,7 @@ class  _PageDemandBasket extends StateMVC<PageDemandBasket> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("طلباتي "),
+        title: Text(language1=="en" ? "my requests " :"طلباتي "),
         backgroundColor: Theme
             .of(context)
             .primaryColorDark,
@@ -207,16 +209,7 @@ class  _PageDemandBasket extends StateMVC<PageDemandBasket> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            "ل.س",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
 
-                          SizedBox(
-                            width: 10,
-                          ),
                           Text(demandData.priceTotal.toString(),
                             // demandData.priceTotal.toString(),
                             style: TextStyle(
@@ -224,6 +217,19 @@ class  _PageDemandBasket extends StateMVC<PageDemandBasket> {
                               color: Colors.green,
                             ),
                           ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            language1=="en" ? "SYP" :
+                            "ل.س",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+
+
+
                         ],
                       ),
                     ),
@@ -275,20 +281,7 @@ class  _PageDemandBasket extends StateMVC<PageDemandBasket> {
 if(demandData.rating!=0)
             RaisedButton(
               onPressed: () {
-                // clear();
-                getReturnDemand(demandData);
-                // _controller.getBasket();
-                print("UUUUUUUUUUUUUU");
-                //  print(d);
-                //  print("UUUUUUUUUUUUUU");
-                //  postDamandNode(d);
-                //
-                //  settollery(d);
-                // // Scaffold.of(context).showSnackBar(_snackBar2);
-                //  d = new DemandData();
-                //  d.product=[];
-                //  tt=[];
-                //  total=0;
+                _onLoadingVerifty();
               },
 
               color: Theme
@@ -299,7 +292,7 @@ if(demandData.rating!=0)
 
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              child: Text(
+              child: Text(language1=="en" ? "Resend" :
                 "إرسال الطلب ",
                 style: TextStyle(
                     fontSize: 17,
@@ -317,19 +310,7 @@ Row(
     RaisedButton(
       onPressed: () {
         // clear();
-        getReturnDemand(demandData);
-        // _controller.getBasket();
-        print("UUUUUUUUUUUUUU");
-        //  print(d);
-        //  print("UUUUUUUUUUUUUU");
-        //  postDamandNode(d);
-        //
-        //  settollery(d);
-        // // Scaffold.of(context).showSnackBar(_snackBar2);
-        //  d = new DemandData();
-        //  d.product=[];
-        //  tt=[];
-        //  total=0;
+        _onLoadingVerifty();
       },
 
       color: Theme
@@ -341,6 +322,7 @@ Row(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20)),
       child: Text(
+        language1=="en" ? "Resend" :
         "إرسال الطلب ",
         style: TextStyle(
             fontSize: 12,
@@ -363,6 +345,7 @@ Row(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20)),
       child: Text(
+        language1=="en" ? "Rating" :
         "تقييم الطلب",
         style: TextStyle(
             fontSize: 12,
@@ -381,6 +364,94 @@ Row(
   }
 
 
+  Widget _onLoadingVerifty() {
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: new Container(
+            decoration: new BoxDecoration(
+              color: Colors.black12,
+              //   borderRadius: new BorderRadius.circular(10.0)
+            ),
+            width: 1000.0,
+            height: 180.0,
+            alignment: AlignmentDirectional.center,
+            child: new Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 35,),
+                new SizedBox(
+                  // height: 200.0,
+                    width: 900.0,
+                    child: Center(child:new Text(   language1=="en" ? "Do you want to send? " : "هل تريد تأكيد عملية إرسال الطلب ؟ ",textDirection: TextDirection.rtl,style: TextStyle(fontSize: 20,color: Theme.of(context).primaryColor),
+                    ),)
+                ),
+
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    RaisedButton(
+                      onPressed: () {
+                        // globalKey.currentState.showSnackBar(_snackBar1);
+                        getReturnDemand(demandData);
+                        print("UUUUUUUUUUUUUU");
+                      },
+
+                      color: changecolor,
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Text(
+                        language1=="en" ? "Yes" : "تأكيد",
+                        style: TextStyle(
+                            fontSize: 14,
+                            letterSpacing: 2.2,
+                            color: Colors.white),
+                      ),
+                    ),
+                    OutlineButton(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () {    Navigator.of(context).pop();},
+                      child: Text(   language1=="en" ? "back" : "عودة",
+                          style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                              color: Colors.black)),
+                    ),
+                  ],)
+              ],
+            ),
+          ),
+          // new Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   children: [
+          //     new CircularProgressIndicator(),
+          //     SizedBox(width: 5,),
+          //     new Text("Loading"),
+          //   ],
+          // ),
+        );
+      },
+    );
+    new Future.delayed(new Duration(seconds: 5), () {
+      //  Navigator.pop(context);
+      // Navigator.pop(context);
+      // if (!loading) {
+      //     // Navigator.pop(context); //pop dialog
+      // }
+
+
+    });
+  }
 
   Widget _onLoadingDialog() {
     var _ratingController;
@@ -419,10 +490,12 @@ Row(
                         height: 20.0,
                       ),
                       Text(
+                        language1=="en" ? "Please rate the order" :
                         'من فضلك قييم الطلب ',
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           fontSize: 24.0,
+                            color: Colors.black
                         ),
                       ),
                       SizedBox(
@@ -505,7 +578,7 @@ Row(
                       SizedBox(height: 20.0),
                       Text(
                         'Rating: $_rating',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
                       ),
                       SizedBox(height: 20.0),
                       Row(
@@ -527,7 +600,7 @@ Row(
                                 )
                             ),
                             child: Center(
-                              child: Text("إرسال التقييم ", style: TextStyle(
+                              child: Text(language1=="en" ? "Send" :"إرسال التقييم ", style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),),
                             ),
@@ -554,7 +627,7 @@ Row(
                                 )
                             ),
                             child: Center(
-                              child: Text("عودة", style: TextStyle(
+                              child: Text(language1=="en" ? "back" :"عودة", style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),),
                             ),

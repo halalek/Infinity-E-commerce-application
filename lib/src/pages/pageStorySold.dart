@@ -17,6 +17,8 @@ import 'package:structurepublic/src/pages/categorizeView.dart';
 import 'package:structurepublic/src/pages/pageSoldDetail.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 
+import '../../main.dart';
+
 int i=0;
 int finit=0;
 
@@ -113,18 +115,19 @@ class _MoreStoriesState extends StateMVC<MoreStories> {
                     SizedBox(
                       width: 8.0,
                     ),
-                    Text(
+                    Text(language1=="en" ? _soldData.name_market_en:
                       _soldData.name_market_ar,
                       style: TextStyle(fontSize: 18.0,color: Colors.red[300]),
                     )
                   ],
                 ),
                 ListTile(
-                  title: Text(
+                  title: Text(language1=="en" ? _soldData.name_en :
                     _soldData.name_ar,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                   ),
-                  subtitle: Text(_soldData.description_ar,
+                  subtitle: Text(language1=="en" ? _soldData.description_en :
+                  _soldData.description_ar,
                       style:
                       TextStyle(fontSize: 14,color: Theme.of(context).primaryColor)),
                   trailing: Text(

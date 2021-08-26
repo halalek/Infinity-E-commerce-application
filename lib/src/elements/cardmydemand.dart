@@ -15,6 +15,7 @@ import 'package:structurepublic/src/pages/pageTrollery.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart';
 
+import '../../main.dart';
 import 'cardmarketWidget.dart';
 import 'package:intl/intl.dart';
 
@@ -72,13 +73,15 @@ import 'package:intl/intl.dart';
                   // ),
                   Expanded(child: ListTile(
                    leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage:CachedNetworkImageProvider(demandData.marketData.imageIcon)),
-                   title: Text(demandData.marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-                    subtitle: Text((demandData.priceTotal).toString() + "ل.س"),
+                   title: Text(language1=="en" ?demandData.marketData.nameEn :
+                   demandData.marketData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Theme.of(context).primaryColor),),
+                    subtitle: Text((demandData.priceTotal).toString() + "ل.س",style: TextStyle(color: Theme.of(context).primaryColor),),
 
                     trailing:
                     GestureDetector(
                       // chi0ld: Text("llll",style: TextStyle(color: Colors.green,fontSize: 15,fontWeight: FontWeight.w400),),
-                      child:Text((demandData.stateAr).toString(),style: TextStyle(fontSize: 16,color: Theme.of(context).primaryColorDark)),
+                      child:Text(language1=="en" ? (demandData.stateEn).toString() :
+                      (demandData.stateAr).toString(),style: TextStyle(fontSize: 16,color: Theme.of(context).primaryColorDark)),
                       onTap: () {
 
                          Navigator.push(context, MaterialPageRoute(builder: (context) =>PageDemandBasket(demandData)));
@@ -167,7 +170,7 @@ class CardmydemandDetail extends StatelessWidget {
                   child: Text(
 
                     (product.priceTotal).toString(),
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.black),
                   ),
                 ),
                 SizedBox(
@@ -190,6 +193,7 @@ class CardmydemandDetail extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
+                  language1=="en" ? product.nameEn :
                   product.nameAr,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20,color: Colors.black),
@@ -210,11 +214,11 @@ class CardmydemandDetail extends StatelessWidget {
                   //mainAxisAlignment: MainAxisAlignment.end,
                   //  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text( "العدد : ",
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
+                    Text(language1=="en" ? "count " : "العدد : ",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.black),),
 SizedBox(width: 20,),
                     Text( product.number.toString(),
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.black),),
 
                   ],
                 ),

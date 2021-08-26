@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(context) {
     return Container(
-      color: dark,
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: EdgeInsets.only(left: 16, top: 25, right: 16),
       child: ListView(
         children: [
@@ -28,14 +28,14 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
                 fontFamily: font,
-                color: darkfont),
+                color: Theme.of(context).primaryColor),
           )),
           SizedBox(
             height: 40,
           ),
           Row(
             children: [
-              Text(
+              Text(language1=="en" ? "Them" :
                 "التصميم",
                 style: TextStyle(
                   fontSize: 18,
@@ -66,13 +66,13 @@ class _SettingsPageState extends State<SettingsPage> {
           SizedBox(
             height: 70,
           ),
-          buildAccountOptionRow5(context, "اللغة"),
+          buildAccountOptionRow5(context, (language1=="en" ? "Language" :"اللغة")),
           Divider(
             height: 15,
             thickness: 2,
           ),
 
-          buildAccountOptionRow4(context, "Arabic"),
+          buildAccountOptionRow42(context, "Arabic"),
           buildAccountOptionRow4(context, "English"),
 
           SizedBox(
@@ -105,7 +105,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: darkfont,
+                  color: Theme.of(context).primaryColor,
                   fontFamily: font,
                 ),
               ),
@@ -123,6 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ])),
                   child: Center(
                     child: Text(
+                      language1=="en" ? "active" :
                       "تفعيل ",
                       style: TextStyle(
                           color: Colors.white,
@@ -131,7 +132,73 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
-                onTap: () async {},
+                onTap: () async {
+                  //SystemNavigator.pop();
+                  SharedPreferences preferences =
+                  await SharedPreferences.getInstance();
+                  preferences.setString('language', "en");
+                  language1="en";
+                  //  Navigator.pop(context);
+                  SystemNavigator.pop();
+                },
+              ),
+            ],
+          ),
+        ));
+  }
+
+
+  GestureDetector buildAccountOptionRow42(BuildContext context, String title) {
+    return GestureDetector(
+        onTap: () {
+          //_LanguageDialog();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).primaryColor,
+                  fontFamily: font,
+                ),
+              ),
+              InkWell(
+                child: Container(
+                  height: 30,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        // Color.fromRGBO(143, 148, 251, 1),
+                        // Color.fromRGBO(143, 148, 251, .6),
+                        Colors.red[300],
+                        Colors.red[400]
+                      ])),
+                  child: Center(
+                    child: Text(
+                      language1=="en" ? "active" :
+                      "تفعيل ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                ),
+                onTap: () async {
+                  //SystemNavigator.pop();
+                  SharedPreferences preferences =
+                  await SharedPreferences.getInstance();
+                  preferences.setString('language', "ar");
+                  //  Navigator.pop(context);
+                  language1="ar";
+                  SystemNavigator.pop();
+                },
               ),
             ],
           ),
@@ -173,13 +240,13 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: darkfont,
+                color: Theme.of(context).primaryColor,
                 fontFamily: font,
               ),
             ),
             Icon(
               Icons.palette,
-              color: darkfont,
+              color: Theme.of(context).primaryColor,
             ),
           ],
         ),
@@ -195,7 +262,7 @@ class _SettingsPageState extends State<SettingsPage> {
         return Dialog(
           child: new Container(
               decoration: new BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: new BorderRadius.circular(10.0)),
               width: 400.0,
               height: 250.0,
@@ -264,6 +331,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ])),
                         child: Center(
                           child: Text(
+                            language1=="en" ? "active" :
                             "تفعيل ",
                             style: TextStyle(
                                 color: Colors.white,
@@ -301,6 +369,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ])),
                         child: Center(
                           child: Text(
+                            language1=="en" ? "active" :
                             "تفعيل ",
                             style: TextStyle(
                                 color: Colors.white,
@@ -356,7 +425,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ])),
                     child: Center(
                       child: Text(
-                        "تفعيل ",
+                        "555",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -365,18 +434,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   onTap: () async {
-                    // setState(() async {
-                    //
-                    //   //   _con. getProductsSearch(_chosenValue);
-                    // });
                     SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    preferences.setString('color', "Dark");
-                    //  Navigator.pop(context);
+                    await SharedPreferences.getInstance();
+                    preferences.setString('color', "light");
+                    // Navigator.pop(context);
                     SystemNavigator.pop();
-                    //_loginrController.loginfirebase();
-                    //   Navigator.of(context).pushReplacementNamed('/e');
-                    //SignupMain
                   },
                 ),
               ])),

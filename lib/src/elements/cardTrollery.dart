@@ -13,6 +13,7 @@ import 'package:structurepublic/src/pages/categorizeView.dart';
 import 'package:structurepublic/src/pages/pageTrollery.dart';
 
 
+import '../../main.dart';
 import 'cardProductDetail.dart';
 
 
@@ -75,7 +76,7 @@ return Container(
                   child: Text(
 
                     (product.priceTotal).toString(),
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.black),
                   ),
                 ),
                 SizedBox(
@@ -98,6 +99,7 @@ return Container(
                   height: 10,
                 ),
                 Text(
+                  language1=="en" ? product.nameEn :
                   product.nameAr,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20,color: Colors.black),
@@ -126,7 +128,7 @@ return Container(
                     ),
 
                      Text( product.number.toString(),
-                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),),
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.black),),
 
                    MaterialButton(
                      minWidth: 10.0,

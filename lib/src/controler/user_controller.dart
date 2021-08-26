@@ -81,6 +81,7 @@ import 'package:structurepublic/src/repository/login_repository.dart';
 import 'package:structurepublic/src/repository/page_trollery_repository.dart'
 as repo;
 import '../../generated/l10n.dart';
+import '../../main.dart';
 import '../helpers/helper.dart';
 import '../models/user.dart';
 import '../repository/user_repository.dart' as repository;
@@ -242,16 +243,16 @@ class UserController extends ControllerMVC {
               new SizedBox(
                    // height: 200.0,
                     width: 900.0,
-                    child: Center(child:new Text("عندما يصل مجموع طلباتك الغير متضمنة حسومات  \n        إلى  50000 أو اكثر ستحصل على قسيمة حسم \n            تتراوح بين   5000 إلى 20000  ",textDirection: TextDirection.rtl,
+                    child: Center(child:new Text(language1=="en" ? "When the total of your orders that do not include discount reach 50000 SYP  you will receive a voucher 20000 SYP" :"عندما يصل مجموع طلباتك الغير متضمنة حسومات  \n        إلى  50000 أو اكثر ستحصل على قسيمة حسم \n            تتراوح بين   5000 إلى 20000  ",textDirection: TextDirection.rtl,
                     ),)
                   ),
 
                 new Container(
                   margin: const EdgeInsets.only(top: 20.0),
                   child: new Center(
-                    child: new Text(" المتبقي "+
-                      pricetotal.toString() + " ل.س",
-                      style: new TextStyle(color: Colors.red, fontSize: 20),
+                    child: new Text((language1=="en" ? "Remaining amount " :" المتبقي ") +
+                      pricetotal.toString() + (language1=="en" ? " SYP" :" ل.س"),
+                      style: new TextStyle(color: Colors.red, fontSize: 17),
                     ),
                   ),
                 ),

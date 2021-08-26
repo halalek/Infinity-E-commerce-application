@@ -55,9 +55,11 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
       print("timeClose "  +   marketData.timeOpen    +  " "  + marketData.timeClose);
       if(marketData.active)
         {
+          marketData.stateEn="online";
           marketData.state="متصل";
+
         }
-      else{marketData.state="غير متصل";}
+      else{marketData.state="غير متصل";marketData.stateEn="offline";}
 //      var timeclose=DateFormat('HH ').format(dateclose);
 //      var timecloseminit=DateFormat('mm ').format(dateclose);
 //      print(" formattedDateopen   " +   formattedDate   +  "   formattedDateclose  " +   formattedDateclose );
@@ -98,6 +100,7 @@ Future<List<MarketData>> getMarket(SectionData sectionData) async {
 //     marketData.state="غير متصل ";
 //   }
 print(" 7777777777777777777777777777"  + marketData.state );
+     print(" 888888888888888888888888887"  + marketData.stateEn);
      list.add(marketData);
 
     }

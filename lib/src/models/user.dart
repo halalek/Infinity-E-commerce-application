@@ -77,7 +77,7 @@ class Userss {
   }
 
   factory Userss.fromJson(Map<String, dynamic> json) => Userss(
-        name: json["name"] == null ? null : json["name"],
+        name: json["name"] == null ? "" : json["name"],
         id: json["id"] == null ? null : json["id"],
         token: json["token"] == null ? null : json["token"],
         lat: json["lat"] == null ? null : json["lat"],

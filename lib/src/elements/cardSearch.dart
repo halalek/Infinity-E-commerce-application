@@ -7,6 +7,9 @@ import 'package:structurepublic/src/models/MarketData.dart';
 import 'package:structurepublic/src/models/ProductData.dart';
 import 'package:structurepublic/src/models/SectionData.dart';
 import 'package:structurepublic/src/pages/productDetail.dart';
+import 'package:structurepublic/src/repository/page_trollery_repository.dart';
+
+import '../../main.dart';
 
 class CardProductSearch extends StatelessWidget {
   final ProductData productData;
@@ -43,8 +46,8 @@ class CardProductSearch extends StatelessWidget {
                   // ),
                   Expanded(child: ListTile(
                        leading: CircleAvatar(backgroundColor: Colors.black12,backgroundImage: CachedNetworkImageProvider(productData.image),),
-                    title: Text(productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold),),
-                    subtitle: Text(productData.description_ar  ?? " "),
+                    title: Text(language1=="en" ? productData.nameEn : productData.nameAr,style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Theme.of(context).primaryColor),),
+                    subtitle: Text(language1=="en" ? productData.description_en : productData.description_ar  ?? " ",style: TextStyle(color: Theme.of(context).primaryColor),),
 
                     trailing:
                     GestureDetector(

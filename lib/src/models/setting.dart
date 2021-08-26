@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../helpers/custom_trace.dart';
 
+
+
+
 class Setting {
   String appName = '';
   double defaultTax;

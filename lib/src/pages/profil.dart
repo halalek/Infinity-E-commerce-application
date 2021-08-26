@@ -26,6 +26,7 @@ import 'dart:io';
 
 import 'package:structurepublic/src/repository/login_repository.dart';
 
+import '../../main.dart';
 import 'mydemand.dart';
 class ProfilePage extends StatefulWidget
 {
@@ -446,7 +447,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                       child:Column(
                           children: [
                             Row(  children: [
-                              Text("حسوماتك ",style: TextStyle(color: Colors.red[300]),),
+                              Text( language1=="en" ? "Your Discounts" : "حسوماتك ",style: TextStyle(color: Colors.red[300]),),
                               IconButton(
                                   icon: Icon(Icons.fastfood,color:changecolor,),
 
@@ -471,7 +472,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child:
-                                    Center(child: Text("حسوماتي",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
+                                    Center(child: Text( language1=="en" ? "My Vouchers " : "حسوماتي",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
                                     ),
                                   ),
                                     onTap: (){
@@ -551,6 +552,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                   //  color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Home" :
                   "الرئيسية",
                   // style: TextStyle(color: Colors.black45),
                 ),
@@ -562,6 +564,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                   //  color: Theme.of(context).primaryColorLight,
                 ),
                 title: Text(
+                  language1=="en" ? "Shopping " :
                   "التسوق",
                   //  style: TextStyle(color: Theme.of(context).primaryColorLight),
                 ),
@@ -573,6 +576,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Offers " :
                   "العروض",
                   //  style: TextStyle(color: Colors.black45),
                 ),
@@ -584,6 +588,7 @@ class  _ProfilePage extends StateMVC<ProfilePage> {
                   // color: Colors.black45,
                 ),
                 title: Text(
+                  language1=="en" ? "Profile " :
                   "حسابك",
                   //   style: TextStyle(color: Colors.black45),
                 ),

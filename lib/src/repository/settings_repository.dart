@@ -24,6 +24,7 @@ Future<Setting> initSettings() async {
          if (prefs.containsKey('language')) {
           _setting.mobileLanguage.value = Locale(prefs.get('language'), '');
         }
+
         _setting.brightness.value = prefs.getBool('isDark') ?? false ? Brightness.dark : Brightness.light;
         setting.value = _setting;
         // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member

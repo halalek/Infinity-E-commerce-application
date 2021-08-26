@@ -12,6 +12,8 @@ import 'package:structurepublic/src/pages/sharedPref.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 import 'package:structurepublic/src/pages/vereible.dart';
 import 'package:structurepublic/src/repository/login_repository.dart'as repo;
+
+import '../../main.dart';
 class editProfilePage extends StatefulWidget
 {
   @override
@@ -49,7 +51,7 @@ Userss jj=new Userss();
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
         elevation: 1,
-title: Text("الملف الشخصي"),
+title: Text(language1=="en" ? "Profile" : "الملف الشخصي"),
 
       ),
       body: Container(
@@ -85,7 +87,7 @@ title: Text("الملف الشخصي"),
 
 
                      // contentPadding: EdgeInsets.only(bottom: 3),
-                      labelText: labelText1="الاسم الكامل",
+                      labelText: labelText1=language1=="en" ? "Name" : "الاسم الكامل",
                      labelStyle: TextStyle(
                       color: Colors.red[300],),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -126,7 +128,7 @@ title: Text("الملف الشخصي"),
 
 
                       // contentPadding: EdgeInsets.only(bottom: 3),
-                      labelText: labelText1="الإيميل",
+                      labelText: labelText1=language1=="en" ? "Email" : "الإيميل",
                       labelStyle: TextStyle(
                         color:Colors.red[300],
                       ),
@@ -158,7 +160,7 @@ title: Text("الملف الشخصي"),
                       enabledBorder: UnderlineInputBorder( borderSide: BorderSide(color: darkfont), ),
                       focusedBorder: UnderlineInputBorder( borderSide: BorderSide(color: changecolor), ),
 
-                      labelText: labelText1="رقم الهاتف",
+                      labelText: labelText1=language1=="en" ? "Phone" : "رقم الهاتف",
                       labelStyle: TextStyle(
                         color:Colors.red[300],
                       ),

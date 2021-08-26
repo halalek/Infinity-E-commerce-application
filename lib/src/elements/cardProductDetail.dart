@@ -17,6 +17,8 @@ import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import '../../main.dart';
+
 class CardProductDetailWidget extends StatefulWidget {
 
    final ProductData productData;
@@ -66,12 +68,10 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-         child: Text('تم الإضافة إلى السلة ',style: TextStyle(fontSize:25), )),
+         child: Text(language1=="en" ? "Added to cart " : 'تم الإضافة إلى السلة ',style: TextStyle(fontSize:25), )),
 
          Center(
-        child: Text('لتأكيد أو تعديل الطلب انتقل لصفحة السلة  ',style: TextStyle(fontSize:20, ),),
-
-
+        child: Text(language1=="en" ? "Edit order Go to cart page " :'لتأكيد أو تعديل الطلب انتقل لصفحة السلة  ',style: TextStyle(fontSize:20, ),),
           ),],),),
     backgroundColor: Colors.black26,
     behavior: SnackBarBehavior.floating,
@@ -104,7 +104,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
   @override
   Widget build(BuildContext context) {
       if(marketData!=null)
-    {productData.nameMarket=marketData.nameAr;}
+    {productData.nameMarket=marketData.nameAr;
+    productData.nameMarketen=marketData.nameEn;}
     Search();
     return  Container(
       height:400,
@@ -116,10 +117,11 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                 padding: EdgeInsets.all(5),
                 children: <Widget>[
                   Container(
+                 //   color: Theme.of(context).cardColor,
                       width:280,//MediaQuery.of(context).size.width,
                       height: 600,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                       ),
                       child: Column(
                         children: [
@@ -141,14 +143,14 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                   children: [
 
                                     ListTile(
-                                      title: Text(
+                                      title: Text(language1=="en" ? productData.nameEn :
                                         productData.nameAr,
                                         style: TextStyle(
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold,color: Colors.black),
+                                            fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),
                                       ),
-                                      subtitle: Text(
-                                         productData.description_ar,style: TextStyle(color: Colors.black),),
+                                      subtitle: Text(language1=="en" ? productData.description_en :
+                                         productData.description_ar,style: TextStyle(color: Theme.of(context).primaryColor),),
 
                                       trailing: GestureDetector(
                                         child: Text(
@@ -175,18 +177,18 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                       children: <Widget>[
                                         new  MaterialButton(
                                           onPressed: add,
-                                          child: new Icon(Icons.add, color: Colors.black,),
+                                          child: new Icon(Icons.add, color: Theme.of(context).primaryColor,),
                                           // backgroundColor: Colors.white,
                                         ),
 
                                         new Text('$count',
-                                            style: new TextStyle(fontSize: 20.0,color: Colors.black)),
+                                            style: new TextStyle(fontSize: 20.0,color: Theme.of(context).primaryColor)),
 
                                         new MaterialButton(
                                           onPressed: minus,
                                           child: new Icon(
                                               const IconData(0xe15b, fontFamily: 'MaterialIcons'),
-                                              color: Colors.black),
+                                              color:Theme.of(context).primaryColor),
                                           //   backgroundColor: Colors.white,
                                         ),
                                       ],
@@ -229,8 +231,8 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                        controller: _note ,
                                                    decoration: InputDecoration(
                                                       // border: OutlineInputBorder(),
-                                                       hintText: 'ملاحظات أضافية (اختياري)',
-                                                     hintStyle: TextStyle(color: Colors.black)
+                                                       hintText: language1=="en" ? "Note (Optional)" : 'ملاحظات أضافية (اختياري)',
+                                                     hintStyle: TextStyle(color:Theme.of(context).primaryColor)
                                                      //prefixIcon: Icon(Icons.mic),
                                                    ),
                                                   // onTap: _onSound,
@@ -287,7 +289,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                               borderRadius: BorderRadius.circular(8.0),
                                             ),
                                             child:
-                                            Center(child: Text("إضافة",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+                                            Center(child: Text(language1=="en" ? "Add" : "إضافة",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
                                             ),
                                           ),
                                             onTap: (){
@@ -296,6 +298,7 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                               setTrollery(productData,count,marketData);
                                             },
                                           ),
+                                          if(countt==0)
                                           GestureDetector(child: Container(
                                             width: 60,
                                             padding: EdgeInsets.all(10),
@@ -304,16 +307,30 @@ class _CardProductDetailWidget extends State<CardProductDetailWidget> {
                                               borderRadius: BorderRadius.circular(8.0),
                                             ),
                                             child:
-                                            Center(child: Text("مقارنة",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                                            Center(child: Text(language1=="en" ? "compare" : "مقارنة",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,),),
                                             ),
                                           ),
                                             onTap: (){
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                           Navigator.pop(context);
-                                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Comparison(productData)) );
-                                            },
+                                            if(countt==0) {
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                              Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Comparison(
+                                                              productData)));
+                                            }
+
+                                            else if (countt!=0){
+                                              Navigator.pop(context);
+                                              Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Comparison(
+                                                              productData)));
+                                            }},
                                           ),
                                           InkWell(child: Container(
 
