@@ -29,7 +29,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'chat_userdalal.dart';
+
 import 'contact_support.dart';
 
 import 'events.dart';
@@ -44,7 +44,6 @@ class Pagemain1 extends StatefulWidget{
     // TODO: implement createState
     return _Pagemain1();
   }
-
 
 }
 
