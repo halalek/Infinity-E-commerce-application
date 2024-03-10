@@ -1,16 +1,9 @@
-# structurepublic
+# Infinity : 
 
-A new Flutter application.
+"Infinity" is an e-commerce system that brings together stores that provide product delivery services, Displaying the services provided by each store, and the ability to show stores that provide service 24 hours a day.
 
-## Getting Started
+The system contains various stores such as: clothing, restaurants, supermarkets, and flowers. The system meets the user's needs in all their forms, as it is endless shopping for the user.
 
-This project is a starting point for a Flutter application.
+The system consists of an application for the user, the store owner, and the delivery representative, in addition to the control panel (web).
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
